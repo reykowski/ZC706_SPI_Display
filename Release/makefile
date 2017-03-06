@@ -10,17 +10,13 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
-"./AD7294.obj" \
-"./AD7294_main.obj" \
+"./Display_Parameters_main.obj" \
 "./Kentec320x240x16_ssd2119_8bit.obj" \
 "./images.obj" \
-"./lm4f120h5qr_startup_ccs.obj" \
-"./startup_ccs.obj" \
 "./touch.obj" \
 "./ustdlib.obj" \
 "./utils/uartstdio.obj" \
 "./drivers/rgb.obj" \
-"../AD7294_ccs.cmd" \
 $(GEN_CMDS__FLAG) \
 -l"libc.a" \
 -l"C:/ti/TivaWare_C_Series-1.0/examples/boards/ek-tm4c123gxl-boostxl-senshub/pressure_bmp180/ccs/../../../../../driverlib/ccs/Debug/driverlib.lib" \
@@ -166,8 +162,8 @@ Display_Parameters.bin: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "AD7294.pp" "AD7294_main.pp" "Kentec320x240x16_ssd2119_8bit.pp" "images.pp" "lm4f120h5qr_startup_ccs.pp" "startup_ccs.pp" "touch.pp" "ustdlib.pp" "utils\uartstdio.pp" "drivers\rgb.pp" 
-	-$(RM) "AD7294.obj" "AD7294_main.obj" "Kentec320x240x16_ssd2119_8bit.obj" "images.obj" "lm4f120h5qr_startup_ccs.obj" "startup_ccs.obj" "touch.obj" "ustdlib.obj" "utils\uartstdio.obj" "drivers\rgb.obj" 
+	-$(RM) "Display_Parameters_main.pp" "Kentec320x240x16_ssd2119_8bit.pp" "images.pp" "touch.pp" "ustdlib.pp" "utils\uartstdio.pp" "drivers\rgb.pp" 
+	-$(RM) "Display_Parameters_main.obj" "Kentec320x240x16_ssd2119_8bit.obj" "images.obj" "touch.obj" "ustdlib.obj" "utils\uartstdio.obj" "drivers\rgb.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
