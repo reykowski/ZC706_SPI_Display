@@ -215,6 +215,7 @@
     uint16_t i_counter=0;
     uint8_t iAGC_Curve[320]={ [ 0 ... 319 ] = (186-25)};
     uint8_t iCRC_Curve[320]={ [ 0 ... 319 ] = 186};
+    uint8_t iFrame_Curve[320]={ [ 0 ... 319 ] = 186};
 
 
 
@@ -2099,6 +2100,29 @@ main(void)
 
                    GrStringDrawRight(&sContext, val_FRAME_Str, 8, S11_x+90, S11_y, 1);	// Frame Status
                    GrContextBackgroundSet(&sContext, ClrLime);
+
+                   GrContextForegroundSet(&sContext, ClrLime);
+                   GrLineDraw(&sContext, 0,  iFrame_Curve[0], 1, iFrame_Curve[1]);  // Remove First Line Segment (old)
+                   iFrame_Curve[0] = iFrame_Curve[1];   // Move 1 pixel to the left
+
+                   for (i_counter = 1; i_counter < 319; i_counter++)
+                   {
+                       GrContextForegroundSet(&sContext, ClrLime);
+                       GrLineDraw(&sContext, i_counter,  iFrame_Curve[i_counter], i_counter+1, iFrame_Curve[i_counter+1]);
+                       iFrame_Curve[i_counter] = iFrame_Curve[i_counter+1]; // Move 1 pixel to the left
+                       GrContextForegroundSet(&sContext, ClrBlack);
+                       GrLineDraw(&sContext, i_counter-1,  iFrame_Curve[i_counter-1], i_counter, iFrame_Curve[i_counter]);
+                   }
+                   iFrame_Curve[319] = (186 - fFrame*50.0);
+                   GrContextForegroundSet(&sContext, ClrBlack);
+                   GrLineDraw(&sContext, 318,  iFrame_Curve[318], 319, iFrame_Curve[319]);
+                   GrContextForegroundSet(&sContext, ClrForestGreen);
+                   GrLineDrawH(&sContext, 0, 319, 133);
+                   GrLineDrawH(&sContext, 0, 319, 134);
+                   GrLineDrawH(&sContext, 0, 319, 188);
+                   GrLineDrawH(&sContext, 0, 319, 189);
+                   GrContextForegroundSet(&sContext, ClrBlack);
+
 
             	  break;
 
