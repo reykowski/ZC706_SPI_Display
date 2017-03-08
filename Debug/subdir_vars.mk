@@ -2,53 +2,55 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
+SHELL = cmd.exe
+
 # Add inputs and outputs from these tool invocations to the build variables 
 CMD_SRCS += \
 ../tm4c123gh6pm.cmd 
 
 C_SRCS += \
-../Display_Parameters_main.c \
 ../Kentec320x240x16_ssd2119_8bit.c \
+../ZC706_SPI_Display.c \
 ../images.c \
 ../tm4c123gh6pm_startup_ccs.c \
 ../touch.c \
 C:/ti/TivaWare_C_Series-1.0/utils/ustdlib.c 
 
+C_DEPS += \
+./Kentec320x240x16_ssd2119_8bit.d \
+./ZC706_SPI_Display.d \
+./images.d \
+./tm4c123gh6pm_startup_ccs.d \
+./touch.d \
+./ustdlib.d 
+
 OBJS += \
-./Display_Parameters_main.obj \
 ./Kentec320x240x16_ssd2119_8bit.obj \
+./ZC706_SPI_Display.obj \
 ./images.obj \
 ./tm4c123gh6pm_startup_ccs.obj \
 ./touch.obj \
 ./ustdlib.obj 
 
-C_DEPS += \
-./Display_Parameters_main.pp \
-./Kentec320x240x16_ssd2119_8bit.pp \
-./images.pp \
-./tm4c123gh6pm_startup_ccs.pp \
-./touch.pp \
-./ustdlib.pp 
-
-C_DEPS__QUOTED += \
-"Display_Parameters_main.pp" \
-"Kentec320x240x16_ssd2119_8bit.pp" \
-"images.pp" \
-"tm4c123gh6pm_startup_ccs.pp" \
-"touch.pp" \
-"ustdlib.pp" 
-
 OBJS__QUOTED += \
-"Display_Parameters_main.obj" \
 "Kentec320x240x16_ssd2119_8bit.obj" \
+"ZC706_SPI_Display.obj" \
 "images.obj" \
 "tm4c123gh6pm_startup_ccs.obj" \
 "touch.obj" \
 "ustdlib.obj" 
 
+C_DEPS__QUOTED += \
+"Kentec320x240x16_ssd2119_8bit.d" \
+"ZC706_SPI_Display.d" \
+"images.d" \
+"tm4c123gh6pm_startup_ccs.d" \
+"touch.d" \
+"ustdlib.d" 
+
 C_SRCS__QUOTED += \
-"../Display_Parameters_main.c" \
 "../Kentec320x240x16_ssd2119_8bit.c" \
+"../ZC706_SPI_Display.c" \
 "../images.c" \
 "../tm4c123gh6pm_startup_ccs.c" \
 "../touch.c" \

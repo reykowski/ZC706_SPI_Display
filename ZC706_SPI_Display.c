@@ -1,6 +1,6 @@
 //*****************************************************************************
 //
-// pressure_AD7294.c - Example to use of the SensorLib with the AD7294
+// ZC706_SPI_Display.c - Display data retrieved from ZC706 via SPI port.
 //
 // Copyright (c) 2013 Texas Instruments Incorporated.  All rights reserved.
 // Software License Agreement
@@ -24,41 +24,25 @@
 
 //*****************************************************************************
 //
-//! \addtogroup ssi_examples_list
-//! <h1>SPI Slave (spi_slave)</h1>
 //!
-//! This example configures the SSI0 as SPI Master, SSI1 as SPI Slave on an
+//! This code configures the SSI1 as SPI Slave on an
 //! TM4C123G launchpad evaluation board.  RX timeout interrupt is configured for SSI1.
-//! Three characters are sent on the master TX, then SSI1 RX timeout interrupt
-//! is enabled. The code then waits for the interrupt to fire.  Once the
-//! interrupt is fired the data from slave RX FIFO is read and compared to the
-//! transmitted packet and the appropriate status is displayed.  If everything
-//! goes well you should see a "Test Passed." message on the terminal window.
-//! The status messages are transmitted over UART0 at 115200 baud and 8-n-1
+//! Four 16bit words are sent from ZC706 FPGA.
+//! The SSI1 RX timeout interrupt is enabled.
+//! The code then waits for the interrupt to fire.
+//! Once the interrupt is fired, the data from slave RX FIFO is read, checked and assembled to a 32 bit word
+//! The 32bit words are stored in an array for further processing and disply
+//! UART0 is used to send information to host at 115200 baud and 8-n-1
 //! mode.
 //!
 //! This example uses the following peripherals and I/O signals on EK-TM4C123GXL.
-//! You must review these and change as needed for your own board:
-//! - SSI0 peripheral
-//! - GPIO Port A peripheral (for SSI0 pins)
-//! - SSI0CLK - PA2
-//! - SSI0Fss - PA3
-//! - SSI0Rx  - PA4
-//! - SSI0Tx  - PA5
 //!
 //! - SSI1 peripheral
 //! - GPIO Port D peripheral (for SSI1 pins)
-//! - SSI1CLK - PD0
-//! - SSI1Fss - PD1
-//! - SSI1Rx  - PD2
-//! - SSI1Tx  - PD3
-//!
-//! For this example to work, the following connections are needed on the
-//! EK-TM4C123GXL evaluation board.
-//! - SSI0CLK(PA2) - SSI1CLK(PD0)
-//! - SSI0Fss(PA3) - SSI1Fss(PD1)
-//! - SSI0Rx(PA4)  - SSI1Tx(PD3)
-//! - SSI0Tx(PA5)  - SSI1Rx(PD2)
+//! - SSI1CLK - PD0  - Clock
+//! - SSI1Fss - PD1	 - Enable
+//! - SSI1Rx  - PD2  - MOSI
+//! - SSI1Tx  - PD3  - MISO (currently not used)
 //!
 //! The following UART signals are configured only for displaying console
 //! messages for this example.  These are not required for operation of SSI0.
@@ -75,58 +59,6 @@
 //
 //*****************************************************************************
 
-//*****************************************************************************
-//
-//! \addtogroup ssi_examples_list
-//! <h1>SPI Slave (spi_slave)</h1>
-//!
-//! This example configures the SSI0 as SPI Master, SSI1 as SPI Slave on an
-//! TM4C123G launchpad evaluation board.  RX timeout interrupt is configured for SSI1.
-//! Three characters are sent on the master TX, then SSI1 RX timeout interrupt
-//! is enabled. The code then waits for the interrupt to fire.  Once the
-//! interrupt is fired the data from slave RX FIFO is read and compared to the
-//! transmitted packet and the appropriate status is displayed.  If everything
-//! goes well you should see a "Test Passed." message on the terminal window.
-//! The status messages are transmitted over UART0 at 115200 baud and 8-n-1
-//! mode.
-//!
-//! This example uses the following peripherals and I/O signals on EK-TM4C123GXL.
-//! You must review these and change as needed for your own board:
-//! - SSI0 peripheral
-//! - GPIO Port A peripheral (for SSI0 pins)
-//! - SSI0CLK - PA2
-//! - SSI0Fss - PA3
-//! - SSI0Rx  - PA4
-//! - SSI0Tx  - PA5
-//!
-//! - SSI1 peripheral
-//! - GPIO Port D peripheral (for SSI1 pins)
-//! - SSI1CLK - PD0
-//! - SSI1Fss - PD1
-//! - SSI1Rx  - PD2
-//! - SSI1Tx  - PD3
-//!
-//! For this example to work, the following connections are needed on the
-//! EK-TM4C123GXL evaluation board.
-//! - SSI0CLK(PA2) - SSI1CLK(PD0)
-//! - SSI0Fss(PA3) - SSI1Fss(PD1)
-//! - SSI0Rx(PA4)  - SSI1Tx(PD3)
-//! - SSI0Tx(PA5)  - SSI1Rx(PD2)
-//!
-//! The following UART signals are configured only for displaying console
-//! messages for this example.  These are not required for operation of SSI0.
-//! - UART0 peripheral
-//! - GPIO Port A peripheral (for UART0 pins)
-//! - UART0RX - PA0
-//! - UART0TX - PA1
-//!
-//! This example uses the following interrupt handlers.  To use this example
-//! in your own application you must add these interrupt handlers to your
-//! vector table.
-//! - SSI1IntHandler.
-//!
-//
-//*****************************************************************************
 
 
 #include "stdint.h"
@@ -238,14 +170,14 @@
 #define S62_y 180
 
 // Define String names for data display:
-#define str_AGC		"    AGC: "
-#define str_LOCK	"   LOCK: "
-#define str_HOLD	"   HOLD: "
-#define str_EVM		"    EVM: "
-#define str_FRAME	"  FRAME: "
-#define str_CRC		"    CRC: "
-#define str_BER		"    BER: "
-#define str_NA		"    ---: "
+#define str_AGC		"AGC: "
+#define str_LOCK	"LOCK: "
+#define str_HOLD	"HOLD: "
+#define str_EVM		"EVM: "
+#define str_FRAME	"FRAME: "
+#define str_CRC		"CRC: "
+#define str_BER		"BER: "
+#define str_NA		"---: "
 
 
 // Define names for LED display:
@@ -278,6 +210,28 @@
     float fADC_Val=0;
     float fRsense = 0.010;
     float fVref0 = 2.5, fVref1 = 2.5, fVref2 = 2.5, fVref3 = 2.5;
+
+
+    uint16_t i_counter=0;
+    uint8_t iAGC_Curve[320]={ [ 0 ... 319 ] = (186-25)};
+    uint8_t iCRC_Curve[320]={ [ 0 ... 319 ] = 186};
+
+
+
+    float my_noise;
+
+    static char val_AGC_Str[20];
+    static char val_LOCK_Str[20];
+    static char val_HOLD_Str[20];
+    static char val_EVM_Str[20];
+    static char val_FRAME_Str[20];
+    static char val_CRC_Str[20];
+    static char val_BER_Str[20];
+    static char val8_string[20];
+    static char val9_string[20];
+    static char val10_string[20];
+    static char val11_string[20];
+    static char val12_string[20];
 
     //*****************************************************************************
     //
@@ -314,7 +268,7 @@
     void OnPrimitivePaint(tWidget *pWidget, tContext *pContext);
     void OnRadioChange(tWidget *pWidget, uint32_t bSelected);
 
-    extern tCanvasWidget g_psPanels[7];
+    extern tCanvasWidget g_psPanels[10];
     tContext *p1Context;
 
 
@@ -344,61 +298,6 @@
 //*****************************************************************************
 uint32_t g_pui32Colors[3];
 
-
-
-
-//*****************************************************************************
-//
-//! \addtogroup ssi_examples_list
-//! <h1>SPI Slave (spi_slave)</h1>
-//!
-//! This example configures the SSI0 as SPI Master, SSI1 as SPI Slave on an
-//! TM4C123G launchpad evaluation board.  RX timeout interrupt is configured for SSI1.
-//! Three characters are sent on the master TX, then SSI1 RX timeout interrupt
-//! is enabled. The code then waits for the interrupt to fire.  Once the
-//! interrupt is fired the data from slave RX FIFO is read and compared to the
-//! transmitted packet and the appropriate status is displayed.  If everything
-//! goes well you should see a "Test Passed." message on the terminal window.
-//! The status messages are transmitted over UART0 at 115200 baud and 8-n-1
-//! mode.
-//!
-//! This example uses the following peripherals and I/O signals on EK-TM4C123GXL.
-//! You must review these and change as needed for your own board:
-//! - SSI0 peripheral
-//! - GPIO Port A peripheral (for SSI0 pins)
-//! - SSI0CLK - PA2
-//! - SSI0Fss - PA3
-//! - SSI0Rx  - PA4
-//! - SSI0Tx  - PA5
-//!
-//! - SSI1 peripheral
-//! - GPIO Port D peripheral (for SSI1 pins)
-//! - SSI1CLK - PD0
-//! - SSI1Fss - PD1
-//! - SSI1Rx  - PD2
-//! - SSI1Tx  - PD3
-//!
-//! For this example to work, the following connections are needed on the
-//! EK-TM4C123GXL evaluation board.
-//! - SSI0CLK(PA2) - SSI1CLK(PD0)
-//! - SSI0Fss(PA3) - SSI1Fss(PD1)
-//! - SSI0Rx(PA4)  - SSI1Tx(PD3)
-//! - SSI0Tx(PA5)  - SSI1Rx(PD2)
-//!
-//! The following UART signals are configured only for displaying console
-//! messages for this example.  These are not required for operation of SSI0.
-//! - UART0 peripheral
-//! - GPIO Port A peripheral (for UART0 pins)
-//! - UART0RX - PA0
-//! - UART0TX - PA1
-//!
-//! This example uses the following interrupt handlers.  To use this example
-//! in your own application you must add these interrupt handlers to your
-//! vector table.
-//! - SSI1IntHandler.
-//!
-//
-//*****************************************************************************
 
 //*****************************************************************************
 //
@@ -552,7 +451,7 @@ uint8_t SysTickIntHandler()
 //
 //*****************************************************************************
 //
-// Start placing some Blocks
+// Start placing some Blocks for Block Diagram
 //
 #define rect_x 	45
 #define rect_y	45
@@ -585,7 +484,7 @@ tPushButtonWidget g_psPushButtons2[] =
 						    &g_sKentec320x240x16_SSD2119, rect_x4, rect_y1, rect_x, rect_y,
 							PB_STYLE_FILL | PB_STYLE_OUTLINE | PB_STYLE_TEXT | PB_STYLE_RELEASE_NOTIFY ,
 							ClrLightGreen, ClrGold, ClrGray, ClrBlack,
-							&g_sFontCm14, "MSG", 0, 0, 0, 0, OnSYNCButtonPress),
+							&g_sFontCm14, "MSG", 0, 0, 0, 0, OnRXMSGButtonPress),
     RectangularButtonStruct(g_psPanels, g_psPushButtons2 + 5, 0,
                             &g_sKentec320x240x16_SSD2119, rect_x1, rect_y2, rect_x, rect_y,
                             PB_STYLE_FILL | PB_STYLE_OUTLINE | PB_STYLE_TEXT | PB_STYLE_RELEASE_NOTIFY ,
@@ -626,7 +525,7 @@ tCanvasWidget g_psButtonCanvas[] =
 
 //*****************************************************************************
 //
-// The second panel, which contains the Staus LEDs
+// The second panel, which contains the Status LEDs
 //
 //*****************************************************************************
 Canvas(g_sLED_Display, g_psPanels+1, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
@@ -666,7 +565,7 @@ Canvas(g_sSYNCStatus, g_psPanels + 5, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
 // The seventh panel, which contains PLL Status Info
 //
 //*****************************************************************************
-Canvas(g_sMSGStatus, g_psPanels + 6, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
+Canvas(g_sRXMSGStatus, g_psPanels + 6, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
        320, 166, CANVAS_STYLE_APP_DRAWN, 0, 0, 0, 0, 0, 0, OnRXMSGStatusPaint);
 //*****************************************************************************
 //
@@ -695,10 +594,11 @@ tCanvasWidget g_psPanels[] =
 			     320, 166, CANVAS_STYLE_FILL, ClrLime, 0, 0, 0, 0, 0, 0),
 	CanvasStruct(0, 0, &g_sSYNCStatus, &g_sKentec320x240x16_SSD2119, 0, 24,
 			     320, 166, CANVAS_STYLE_FILL, ClrLime, 0, 0, 0, 0, 0, 0),
+    CanvasStruct(0, 0, &g_sRXMSGStatus, &g_sKentec320x240x16_SSD2119, 0, 24,
+			     320, 166, CANVAS_STYLE_FILL, ClrLime, 0, 0, 0, 0, 0, 0),
 };
 /*
-	CanvasStruct(0, 0, &g_sMSGStatus, &g_sKentec320x240x16_SSD2119, 0, 24,
-				 320, 166, CANVAS_STYLE_FILL, ClrLime, 0, 0, 0, 0, 0, 0),
+
 	             	CanvasStruct(0, 0, &g_sPrimitives  , &g_sKentec320x240x16_SSD2119, 0, 24,
 			     320, 166, CANVAS_STYLE_FILL, ClrSeashell, 0, 0, 0, 0, 0, 0),
 };
@@ -718,13 +618,13 @@ tCanvasWidget g_psPanels[] =
 //*****************************************************************************
 char *g_pcPanelNames[] =
 {
-	"     Block Diagram       ",
-    "     Status LED Display  ",
-    "     Status Data Display ",
-    "     Rx Status Panel     ",
-    "     PLL Status Panel    ",
-    "     SYNC Status Panel   ",
-    "     Rx MSG Status Panel ",
+	"     Block Diagram  ",
+    "     Status LEDs    ",
+    "     Status Data    ",
+    "     Rx Status      ",
+    "     PLL Status     ",
+    "     SYNC Status    ",
+    "     Rx MSG Status  ",
     "     Sliders     ",
     "     S/W Update    "
 };
@@ -1309,7 +1209,7 @@ OnRxStatusPaint(tWidget *pWidget, tContext *pContext)
     GrContextFontSet(pContext, &g_sFontCm20);
     GrContextForegroundSet(pContext, ClrBlack);
     GrStringDrawRight(pContext, str_AGC,  9, P11_x+10, P11_y, 0);
-    //GrStringDrawRight(pContext, "ABCD",  9, P12_x+10, P12_y, 0);
+
 }
 //*****************************************************************************
 //
@@ -1346,8 +1246,9 @@ OnSYNCStatusPaint(tWidget *pWidget, tContext *pContext)
     //
     GrContextFontSet(pContext, &g_sFontCm20);
     GrContextForegroundSet(pContext, ClrBlack);
-
-    GrStringDrawRight(pContext, str_FRAME,  9, P11_x+10, P11_y, 0);
+    GrContextBackgroundSet(pContext, ClrLime);
+    GrStringDraw(pContext, str_FRAME, -1, 32, S11_y, 1);
+    //GrStringDrawRight(pContext, str_FRAME,  9, P11_x+10, P11_y, 0);
 
 }
 //*****************************************************************************
@@ -1689,25 +1590,6 @@ main(void)
     int32_t i32IntegerPart;
     int32_t i32FractionPart;
     uint8_t i8Count=0;
-    uint16_t iAGC_counter=0;
-    uint8_t iAGC_Curve[320]={ [ 0 ... 319 ] = (165-50)} , iAGC_old = (165-50);
-
-
-
-    float my_noise;
-
-    static char val_AGC_Str[10];
-    static char val_LOCK_Str[10];
-    static char val_HOLD_Str[10];
-    static char val_EVM_Str[10];
-    static char val_FRAME_Str[10];
-    static char val_CRC_Str[10];
-    static char val_BER_Str[10];
-    static char val8_string[10];
-    static char val9_string[10];
-    static char val10_string[10];
-    static char val11_string[10];
-    static char val12_string[10];
 
     uint32_t ulindex, ulindex_max = 0;
     int16_t val;
@@ -2021,7 +1903,7 @@ main(void)
             // Message (CRC Error)
             fCRC = (g_ulDataRx2[pos_CRC]/32768.0);
     		float_to_int_and_fract(fCRC, &i32IntegerPart, &i32FractionPart);
-            usprintf(val_CRC_Str, " %2d.%02d    ", i32IntegerPart, i32FractionPart);
+            usprintf(val_CRC_Str, " %2d.%01d    ", i32IntegerPart, i32FractionPart);
 
             // BER
             fBER = (g_ulDataRx2[pos_BER]/(16384.0))+my_noise;
@@ -2161,52 +2043,36 @@ main(void)
            	       if (fAGC>1000.0)
            	       {
            	    	   GrContextBackgroundSet(&sContext, ClrRed);
-           	    	   //GrStringDraw(&sContext, "AGC larger 1000!",  9, S11_x+10, S11_y, 0);
-           	    	   //GrStringDraw(&sContext, "Check input to RX1A ", 8, S21_x+10, S21_y, 1);
+           	    	   GrStringDraw(&sContext, "Check input to RX1A ", -1, 32, S21_y, 1);
            	       }
-
-                   GrStringDrawRight(&sContext, val_AGC_Str, 8, S11_x+70, S11_y, 1);	// AGC
+           	       else
+           	       {
+           	        GrStringDraw(&sContext,    "AGC is within range    ", -1, 32, S21_y, 1);
+           	       }
+                   GrStringDrawRight(&sContext, val_AGC_Str, 10, S11_x+100, S11_y, 1);	// AGC
                    GrContextBackgroundSet(&sContext, ClrLime);
 
                    GrContextForegroundSet(&sContext, ClrLime);
                    GrLineDraw(&sContext, 0,  iAGC_Curve[0], 1, iAGC_Curve[1]);  // Remove First Line Segment (old)
                    iAGC_Curve[0] = iAGC_Curve[1];	// Move 1 pixel to the left
 
-                   for (iAGC_counter = 1; iAGC_counter < 319; iAGC_counter++)
+                   for (i_counter = 1; i_counter < 319; i_counter++)
                    {
                 	   GrContextForegroundSet(&sContext, ClrLime);
-                	   GrLineDraw(&sContext, iAGC_counter,  iAGC_Curve[iAGC_counter], iAGC_counter+1, iAGC_Curve[iAGC_counter+1]);
-                       iAGC_Curve[iAGC_counter] = iAGC_Curve[iAGC_counter+1];	// Move 1 pixel to the left
+                	   GrLineDraw(&sContext, i_counter,  iAGC_Curve[i_counter], i_counter+1, iAGC_Curve[i_counter+1]);
+                       iAGC_Curve[i_counter] = iAGC_Curve[i_counter+1];	// Move 1 pixel to the left
                 	   GrContextForegroundSet(&sContext, ClrBlack);
-                	   GrLineDraw(&sContext, iAGC_counter-1,  iAGC_Curve[iAGC_counter-1], iAGC_counter, iAGC_Curve[iAGC_counter]);
+                	   GrLineDraw(&sContext, i_counter-1,  iAGC_Curve[i_counter-1], i_counter, iAGC_Curve[i_counter]);
                    }
-                   iAGC_Curve[319] = (165 - fAGC/20.0);
+                   iAGC_Curve[319] = (186 - fAGC/40.0);
                    GrContextForegroundSet(&sContext, ClrBlack);
                    GrLineDraw(&sContext, 318,  iAGC_Curve[318], 319, iAGC_Curve[319]);
-
-                   /*
-                   GrContextForegroundSet(&sContext, ClrLime);
-                   if (iAGC_counter>0)
-                   {
-                	   // Remove old line
-                       GrLineDraw(&sContext, iAGC_counter-1,  iAGC_old ,iAGC_counter, iAGC_Curve[iAGC_counter]);
-                   }
-                   iAGC_old = iAGC_Curve[iAGC_counter];
-
+                   GrContextForegroundSet(&sContext, ClrForestGreen);
+                   GrLineDrawH(&sContext, 0, 319, 133);
+                   GrLineDrawH(&sContext, 0, 319, 134);
+                   GrLineDrawH(&sContext, 0, 319, 188);
+                   GrLineDrawH(&sContext, 0, 319, 189);
                    GrContextForegroundSet(&sContext, ClrBlack);
-                   iAGC_Curve[iAGC_counter] = (165 - fAGC/20.0);
-                   if (iAGC_counter>0)
-                   {
-                	   // Draw new line
-                       GrLineDraw(&sContext, iAGC_counter-1,  iAGC_Curve[iAGC_counter-1],iAGC_counter,iAGC_Curve[iAGC_counter]);
-                   }
-
-                   iAGC_counter++;
-                   if (iAGC_counter>319)
-                   {
-                	   iAGC_counter = 0;
-                   }
-                   */
 
             	  break;
 
@@ -2221,14 +2087,57 @@ main(void)
                case SYNC_Panel  :
                    GrContextForegroundSet(&sContext, ClrBlack);
                    GrContextBackgroundSet(&sContext, ClrLime);
-                   GrStringDrawRight(&sContext, val_FRAME_Str, 8, S11_x+70, S11_y, 1);	// Frame Status
+                   if (fFrame<1.0)
+                  {
+                      GrContextBackgroundSet(&sContext, ClrRed);
+                      GrStringDraw(&sContext, "Synchronization Error ", -1, 32, S21_y, 1);
+                  }
+                  else
+                  {
+                   GrStringDraw(&sContext,    "Synchronization Ok    ", -1, 32, S21_y, 1);
+                  }
+
+                   GrStringDrawRight(&sContext, val_FRAME_Str, 8, S11_x+90, S11_y, 1);	// Frame Status
+                   GrContextBackgroundSet(&sContext, ClrLime);
 
             	  break;
 
                case RXMSG_Panel  :
                    GrContextForegroundSet(&sContext, ClrBlack);
                    GrContextBackgroundSet(&sContext, ClrLime);
-                   GrStringDrawRight(&sContext, val_CRC_Str, 8, S11_x+70, S11_y, 1);	// Message Status (CRC Error)
+                   if (fCRC>0.0)
+                  {
+                      GrContextBackgroundSet(&sContext, ClrRed);
+                      GrStringDraw(&sContext, "Check Sum Error ", -1, 32, S21_y, 1);
+                  }
+                  else
+                  {
+                   GrStringDraw(&sContext,    "Check Sum Ok    ", -1, 32, S21_y, 1);
+                  }
+                   GrStringDrawRight(&sContext, val_CRC_Str, 8, S11_x+70, S11_y, 1); // Message Status (CRC Error)
+                   GrContextBackgroundSet(&sContext, ClrLime);
+
+                   GrContextForegroundSet(&sContext, ClrLime);
+                   GrLineDraw(&sContext, 0,  iCRC_Curve[0], 1, iCRC_Curve[1]);  // Remove First Line Segment (old)
+                   iCRC_Curve[0] = iCRC_Curve[1];   // Move 1 pixel to the left
+
+                   for (i_counter = 1; i_counter < 319; i_counter++)
+                   {
+                       GrContextForegroundSet(&sContext, ClrLime);
+                       GrLineDraw(&sContext, i_counter,  iCRC_Curve[i_counter], i_counter+1, iCRC_Curve[i_counter+1]);
+                       iCRC_Curve[i_counter] = iCRC_Curve[i_counter+1]; // Move 1 pixel to the left
+                       GrContextForegroundSet(&sContext, ClrBlack);
+                       GrLineDraw(&sContext, i_counter-1,  iCRC_Curve[i_counter-1], i_counter, iCRC_Curve[i_counter]);
+                   }
+                   iCRC_Curve[319] = (186 - fCRC*50.0);
+                   GrContextForegroundSet(&sContext, ClrBlack);
+                   GrLineDraw(&sContext, 318,  iCRC_Curve[318], 319, iCRC_Curve[319]);
+                   GrContextForegroundSet(&sContext, ClrForestGreen);
+                   GrLineDrawH(&sContext, 0, 319, 133);
+                   GrLineDrawH(&sContext, 0, 319, 134);
+                   GrLineDrawH(&sContext, 0, 319, 188);
+                   GrLineDrawH(&sContext, 0, 319, 189);
+                   GrContextForegroundSet(&sContext, ClrBlack);
 
             	  break;
 

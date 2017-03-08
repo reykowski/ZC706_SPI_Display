@@ -4,23 +4,21 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.7
-
 GEN_OPTS__FLAG := 
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
-"./Display_Parameters_main.obj" \
 "./Kentec320x240x16_ssd2119_8bit.obj" \
+"./ZC706_SPI_Display.obj" \
 "./images.obj" \
 "./touch.obj" \
 "./ustdlib.obj" \
-"./utils/uartstdio.obj" \
 "./drivers/rgb.obj" \
+"./utils/uartstdio.obj" \
 $(GEN_CMDS__FLAG) \
--l"libc.a" \
--l"C:/ti/TivaWare_C_Series-1.0/examples/boards/ek-tm4c123gxl-boostxl-senshub/pressure_bmp180/ccs/../../../../../driverlib/ccs/Debug/driverlib.lib" \
--l"C:/ti/TivaWare_C_Series-1.0/examples/boards/ek-tm4c123gxl-boostxl-senshub/pressure_bmp180/ccs/../../../../../sensorlib/ccs/Debug/sensorlib.lib" \
+-llibc.a \
+-l"C:/ti/TivaWare_C_Series-1.0/driverlib/ccs/Debug/driverlib.lib" \
+-l"C:/ti/TivaWare_C_Series-1.0/sensorlib/ccs/Debug/sensorlib.lib" \
 
 -include ../makefile.init
 
@@ -30,97 +28,100 @@ RMDIR := RMDIR /S/Q
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include subdir_vars.mk
--include utils/subdir_vars.mk
 -include drivers/subdir_vars.mk
+-include utils/subdir_vars.mk
 -include subdir_rules.mk
--include utils/subdir_rules.mk
 -include drivers/subdir_rules.mk
+-include utils/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
-ifneq ($(strip $(S_DEPS)),)
--include $(S_DEPS)
-endif
-ifneq ($(strip $(S_UPPER_DEPS)),)
--include $(S_UPPER_DEPS)
-endif
-ifneq ($(strip $(S62_DEPS)),)
--include $(S62_DEPS)
-endif
-ifneq ($(strip $(C64_DEPS)),)
--include $(C64_DEPS)
-endif
-ifneq ($(strip $(ASM_DEPS)),)
--include $(ASM_DEPS)
-endif
-ifneq ($(strip $(CC_DEPS)),)
--include $(CC_DEPS)
-endif
-ifneq ($(strip $(S55_DEPS)),)
--include $(S55_DEPS)
-endif
-ifneq ($(strip $(C67_DEPS)),)
--include $(C67_DEPS)
-endif
-ifneq ($(strip $(CLA_DEPS)),)
--include $(CLA_DEPS)
-endif
-ifneq ($(strip $(C??_DEPS)),)
--include $(C??_DEPS)
-endif
-ifneq ($(strip $(CPP_DEPS)),)
--include $(CPP_DEPS)
-endif
-ifneq ($(strip $(S??_DEPS)),)
--include $(S??_DEPS)
-endif
-ifneq ($(strip $(C_DEPS)),)
--include $(C_DEPS)
-endif
-ifneq ($(strip $(C62_DEPS)),)
--include $(C62_DEPS)
-endif
-ifneq ($(strip $(CXX_DEPS)),)
--include $(CXX_DEPS)
-endif
-ifneq ($(strip $(C++_DEPS)),)
--include $(C++_DEPS)
-endif
-ifneq ($(strip $(ASM_UPPER_DEPS)),)
--include $(ASM_UPPER_DEPS)
-endif
-ifneq ($(strip $(K_DEPS)),)
--include $(K_DEPS)
-endif
-ifneq ($(strip $(C43_DEPS)),)
--include $(C43_DEPS)
-endif
-ifneq ($(strip $(INO_DEPS)),)
--include $(INO_DEPS)
-endif
-ifneq ($(strip $(S67_DEPS)),)
--include $(S67_DEPS)
-endif
-ifneq ($(strip $(SA_DEPS)),)
--include $(SA_DEPS)
-endif
-ifneq ($(strip $(S43_DEPS)),)
--include $(S43_DEPS)
-endif
-ifneq ($(strip $(OPT_DEPS)),)
--include $(OPT_DEPS)
-endif
-ifneq ($(strip $(PDE_DEPS)),)
--include $(PDE_DEPS)
-endif
-ifneq ($(strip $(S64_DEPS)),)
--include $(S64_DEPS)
+ifneq ($(strip $(C55_DEPS)),)
+-include $(C55_DEPS)
 endif
 ifneq ($(strip $(C_UPPER_DEPS)),)
 -include $(C_UPPER_DEPS)
 endif
-ifneq ($(strip $(C55_DEPS)),)
--include $(C55_DEPS)
+ifneq ($(strip $(S67_DEPS)),)
+-include $(S67_DEPS)
+endif
+ifneq ($(strip $(S62_DEPS)),)
+-include $(S62_DEPS)
+endif
+ifneq ($(strip $(S_DEPS)),)
+-include $(S_DEPS)
+endif
+ifneq ($(strip $(OPT_DEPS)),)
+-include $(OPT_DEPS)
+endif
+ifneq ($(strip $(C??_DEPS)),)
+-include $(C??_DEPS)
+endif
+ifneq ($(strip $(ASM_UPPER_DEPS)),)
+-include $(ASM_UPPER_DEPS)
+endif
+ifneq ($(strip $(S??_DEPS)),)
+-include $(S??_DEPS)
+endif
+ifneq ($(strip $(C64_DEPS)),)
+-include $(C64_DEPS)
+endif
+ifneq ($(strip $(CXX_DEPS)),)
+-include $(CXX_DEPS)
+endif
+ifneq ($(strip $(S64_DEPS)),)
+-include $(S64_DEPS)
+endif
+ifneq ($(strip $(INO_DEPS)),)
+-include $(INO_DEPS)
+endif
+ifneq ($(strip $(CLA_DEPS)),)
+-include $(CLA_DEPS)
+endif
+ifneq ($(strip $(S55_DEPS)),)
+-include $(S55_DEPS)
+endif
+ifneq ($(strip $(SV7A_DEPS)),)
+-include $(SV7A_DEPS)
+endif
+ifneq ($(strip $(C62_DEPS)),)
+-include $(C62_DEPS)
+endif
+ifneq ($(strip $(C67_DEPS)),)
+-include $(C67_DEPS)
+endif
+ifneq ($(strip $(PDE_DEPS)),)
+-include $(PDE_DEPS)
+endif
+ifneq ($(strip $(K_DEPS)),)
+-include $(K_DEPS)
+endif
+ifneq ($(strip $(C_DEPS)),)
+-include $(C_DEPS)
+endif
+ifneq ($(strip $(CC_DEPS)),)
+-include $(CC_DEPS)
+endif
+ifneq ($(strip $(C++_DEPS)),)
+-include $(C++_DEPS)
+endif
+ifneq ($(strip $(C43_DEPS)),)
+-include $(C43_DEPS)
+endif
+ifneq ($(strip $(S43_DEPS)),)
+-include $(S43_DEPS)
+endif
+ifneq ($(strip $(ASM_DEPS)),)
+-include $(ASM_DEPS)
+endif
+ifneq ($(strip $(S_UPPER_DEPS)),)
+-include $(S_UPPER_DEPS)
+endif
+ifneq ($(strip $(CPP_DEPS)),)
+-include $(CPP_DEPS)
+endif
+ifneq ($(strip $(SA_DEPS)),)
+-include $(SA_DEPS)
 endif
 endif
 
@@ -147,32 +148,32 @@ all: Display_Parameters.out
 Display_Parameters.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: ARM Linker'
-	"C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.7/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 --abi=eabi -me -O2 --gcc --define=ccs="ccs" --define=PART_TM4C123GH6PM --define=TARGET_IS_BLIZZARD_RB1 --define="ccs" --define=PART_LM4F120H5QR --display_error_number --diag_warning=225 --diag_wrap=off --gen_func_subsections=on --ual -z -m"pressure_bmp180_ccs.map" --heap_size=0 --stack_size=1024 -i"C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.7/lib" -i"C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.7/include" --reread_libs --warn_sections --display_error_number --diag_wrap=off --xml_link_info="Display_Parameters_linkInfo.xml" --rom_model -o "Display_Parameters.out" $(ORDERED_OBJS)
+	"D:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.1.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 --abi=eabi -me -O2 --gcc --define=ccs="ccs" --define=PART_TM4C123GH6PM --define=TARGET_IS_BLIZZARD_RB1 --define="ccs" --define=PART_LM4F120H5QR --display_error_number --diag_warning=225 --diag_wrap=off --gen_func_subsections=on --ual -z -m"pressure_bmp180_ccs.map" --heap_size=0 --stack_size=1024 -i"D:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.1.LTS/lib" -i"D:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.1.LTS/include" --reread_libs --warn_sections --display_error_number --diag_wrap=off --xml_link_info="Display_Parameters_linkInfo.xml" --rom_model -o "Display_Parameters.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 	@$(MAKE) --no-print-directory post-build
 
 Display_Parameters.bin: $(EXE_OUTPUTS)
 	@echo 'Invoking: ARM Hex Utility'
-	"C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.7/bin/armhex"  -o "Display_Parameters.bin" $(EXE_OUTPUTS__QUOTED)
+	"D:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.1.LTS/bin/armhex"  -o "Display_Parameters.bin" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $@'
 	@echo ' '
 	@$(MAKE) --no-print-directory post-build
 
 # Other Targets
 clean:
-	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "Display_Parameters_main.pp" "Kentec320x240x16_ssd2119_8bit.pp" "images.pp" "touch.pp" "ustdlib.pp" "utils\uartstdio.pp" "drivers\rgb.pp" 
-	-$(RM) "Display_Parameters_main.obj" "Kentec320x240x16_ssd2119_8bit.obj" "images.obj" "touch.obj" "ustdlib.obj" "utils\uartstdio.obj" "drivers\rgb.obj" 
+	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
+	-$(RM) "Kentec320x240x16_ssd2119_8bit.obj" "ZC706_SPI_Display.obj" "images.obj" "touch.obj" "ustdlib.obj" "drivers\rgb.obj" "utils\uartstdio.obj" 
+	-$(RM) "Kentec320x240x16_ssd2119_8bit.d" "ZC706_SPI_Display.d" "images.d" "touch.d" "ustdlib.d" "drivers\rgb.d" "utils\uartstdio.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
 post-build:
-	-"C:/ti/ccsv6/utils/tiobj2bin/tiobj2bin" "Display_Parameters.out" "Display_Parameters.bin" "C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.7/bin/armofd" "C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.7/bin/armhex" "C:/ti/ccsv6/utils/tiobj2bin/mkhex4bin"
+	-"D:/ti/ccsv7/utils/tiobj2bin/tiobj2bin" "Display_Parameters.out" "Display_Parameters.bin" "D:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.1.LTS/bin/armofd" "D:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.1.LTS/bin/armhex" "D:/ti/ccsv7/utils/tiobj2bin/mkhex4bin"
 	-@echo ' '
 
 .PHONY: all clean dependents
-.SECONDARY: post-build
+.SECONDARY:
 
 -include ../makefile.targets
 
