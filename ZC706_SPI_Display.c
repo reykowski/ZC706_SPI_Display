@@ -214,6 +214,8 @@
 
     uint16_t i_counter=0;
     uint8_t iAGC_Curve[320]={ [ 0 ... 319 ] = (186-25)};
+    uint8_t iLock_Curve[320]={ [ 0 ... 319 ] = 186};
+    uint8_t iHold_Curve[320]={ [ 0 ... 319 ] = 132};
     uint8_t iCRC_Curve[320]={ [ 0 ... 319 ] = 186};
     uint8_t iFrame_Curve[320]={ [ 0 ... 319 ] = 186};
 
@@ -1566,7 +1568,7 @@ if(*i32FractionPart < 0)
     *i32FractionPart *= -1;
 	}
 }
-
+//*****************************************************************************
 void delay_cycles(long cycles)
 {
 	long k = 0;
@@ -1577,6 +1579,36 @@ void delay_cycles(long cycles)
 		}
 	k = k+5;
 }
+//*****************************************************************************
+//
+//      Place and Update a Scope on the Display
+//
+//*****************************************************************************
+void UpdateScope(tContext *pContext, uint8_t *i_Curve, float fnew_Value, float fmin, float fmax , uint8_t yp_min, uint8_t yp_max)
+{
+    GrContextForegroundSet(pContext, ClrLime);
+     GrLineDraw(pContext, 0,  i_Curve[0], 1, i_Curve[1]);  // Remove First Line Segment (old)
+     i_Curve[0] = i_Curve[1];   // Move 1 pixel to the left
+
+     for (i_counter = 1; i_counter < 319; i_counter++)
+     {
+         GrContextForegroundSet(pContext, ClrLime);
+         GrLineDraw(pContext, i_counter,  i_Curve[i_counter], i_counter+1, i_Curve[i_counter+1]);
+         i_Curve[i_counter] = i_Curve[i_counter+1]; // Move 1 pixel to the left
+         GrContextForegroundSet(pContext, ClrBlack);
+         GrLineDraw(pContext, i_counter-1,  i_Curve[i_counter-1], i_counter, i_Curve[i_counter]);
+     }
+     i_Curve[319] = (yp_max - (yp_max-yp_min)*(fnew_Value-fmin)/(fmax-fmin));
+     GrContextForegroundSet(pContext, ClrBlack);
+     GrLineDraw(pContext, 318,  i_Curve[318], 319, i_Curve[319]);
+     GrContextForegroundSet(pContext, ClrForestGreen);
+     GrLineDrawH(pContext, 0, 319, yp_min-3);
+     GrLineDrawH(pContext, 0, 319, yp_min-2);
+     GrLineDrawH(pContext, 0, 319, yp_max+2);
+     GrLineDrawH(pContext, 0, 319, yp_max+3);
+     GrContextForegroundSet(pContext, ClrBlack);
+}
+
 
 //*****************************************************************************
 //
@@ -2082,6 +2114,20 @@ main(void)
                    GrContextBackgroundSet(&sContext, ClrLime);
                    GrStringDrawRight(&sContext, val_LOCK_Str, 8, S11_x+70, S11_y, 1);	// LOCK
                    GrStringDrawRight(&sContext, val_HOLD_Str, 8, S12_x+70, S12_y, 1);	// Hold Over
+                   if (fLock<1.0)
+                  {
+                      GrContextBackgroundSet(&sContext, ClrRed);
+                      GrStringDraw(&sContext, "PLL is not locked ", -1, 32, S21_y, 1);
+                  }
+                  else
+                  {
+                   GrStringDraw(&sContext,    "PLL locked         ", -1, 32, S21_y, 1);
+                  }
+                   GrContextBackgroundSet(&sContext, ClrLime);
+
+
+                   UpdateScope(&sContext, &iLock_Curve[0], fLock, 0.0, 1.0, 85, 132);
+                   UpdateScope(&sContext, &iHold_Curve[0], fHold, 0.0, 1.0, 138, 186);
 
             	  break;
 
@@ -2141,27 +2187,7 @@ main(void)
                    GrStringDrawRight(&sContext, val_CRC_Str, 8, S11_x+70, S11_y, 1); // Message Status (CRC Error)
                    GrContextBackgroundSet(&sContext, ClrLime);
 
-                   GrContextForegroundSet(&sContext, ClrLime);
-                   GrLineDraw(&sContext, 0,  iCRC_Curve[0], 1, iCRC_Curve[1]);  // Remove First Line Segment (old)
-                   iCRC_Curve[0] = iCRC_Curve[1];   // Move 1 pixel to the left
-
-                   for (i_counter = 1; i_counter < 319; i_counter++)
-                   {
-                       GrContextForegroundSet(&sContext, ClrLime);
-                       GrLineDraw(&sContext, i_counter,  iCRC_Curve[i_counter], i_counter+1, iCRC_Curve[i_counter+1]);
-                       iCRC_Curve[i_counter] = iCRC_Curve[i_counter+1]; // Move 1 pixel to the left
-                       GrContextForegroundSet(&sContext, ClrBlack);
-                       GrLineDraw(&sContext, i_counter-1,  iCRC_Curve[i_counter-1], i_counter, iCRC_Curve[i_counter]);
-                   }
-                   iCRC_Curve[319] = (186 - fCRC*50.0);
-                   GrContextForegroundSet(&sContext, ClrBlack);
-                   GrLineDraw(&sContext, 318,  iCRC_Curve[318], 319, iCRC_Curve[319]);
-                   GrContextForegroundSet(&sContext, ClrForestGreen);
-                   GrLineDrawH(&sContext, 0, 319, 133);
-                   GrLineDrawH(&sContext, 0, 319, 134);
-                   GrLineDrawH(&sContext, 0, 319, 188);
-                   GrLineDrawH(&sContext, 0, 319, 189);
-                   GrContextForegroundSet(&sContext, ClrBlack);
+                   UpdateScope(&sContext, &iCRC_Curve[0], fCRC, 0.0, 1.0, 136, 186);
 
             	  break;
 
