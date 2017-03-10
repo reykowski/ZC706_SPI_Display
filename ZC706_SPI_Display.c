@@ -1601,11 +1601,16 @@ void UpdateScope(tContext *pContext, uint8_t *i_Curve, float fnew_Value, float f
      i_Curve[319] = (yp_max - (yp_max-yp_min)*(fnew_Value-fmin)/(fmax-fmin));
      GrContextForegroundSet(pContext, ClrBlack);
      GrLineDraw(pContext, 318,  i_Curve[318], 319, i_Curve[319]);
-     GrContextForegroundSet(pContext, ClrForestGreen);
+     GrContextForegroundSet(pContext, ClrLimeGreen);
      GrLineDrawH(pContext, 0, 319, yp_min-3);
      GrLineDrawH(pContext, 0, 319, yp_min-2);
      GrLineDrawH(pContext, 0, 319, yp_max+2);
      GrLineDrawH(pContext, 0, 319, yp_max+3);
+     GrContextForegroundSet(pContext, ClrLimeGreen);
+     GrLineDrawV(pContext,  80-1, yp_min-2, yp_max+2);
+     GrLineDrawV(pContext, 160-1, yp_min-2, yp_max+2);
+     GrLineDrawV(pContext, 240-1, yp_min-2, yp_max+2);
+     GrLineDrawH(pContext, 0, 319, (yp_max+yp_min)/2);
      GrContextForegroundSet(pContext, ClrBlack);
 }
 
@@ -2085,6 +2090,8 @@ main(void)
                    GrStringDrawRight(&sContext, val_AGC_Str, 10, S11_x+100, S11_y, 1);	// AGC
                    GrContextBackgroundSet(&sContext, ClrLime);
 
+                   UpdateScope(&sContext, & iAGC_Curve[0], fAGC, 0.0, 2000.0, 136, 186);
+/*
                    GrContextForegroundSet(&sContext, ClrLime);
                    GrLineDraw(&sContext, 0,  iAGC_Curve[0], 1, iAGC_Curve[1]);  // Remove First Line Segment (old)
                    iAGC_Curve[0] = iAGC_Curve[1];	// Move 1 pixel to the left
@@ -2106,6 +2113,7 @@ main(void)
                    GrLineDrawH(&sContext, 0, 319, 188);
                    GrLineDrawH(&sContext, 0, 319, 189);
                    GrContextForegroundSet(&sContext, ClrBlack);
+*/
 
             	  break;
 
@@ -2144,6 +2152,8 @@ main(void)
                    GrStringDraw(&sContext,    "Synchronization Ok    ", -1, 32, S21_y, 1);
                   }
 
+                   UpdateScope(&sContext, & iFrame_Curve[0], fFrame, 0.0, 1.0, 136, 186);
+ /*
                    GrStringDrawRight(&sContext, val_FRAME_Str, 8, S11_x+90, S11_y, 1);	// Frame Status
                    GrContextBackgroundSet(&sContext, ClrLime);
 
@@ -2168,7 +2178,7 @@ main(void)
                    GrLineDrawH(&sContext, 0, 319, 188);
                    GrLineDrawH(&sContext, 0, 319, 189);
                    GrContextForegroundSet(&sContext, ClrBlack);
-
+*/
 
             	  break;
 
