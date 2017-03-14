@@ -171,7 +171,7 @@
 
 // Define String names for data display:
 #define str_AGC		"AGC: "
-#define str_LOCK	"LOCK: "
+#define str_Lock	"Lock: "
 #define str_HOLD	"HOLD: "
 #define str_EVM		"EVM: "
 #define str_FRAME	"FRAME: "
@@ -182,7 +182,7 @@
 
 // Define names for LED display:
 #define str_LED1	"AGC"
-#define str_LED2	"LOCK"
+#define str_LED2	"Lock"
 #define str_LED3	"HOLD"
 #define str_LED4	"EVM"
 #define str_LED5	"FRAME"
@@ -214,8 +214,8 @@
 
     uint16_t i_counter=0;
     uint8_t iAGC_Curve[320]={ [ 0 ... 319 ] = (186-25)};
-    uint8_t iLock_Curve[320]={ [ 0 ... 319 ] = 186};
-    uint8_t iHold_Curve[320]={ [ 0 ... 319 ] = 132};
+    uint8_t iLock_Curve[320]={ [ 0 ... 319 ] = 132};
+    uint8_t iHold_Curve[320]={ [ 0 ... 319 ] = 186};
     uint8_t iCRC_Curve[320]={ [ 0 ... 319 ] = 186};
     uint8_t iFrame_Curve[320]={ [ 0 ... 319 ] = 186};
 
@@ -224,10 +224,10 @@
     float my_noise;
 
     static char val_AGC_Str[20];
-    static char val_LOCK_Str[20];
+    static char val_Lock_Str[20];
     static char val_HOLD_Str[20];
     static char val_EVM_Str[20];
-    static char val_FRAME_Str[20];
+    static char val_Frame_Str[20];
     static char val_CRC_Str[20];
     static char val_BER_Str[20];
     static char val8_string[20];
@@ -1187,7 +1187,7 @@ OnDataPaint(tWidget *pWidget, tContext *pContext)
     GrContextForegroundSet(pContext, ClrBlack);
 
     GrStringDrawRight(pContext, str_AGC,  9, P11_x+10, P11_y, 0);
-    GrStringDrawRight(pContext, str_LOCK,  9, P12_x+10, P12_y, 0);
+    GrStringDrawRight(pContext, str_Lock,  9, P12_x+10, P12_y, 0);
     GrStringDrawRight(pContext, str_HOLD,  9, P21_x+10, P21_y, 0);
     GrStringDrawRight(pContext, str_EVM,  9, P22_x+10, P22_y, 0);
     GrStringDrawRight(pContext, str_FRAME,  9, P31_x+10, P31_y, 0);
@@ -1206,12 +1206,22 @@ OnDataPaint(tWidget *pWidget, tContext *pContext)
 void
 OnRxStatusPaint(tWidget *pWidget, tContext *pContext)
 {
+    tRectangle sRect;
     //
     // Start placing some strings
     //
     GrContextFontSet(pContext, &g_sFontCm20);
     GrContextForegroundSet(pContext, ClrBlack);
     GrStringDrawRight(pContext, str_AGC,  9, P11_x+10, P11_y, 0);
+    //
+    // Fill the back of the scope with black panel.
+    //
+    sRect.i16XMin = 0;
+    sRect.i16YMin = 85-6;
+    sRect.i16XMax = 319;
+    sRect.i16YMax = 186+3;
+    GrContextForegroundSet(pContext, ClrBlack);
+    GrRectFill(pContext, &sRect);
 
 }
 //*****************************************************************************
@@ -1222,7 +1232,7 @@ OnRxStatusPaint(tWidget *pWidget, tContext *pContext)
 void
 OnPLLStatusPaint(tWidget *pWidget, tContext *pContext)
 {
-
+    tRectangle sRect;
 
     //
     // Start placing some strings
@@ -1230,9 +1240,17 @@ OnPLLStatusPaint(tWidget *pWidget, tContext *pContext)
     GrContextFontSet(pContext, &g_sFontCm20);
     GrContextForegroundSet(pContext, ClrBlack);
 
-    GrStringDrawRight(pContext, str_LOCK,  9, P11_x+10, P11_y, 0);
+    GrStringDrawRight(pContext, str_Lock,  9, P11_x+10, P11_y, 0);
     GrStringDrawRight(pContext, str_HOLD,  9, P12_x+10, P12_y, 0);
-
+    //
+    // Fill the back of the scope with black panel.
+    //
+    sRect.i16XMin = 0;
+    sRect.i16YMin = 85-6;
+    sRect.i16XMax = 319;
+    sRect.i16YMax = 186+3;
+    GrContextForegroundSet(pContext, ClrBlack);
+    GrRectFill(pContext, &sRect);
 
 }
 //*****************************************************************************
@@ -1243,7 +1261,7 @@ OnPLLStatusPaint(tWidget *pWidget, tContext *pContext)
 void
 OnSYNCStatusPaint(tWidget *pWidget, tContext *pContext)
 {
-
+    tRectangle sRect;
     //
     // Start placing some strings
     //
@@ -1252,7 +1270,15 @@ OnSYNCStatusPaint(tWidget *pWidget, tContext *pContext)
     GrContextBackgroundSet(pContext, ClrLime);
     GrStringDraw(pContext, str_FRAME, -1, 32, S11_y, 1);
     //GrStringDrawRight(pContext, str_FRAME,  9, P11_x+10, P11_y, 0);
-
+    //
+    // Fill the back of the scope with black panel.
+    //
+    sRect.i16XMin = 0;
+    sRect.i16YMin = 85-6;
+    sRect.i16XMax = 319;
+    sRect.i16YMax = 186+3;
+    GrContextForegroundSet(pContext, ClrBlack);
+    GrRectFill(pContext, &sRect);
 }
 //*****************************************************************************
 //
@@ -1262,7 +1288,7 @@ OnSYNCStatusPaint(tWidget *pWidget, tContext *pContext)
 void
 OnRXMSGStatusPaint(tWidget *pWidget, tContext *pContext)
 {
-
+    tRectangle sRect;
     //
     // Start placing some strings
     //
@@ -1270,7 +1296,15 @@ OnRXMSGStatusPaint(tWidget *pWidget, tContext *pContext)
     GrContextForegroundSet(pContext, ClrBlack);
 
     GrStringDrawRight(pContext, str_CRC,  9, P11_x+10, P11_y, 0);
-
+    //
+    // Fill the back of the scope with black panel.
+    //
+    sRect.i16XMin = 0;
+    sRect.i16YMin = 85-6;
+    sRect.i16XMax = 319;
+    sRect.i16YMax = 186+3;
+    GrContextForegroundSet(pContext, ClrBlack);
+    GrRectFill(pContext, &sRect);
 }
 //*****************************************************************************
 //
@@ -1584,34 +1618,70 @@ void delay_cycles(long cycles)
 //      Place and Update a Scope on the Display
 //
 //*****************************************************************************
-void UpdateScope(tContext *pContext, uint8_t *i_Curve, float fnew_Value, float fmin, float fmax , uint8_t yp_min, uint8_t yp_max)
+void UpdateScope(tContext *pContext, uint8_t *i_Curve, float fnew_Value, float fmin, float fmax , uint8_t yp_min, uint8_t yp_max, char *scope_string)
 {
-    GrContextForegroundSet(pContext, ClrLime);
+#define tick_half 3
+
+#define x_tick1 40
+#define x_tick2 80
+#define x_tick3 120
+#define x_tick4 160
+#define x_tick5 200
+#define x_tick6 240
+#define x_tick7 280
+
+    uint8_t yp_center, yp_off;
+    yp_center = (yp_max+yp_min)/2;
+    yp_off = (yp_max - yp_min)/4;
+    if (fnew_Value>fmax)
+    {
+        fnew_Value = fmax;
+    }
+    if (fnew_Value<fmin)
+    {
+        fnew_Value = fmin;
+    }
+
+    // Draw Scope Grid
+    GrContextBackgroundSet(pContext, ClrBlack);         // Back Ground
+    GrContextForegroundSet(pContext, ClrLimeGreen);     // Grid Color
+    GrContextFontSet(pContext, &g_sFontCm12);
+    GrStringDraw(pContext,  scope_string, -1, 240, yp_min + 5, 1);
+    GrLineDrawV(pContext,  x_tick1-1, yp_center-tick_half, yp_center+tick_half);
+    GrLineDrawV(pContext,  x_tick2-1, yp_center-tick_half, yp_center+tick_half);
+    GrLineDrawV(pContext,  x_tick3-1, yp_center-tick_half, yp_center+tick_half);
+    GrLineDrawH(pContext,  x_tick4-1-3, x_tick4-1+tick_half, yp_center-yp_off);
+    GrLineDrawV(pContext,  x_tick4-1, yp_min-2, yp_max+2);
+    GrLineDrawH(pContext,  x_tick4-1-3, x_tick4-1+tick_half, yp_center+yp_off);
+    GrLineDrawV(pContext,  x_tick5-1, yp_center-tick_half, yp_center+tick_half);
+    GrLineDrawV(pContext,  x_tick6-1, yp_center-tick_half, yp_center+tick_half);
+    GrLineDrawV(pContext,  x_tick7-1, yp_center-tick_half, yp_center+tick_half);
+    GrLineDrawH(pContext,  0, 319, yp_center);
+
+    GrContextForegroundSet(pContext, ClrYellow);    // Line Color
+
+
+    GrContextForegroundSet(pContext, ClrBlack);
      GrLineDraw(pContext, 0,  i_Curve[0], 1, i_Curve[1]);  // Remove First Line Segment (old)
      i_Curve[0] = i_Curve[1];   // Move 1 pixel to the left
 
      for (i_counter = 1; i_counter < 319; i_counter++)
      {
-         GrContextForegroundSet(pContext, ClrLime);
+         GrContextForegroundSet(pContext, ClrBlack);
          GrLineDraw(pContext, i_counter,  i_Curve[i_counter], i_counter+1, i_Curve[i_counter+1]);
          i_Curve[i_counter] = i_Curve[i_counter+1]; // Move 1 pixel to the left
-         GrContextForegroundSet(pContext, ClrBlack);
+         GrContextForegroundSet(pContext, ClrYellow);
          GrLineDraw(pContext, i_counter-1,  i_Curve[i_counter-1], i_counter, i_Curve[i_counter]);
      }
      i_Curve[319] = (yp_max - (yp_max-yp_min)*(fnew_Value-fmin)/(fmax-fmin));
-     GrContextForegroundSet(pContext, ClrBlack);
+     GrContextForegroundSet(pContext, ClrYellow);
      GrLineDraw(pContext, 318,  i_Curve[318], 319, i_Curve[319]);
      GrContextForegroundSet(pContext, ClrLimeGreen);
      GrLineDrawH(pContext, 0, 319, yp_min-3);
      GrLineDrawH(pContext, 0, 319, yp_min-2);
      GrLineDrawH(pContext, 0, 319, yp_max+2);
      GrLineDrawH(pContext, 0, 319, yp_max+3);
-     GrContextForegroundSet(pContext, ClrLimeGreen);
-     GrLineDrawV(pContext,  80-1, yp_min-2, yp_max+2);
-     GrLineDrawV(pContext, 160-1, yp_min-2, yp_max+2);
-     GrLineDrawV(pContext, 240-1, yp_min-2, yp_max+2);
-     GrLineDrawH(pContext, 0, 319, (yp_max+yp_min)/2);
-     GrContextForegroundSet(pContext, ClrBlack);
+
 }
 
 
@@ -1641,13 +1711,15 @@ main(void)
 
 //***************************************************************************************
 
-#define	pos_AGC		12
-#define	pos_Lock	10
-#define	pos_Hold	22
-#define	pos_EVM		3
-#define	pos_Frame	24
-#define	pos_CRC		14
-#define	pos_BER		6
+#define pos_Lock_Avg1     20
+#define pos_Lock_Avg2     21
+#define	pos_AGC	     	  12
+#define	pos_Lock	      10
+#define	pos_Hold	      22
+#define	pos_EVM		       3
+#define	pos_Frame	      24
+#define	pos_CRC		      14
+#define	pos_BER		       6
 
     g_ulDataRx2[0] = 0b1111000011110000;
     g_ulDataRx2[1] = 0b1100110011110000;
@@ -1664,11 +1736,12 @@ main(void)
 
     g_ulDataRx2[13] = 0b1010101011110000;
 
-    g_ulDataRx2[pos_AGC] =	 0b100001111000011001100;
-    g_ulDataRx2[pos_Lock] =  0b1000000000000000;
-    g_ulDataRx2[pos_Hold] =  0b0000000000000000;
-    g_ulDataRx2[pos_CRC] =   0b0000000000000000;
-    g_ulDataRx2[pos_Frame] = 0b1000000000000000;
+    g_ulDataRx2[pos_AGC] =	      0b100001111000011001100;
+    g_ulDataRx2[pos_Lock] =       0b1000000000000000;
+    g_ulDataRx2[pos_Lock_Avg2] =  0.8*32768.0;
+    g_ulDataRx2[pos_Hold] =       0b0000000000000000;
+    g_ulDataRx2[pos_CRC] =        0b0000000000000000;
+    g_ulDataRx2[pos_Frame] =      0b1000000000000000;
 
 
     LSB_val = 128;
@@ -1706,7 +1779,7 @@ main(void)
     //
     // Set the clock to 40Mhz derived from the PLL and the external oscillator
     //
-    ROM_SysCtlClockSet(SYSCTL_SYSDIV_5 | SYSCTL_USE_PLL | SYSCTL_XTAL_16MHZ | SYSCTL_OSC_MAIN );
+    ROM_SysCtlClockSet(SYSCTL_SYSDIV_2_5 | SYSCTL_USE_PLL | SYSCTL_XTAL_16MHZ | SYSCTL_OSC_MAIN );
 
     //
     // Initialize the display driver.
@@ -1764,7 +1837,7 @@ main(void)
     TouchScreenCallbackSet(WidgetPointerMessage);
 
     //
-    // Add the title block and the previous and next buttons to the widget
+    // Add the title bLock and the previous and next buttons to the widget
     // tree.
     //
     WidgetAdd(WIDGET_ROOT, (tWidget *)&g_sPrevious);
@@ -1822,7 +1895,7 @@ main(void)
 	// because the SPI SSI mode is full-duplex, which allows you to send and
 	// receive at the same time.  The SSIDataGetNonBlocking function returns
 	// "true" when data was returned, and "false" when no data was returned.
-	// The "non-blocking" function checks if there is any data in the receive
+	// The "non-bLocking" function checks if there is any data in the receive
 	// FIFO and does not "hang" if there isn't.
 	//
     //      while(SSIDataGetNonBlocking(SSI1_BASE, &g_ulDataRx2[0]))
@@ -1914,14 +1987,25 @@ main(void)
             // print.
 
             // AGC Value
-    		fAGC =  (g_ulDataRx2[pos_AGC]/32768.0);
+    		fAGC =  log10((abs(g_ulDataRx2[pos_AGC]/32768.0)/1000.0)+0.00001);
     		float_to_int_and_fract(fAGC, &i32IntegerPart, &i32FractionPart);
-            usprintf(val_AGC_Str, " %4d.%1d     ", i32IntegerPart, i32FractionPart);
-
+            usprintf(val_AGC_Str, " %3d.%03ddB  ", i32IntegerPart, i32FractionPart);
+            if ((fAGC<0)&(i32IntegerPart==0))
+            {
+                val_AGC_Str[2] = '-';
+            }
             // Lock Status
-    		fLock = (g_ulDataRx2[pos_Lock]/32768.0);
+/*    		fLock = (g_ulDataRx2[pos_Lock]/32768.0);
     		float_to_int_and_fract(fLock, &i32IntegerPart, &i32FractionPart);
-            usprintf(val_LOCK_Str, " %2d.%02d    ", i32IntegerPart, i32FractionPart);
+            usprintf(val_Lock_Str, " %2d.%02ddB  ", i32IntegerPart, i32FractionPart);
+*/
+            fLock = log10(abs(g_ulDataRx2[pos_Lock_Avg2]/32768.0)+0.00001);
+            float_to_int_and_fract(fLock, &i32IntegerPart, &i32FractionPart);
+            usprintf(val_Lock_Str, " %2d.%01ddB  ", i32IntegerPart, i32FractionPart);
+            if ((fLock<0)&(i32IntegerPart==0))
+            {
+                val_Lock_Str[2] = '-';
+            }
 
             // Hold Over
     		fHold = (g_ulDataRx2[pos_Hold]/32768.0);
@@ -1934,9 +2018,9 @@ main(void)
             usprintf(val_EVM_Str, " %2d.%02d    ", i32IntegerPart, i32FractionPart);
 
             // Frame
-            fFrame = (g_ulDataRx2[pos_Frame]/32768.0);
+            fFrame = 1.0 - (g_ulDataRx2[pos_Frame]/32768.0);
     		float_to_int_and_fract(fFrame, &i32IntegerPart, &i32FractionPart);
-            usprintf(val_FRAME_Str, " %2d.%02d    ", i32IntegerPart, i32FractionPart);
+            usprintf(val_Frame_Str, " %2d.%01d    ", i32IntegerPart, i32FractionPart);
 
             // Message (CRC Error)
             fCRC = (g_ulDataRx2[pos_CRC]/32768.0);
@@ -1957,18 +2041,21 @@ main(void)
     		float_to_int_and_fract(fTempInt, &i32IntegerPart, &i32FractionPart);
             usprintf(val9_string, " %2d.%02d    ", i32IntegerPart, i32FractionPart);
 
+
+
             //
             // Check which panel.
             //
             switch(g_ulPanel) {
 
                case Block_Diagram  :
+                    GrContextFontSet(&sContext, &g_sFontCm20);
            	        PushButtonFillColorSet( g_psPushButtons2 + 0, ClrLightGreen );
            	        PushButtonFillColorSet( g_psPushButtons2 + 1, ClrLightGreen );
            	        PushButtonFillColorSet( g_psPushButtons2 + 2, ClrLightGreen );
            	        PushButtonFillColorSet( g_psPushButtons2 + 3, ClrLightGreen );
            	        g_ulButtonState=0;
-           	        if (fAGC>1000.0)
+           	        if (fAGC>0.0)
            	        {
                 	    //
                 	    // Change color of AGC button to Red
@@ -1977,7 +2064,7 @@ main(void)
                	        g_ulButtonState=1;
            	        }
 
-           	        else if ((fLock<1)|(fHold>0))
+           	        else if ((fLock>0)|(fHold>0))
            	        {
                 	    //
                 	    // Change color of PLL button to Red
@@ -1986,7 +2073,7 @@ main(void)
                	        g_ulButtonState=2;
            	        }
 
-           	        else if (fFrame<1)
+           	        else if (fFrame>0)
            	        {
                 	    //
                 	    // Change color of SYNC button to Red
@@ -2003,6 +2090,22 @@ main(void)
                 	    PushButtonFillColorSet( g_psPushButtons2 + 3, ClrRed );
                	        g_ulButtonState=8;
            	        }
+                    else if (fAGC>-0.1)
+                    {
+                        //
+                        // Change color of AGC button to Red
+                        //
+                        PushButtonFillColorSet( g_psPushButtons2 + 0, ClrYellow );
+                        g_ulButtonState=1;
+                    }
+                    else if (fLock>-0.1)
+                    {
+                        //
+                        // Change color of PLL button to Red
+                        //
+                        PushButtonFillColorSet( g_psPushButtons2 + 1, ClrYellow );
+                        g_ulButtonState=2;
+                    }
                     WidgetPaint((tWidget *)(g_psPushButtons2+0) );
                     WidgetPaint((tWidget *)(g_psPushButtons2+1) );
                     WidgetPaint((tWidget *)(g_psPushButtons2+2) );
@@ -2011,18 +2114,27 @@ main(void)
 
                case LED_Panel  :
             	    GrContextForegroundSet(&sContext, ClrLime);
-            	    if (fAGC>1000.0)
+                    //GrContextFontSet(&sContext, &g_sFontCm20);
+            	    if (fAGC>0.0)
             	    {
             	    	GrContextForegroundSet(&sContext, ClrRed);
+            	    }
+            	    else if (fAGC>-0.1)
+            	    {
+            	        GrContextForegroundSet(&sContext, ClrYellow);
             	    }
             	    GrCircleFill(&sContext, (LED_x0 + 0*LED_xd), (LED_y0 + 0*LED_yd), 10);	//AGC
             	    GrContextForegroundSet(&sContext, ClrLime);
 
-            	    if (fLock<1)
+            	    if (fLock>0)
             	    {
             	    	GrContextForegroundSet(&sContext, ClrRed);
             	    }
-            	    GrCircleFill(&sContext, (LED_x0 + 1*LED_xd), (LED_y0 + 0*LED_yd), 10);  // LOCK
+                    else if (fLock>-0.1)
+                    {
+                        GrContextForegroundSet(&sContext, ClrYellow);
+                    }
+            	    GrCircleFill(&sContext, (LED_x0 + 1*LED_xd), (LED_y0 + 0*LED_yd), 10);  // Lock
             	    GrContextForegroundSet(&sContext, ClrLime);
 
             	    if (fHold>0)
@@ -2034,7 +2146,7 @@ main(void)
 
             	    GrCircleFill(&sContext, (LED_x0 + 3*LED_xd), (LED_y0 + 0*LED_yd), 10);	// EVM
 
-            	    if (fFrame<1)
+            	    if (fFrame>0)
             	    {
             	    	GrContextForegroundSet(&sContext, ClrRed);
             	    }
@@ -2058,13 +2170,13 @@ main(void)
                case Data_Panel  :
                    GrContextForegroundSet(&sContext, ClrBlack);
                    GrContextBackgroundSet(&sContext, ClrLime);
-                   GrStringDrawRight(&sContext, val_AGC_Str, 8, S11_x+70, S11_y, 1);	// AGC
-                   GrStringDrawRight(&sContext, val_LOCK_Str, 8, S12_x+70, S12_y, 1);	// Lock
+                   GrStringDraw(&sContext, val_AGC_Str, 10, S11_x, S11_y, 1);	// AGC
+                   GrStringDraw(&sContext, val_Lock_Str, 10, S12_x, S12_y, 1);	// Lock
 
                    GrStringDrawRight(&sContext, val_HOLD_Str, 8, S21_x+70, S21_y, 1);	// Holder Over
                    GrStringDrawRight(&sContext, val_EVM_Str, 8, S22_x+70, S22_y, 1);	// EVM
 
-                   GrStringDrawRight(&sContext, val_FRAME_Str, 8, S31_x+70, S31_y, 1);	// Frame Status
+                   GrStringDrawRight(&sContext, val_Frame_Str, 8, S31_x+70, S31_y, 1);	// Frame Status
                    GrStringDrawRight(&sContext, val_CRC_Str, 8, S32_x+70, S32_y, 1);	// Message Status (CRC Error)
 
                    GrStringDrawRight(&sContext, val_BER_Str, 8, S41_x+70, S41_y, 1);	// BER
@@ -2078,126 +2190,106 @@ main(void)
                case RX_Panel  :
             	   GrContextBackgroundSet(&sContext, ClrLime);
                    GrContextForegroundSet(&sContext, ClrBlack);
-           	       if (fAGC>1000.0)
+                   GrContextFontSet(&sContext, &g_sFontCm20);
+           	       if (fAGC>0.0)
            	       {
            	    	   GrContextBackgroundSet(&sContext, ClrRed);
-           	    	   GrStringDraw(&sContext, "Check input to RX1A ", -1, 32, S21_y, 1);
+           	    	   GrStringDraw(&sContext, "Check input to RX1A ", -1, 32, S21_y-5, 1);
+           	       }
+           	       else if (fAGC>-0.1)
+           	       {
+                       GrContextBackgroundSet(&sContext, ClrYellow);
+                       GrStringDraw(&sContext, "Weak Input Signal ", -1, 32, S21_y-5, 1);
            	       }
            	       else
            	       {
-           	        GrStringDraw(&sContext,    "AGC is within range    ", -1, 32, S21_y, 1);
+           	        GrStringDraw(&sContext,    "AGC within Range    ", -1, 32, S21_y-5, 1);
            	       }
-                   GrStringDrawRight(&sContext, val_AGC_Str, 10, S11_x+100, S11_y, 1);	// AGC
+                   GrStringDraw(&sContext, val_AGC_Str, 10, S11_x+10, S11_y, 1);	// AGC
                    GrContextBackgroundSet(&sContext, ClrLime);
 
-                   UpdateScope(&sContext, & iAGC_Curve[0], fAGC, 0.0, 2000.0, 136, 186);
-/*
-                   GrContextForegroundSet(&sContext, ClrLime);
-                   GrLineDraw(&sContext, 0,  iAGC_Curve[0], 1, iAGC_Curve[1]);  // Remove First Line Segment (old)
-                   iAGC_Curve[0] = iAGC_Curve[1];	// Move 1 pixel to the left
+                   UpdateScope(&sContext, & iAGC_Curve[0], fAGC, -0.5, 0.5, 136, 186, "AGC Graph");
 
-                   for (i_counter = 1; i_counter < 319; i_counter++)
-                   {
-                	   GrContextForegroundSet(&sContext, ClrLime);
-                	   GrLineDraw(&sContext, i_counter,  iAGC_Curve[i_counter], i_counter+1, iAGC_Curve[i_counter+1]);
-                       iAGC_Curve[i_counter] = iAGC_Curve[i_counter+1];	// Move 1 pixel to the left
-                	   GrContextForegroundSet(&sContext, ClrBlack);
-                	   GrLineDraw(&sContext, i_counter-1,  iAGC_Curve[i_counter-1], i_counter, iAGC_Curve[i_counter]);
-                   }
-                   iAGC_Curve[319] = (186 - fAGC/40.0);
-                   GrContextForegroundSet(&sContext, ClrBlack);
-                   GrLineDraw(&sContext, 318,  iAGC_Curve[318], 319, iAGC_Curve[319]);
-                   GrContextForegroundSet(&sContext, ClrForestGreen);
-                   GrLineDrawH(&sContext, 0, 319, 133);
-                   GrLineDrawH(&sContext, 0, 319, 134);
-                   GrLineDrawH(&sContext, 0, 319, 188);
-                   GrLineDrawH(&sContext, 0, 319, 189);
-                   GrContextForegroundSet(&sContext, ClrBlack);
-*/
 
             	  break;
 
                case PLL_Panel  :
                    GrContextForegroundSet(&sContext, ClrBlack);
                    GrContextBackgroundSet(&sContext, ClrLime);
-                   GrStringDrawRight(&sContext, val_LOCK_Str, 8, S11_x+70, S11_y, 1);	// LOCK
+                   GrContextFontSet(&sContext, &g_sFontCm20);
+                   GrStringDrawRight(&sContext, val_Lock_Str, 9, S11_x+80, S11_y, 1);	// Lock
                    GrStringDrawRight(&sContext, val_HOLD_Str, 8, S12_x+70, S12_y, 1);	// Hold Over
-                   if (fLock<1.0)
+                   if (fLock>0.0)
                   {
                       GrContextBackgroundSet(&sContext, ClrRed);
-                      GrStringDraw(&sContext, "PLL is not locked ", -1, 32, S21_y, 1);
+                      GrStringDraw(&sContext, "PLL unLocked ", -1, 20, S21_y-5, 1);
+                  }
+                  else if (fLock>0.0)
+                  {
+                      GrContextBackgroundSet(&sContext, ClrYellow);
+                      GrStringDraw(&sContext, "PLL Lock Weak", -1, 20, S21_y-5, 1);
                   }
                   else
                   {
-                   GrStringDraw(&sContext,    "PLL locked         ", -1, 32, S21_y, 1);
+                      GrStringDraw(&sContext,    "PLL Locked   ", -1, 20, S21_y-5, 1);
+                  }
+                   GrContextBackgroundSet(&sContext, ClrLime);
+                   if (fHold>0.0)
+                  {
+                      GrContextBackgroundSet(&sContext, ClrRed);
+                      GrStringDraw(&sContext, "PLL Hold Mode ", -1, 170, S21_y-5, 1);
+                  }
+                  else
+                  {
+                   GrStringDraw(&sContext,    "PLL Track Mode", -1, 170, S21_y-5, 1);
                   }
                    GrContextBackgroundSet(&sContext, ClrLime);
 
-
-                   UpdateScope(&sContext, &iLock_Curve[0], fLock, 0.0, 1.0, 85, 132);
-                   UpdateScope(&sContext, &iHold_Curve[0], fHold, 0.0, 1.0, 138, 186);
+                   UpdateScope(&sContext, &iLock_Curve[0], fLock, -5.0, 5.0, 85, 132, "Lock Graph");
+                   UpdateScope(&sContext, &iHold_Curve[0], fHold, 0.0, 1.0, 138, 186, "Hold Graph");
 
             	  break;
 
                case SYNC_Panel  :
                    GrContextForegroundSet(&sContext, ClrBlack);
                    GrContextBackgroundSet(&sContext, ClrLime);
-                   if (fFrame<1.0)
+                   GrContextFontSet(&sContext, &g_sFontCm20);
+
+                   if (fFrame>0.0)
                   {
                       GrContextBackgroundSet(&sContext, ClrRed);
-                      GrStringDraw(&sContext, "Synchronization Error ", -1, 32, S21_y, 1);
+                      GrStringDraw(&sContext, "Synchronization Error ", -1, 32, S21_y-5, 1);
                   }
                   else
                   {
-                   GrStringDraw(&sContext,    "Synchronization Ok    ", -1, 32, S21_y, 1);
+                   GrStringDraw(&sContext,    "Synchronization Ok    ", -1, 32, S21_y-5, 1);
                   }
 
-                   UpdateScope(&sContext, & iFrame_Curve[0], fFrame, 0.0, 1.0, 136, 186);
- /*
-                   GrStringDrawRight(&sContext, val_FRAME_Str, 8, S11_x+90, S11_y, 1);	// Frame Status
+                   GrStringDrawRight(&sContext, val_Frame_Str, 8, S11_x+100, S11_y, 1); // Message Status (CRC Error)
                    GrContextBackgroundSet(&sContext, ClrLime);
 
-                   GrContextForegroundSet(&sContext, ClrLime);
-                   GrLineDraw(&sContext, 0,  iFrame_Curve[0], 1, iFrame_Curve[1]);  // Remove First Line Segment (old)
-                   iFrame_Curve[0] = iFrame_Curve[1];   // Move 1 pixel to the left
+                   UpdateScope(&sContext, & iFrame_Curve[0], fFrame, 0.0, 1.0, 136, 186, "Frame Graph");
 
-                   for (i_counter = 1; i_counter < 319; i_counter++)
-                   {
-                       GrContextForegroundSet(&sContext, ClrLime);
-                       GrLineDraw(&sContext, i_counter,  iFrame_Curve[i_counter], i_counter+1, iFrame_Curve[i_counter+1]);
-                       iFrame_Curve[i_counter] = iFrame_Curve[i_counter+1]; // Move 1 pixel to the left
-                       GrContextForegroundSet(&sContext, ClrBlack);
-                       GrLineDraw(&sContext, i_counter-1,  iFrame_Curve[i_counter-1], i_counter, iFrame_Curve[i_counter]);
-                   }
-                   iFrame_Curve[319] = (186 - fFrame*50.0);
-                   GrContextForegroundSet(&sContext, ClrBlack);
-                   GrLineDraw(&sContext, 318,  iFrame_Curve[318], 319, iFrame_Curve[319]);
-                   GrContextForegroundSet(&sContext, ClrForestGreen);
-                   GrLineDrawH(&sContext, 0, 319, 133);
-                   GrLineDrawH(&sContext, 0, 319, 134);
-                   GrLineDrawH(&sContext, 0, 319, 188);
-                   GrLineDrawH(&sContext, 0, 319, 189);
-                   GrContextForegroundSet(&sContext, ClrBlack);
-*/
 
             	  break;
 
                case RXMSG_Panel  :
                    GrContextForegroundSet(&sContext, ClrBlack);
                    GrContextBackgroundSet(&sContext, ClrLime);
+                   GrContextFontSet(&sContext, &g_sFontCm20);
                    if (fCRC>0.0)
                   {
                       GrContextBackgroundSet(&sContext, ClrRed);
-                      GrStringDraw(&sContext, "Check Sum Error ", -1, 32, S21_y, 1);
+                      GrStringDraw(&sContext, "Check Sum Error ", -1, 32, S21_y-5, 1);
                   }
                   else
                   {
-                   GrStringDraw(&sContext,    "Check Sum Ok    ", -1, 32, S21_y, 1);
+                   GrStringDraw(&sContext,    "Check Sum Ok    ", -1, 32, S21_y-5, 1);
                   }
                    GrStringDrawRight(&sContext, val_CRC_Str, 8, S11_x+70, S11_y, 1); // Message Status (CRC Error)
                    GrContextBackgroundSet(&sContext, ClrLime);
 
-                   UpdateScope(&sContext, &iCRC_Curve[0], fCRC, 0.0, 1.0, 136, 186);
+                   UpdateScope(&sContext, &iCRC_Curve[0], fCRC, 0.0, 1.0, 136, 186, "CRC Graph");
 
             	  break;
 
