@@ -10,6 +10,7 @@ CMD_SRCS += \
 
 C_SRCS += \
 ../Kentec320x240x16_ssd2119_8bit.c \
+../TubeImage.c \
 ../ZC706_SPI_Display.c \
 ../images.c \
 ../tm4c123gh6pm_startup_ccs.c \
@@ -18,6 +19,7 @@ C:/ti/TivaWare_C_Series-1.0/utils/ustdlib.c
 
 C_DEPS += \
 ./Kentec320x240x16_ssd2119_8bit.d \
+./TubeImage.d \
 ./ZC706_SPI_Display.d \
 ./images.d \
 ./tm4c123gh6pm_startup_ccs.d \
@@ -26,6 +28,7 @@ C_DEPS += \
 
 OBJS += \
 ./Kentec320x240x16_ssd2119_8bit.obj \
+./TubeImage.obj \
 ./ZC706_SPI_Display.obj \
 ./images.obj \
 ./tm4c123gh6pm_startup_ccs.obj \
@@ -34,6 +37,7 @@ OBJS += \
 
 OBJS__QUOTED += \
 "Kentec320x240x16_ssd2119_8bit.obj" \
+"TubeImage.obj" \
 "ZC706_SPI_Display.obj" \
 "images.obj" \
 "tm4c123gh6pm_startup_ccs.obj" \
@@ -42,6 +46,7 @@ OBJS__QUOTED += \
 
 C_DEPS__QUOTED += \
 "Kentec320x240x16_ssd2119_8bit.d" \
+"TubeImage.d" \
 "ZC706_SPI_Display.d" \
 "images.d" \
 "tm4c123gh6pm_startup_ccs.d" \
@@ -50,6 +55,7 @@ C_DEPS__QUOTED += \
 
 C_SRCS__QUOTED += \
 "../Kentec320x240x16_ssd2119_8bit.c" \
+"../TubeImage.c" \
 "../ZC706_SPI_Display.c" \
 "../images.c" \
 "../tm4c123gh6pm_startup_ccs.c" \

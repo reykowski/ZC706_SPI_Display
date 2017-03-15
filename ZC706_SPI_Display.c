@@ -270,8 +270,10 @@
     void OnRXMSGStatusPaint(tWidget *pWidget, tContext *pContext);
     void OnPrimitivePaint(tWidget *pWidget, tContext *pContext);
     void OnRadioChange(tWidget *pWidget, uint32_t bSelected);
+    void DrawTubeImage(tWidget *pWidget, tContext *pContext);           // Panel 9
 
     extern tCanvasWidget g_psPanels[10];
+    extern const uint8_t g_pui9Image[];
     tContext *p1Context;
 
 
@@ -450,7 +452,14 @@ uint8_t SysTickIntHandler()
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //*****************************************************************************
 //
-// The first panel, which contains the Block Diagram with Push Buttons
+// The first panel, which draws a picture of a tube amp.
+//
+//*****************************************************************************
+Canvas(g_sDrawImage, g_psPanels, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
+       320, 186, CANVAS_STYLE_APP_DRAWN, 0, 0, 0, 0, 0, 0, DrawTubeImage);
+//*****************************************************************************
+//
+// The second panel, which contains the Block Diagram with Push Buttons
 //
 //*****************************************************************************
 //
@@ -468,42 +477,42 @@ uint32_t g_ulButtonState;
 uint32_t g_ulButtonState2;
 tPushButtonWidget g_psPushButtons2[] =
 {
-    RectangularButtonStruct(g_psPanels, g_psPushButtons2 + 1, 0,
+    RectangularButtonStruct(g_psPanels+1, g_psPushButtons2 + 1, 0,
                             &g_sKentec320x240x16_SSD2119, rect_x1, rect_y1, rect_x, rect_y,
                             PB_STYLE_FILL | PB_STYLE_OUTLINE | PB_STYLE_TEXT | PB_STYLE_RELEASE_NOTIFY ,
 							ClrLightGreen, ClrGold,  ClrGray, ClrBlack,
                             &g_sFontCm14, "RX", 0, 0, 0, 0, OnRxButtonPress),
-    RectangularButtonStruct(g_psPanels, g_psPushButtons2 + 2, 0,
+    RectangularButtonStruct(g_psPanels+1, g_psPushButtons2 + 2, 0,
     					    &g_sKentec320x240x16_SSD2119, rect_x2, rect_y1, rect_x, rect_y,
                             PB_STYLE_FILL | PB_STYLE_OUTLINE | PB_STYLE_TEXT | PB_STYLE_RELEASE_NOTIFY ,
 							ClrLightGreen, ClrGold, ClrGray, ClrBlack,
                             &g_sFontCm14, "PLL", 0, 0, 0, 0, OnPLLButtonPress),
-    RectangularButtonStruct(g_psPanels, g_psPushButtons2 + 3, 0,
+    RectangularButtonStruct(g_psPanels+1, g_psPushButtons2 + 3, 0,
     						&g_sKentec320x240x16_SSD2119, rect_x3, rect_y1, rect_x, rect_y,
 	                        PB_STYLE_FILL | PB_STYLE_OUTLINE | PB_STYLE_TEXT | PB_STYLE_RELEASE_NOTIFY ,
 							ClrLightGreen, ClrGold, ClrGray, ClrBlack,
 	                        &g_sFontCm14, "SYNC", 0, 0, 0, 0, OnSYNCButtonPress),
-	RectangularButtonStruct(g_psPanels,g_psPushButtons2 + 4 , 0,
+	RectangularButtonStruct(g_psPanels+1,g_psPushButtons2 + 4 , 0,
 						    &g_sKentec320x240x16_SSD2119, rect_x4, rect_y1, rect_x, rect_y,
 							PB_STYLE_FILL | PB_STYLE_OUTLINE | PB_STYLE_TEXT | PB_STYLE_RELEASE_NOTIFY ,
 							ClrLightGreen, ClrGold, ClrGray, ClrBlack,
 							&g_sFontCm14, "MSG", 0, 0, 0, 0, OnRXMSGButtonPress),
-    RectangularButtonStruct(g_psPanels, g_psPushButtons2 + 5, 0,
+    RectangularButtonStruct(g_psPanels+1, g_psPushButtons2 + 5, 0,
                             &g_sKentec320x240x16_SSD2119, rect_x1, rect_y2, rect_x, rect_y,
                             PB_STYLE_FILL | PB_STYLE_OUTLINE | PB_STYLE_TEXT | PB_STYLE_RELEASE_NOTIFY ,
                             ClrLightGreen, ClrGold, ClrGray, ClrBlack,
                             &g_sFontCm14, "TX", 0, 0, 0, 0, OnButtonPress2),
-    RectangularButtonStruct(g_psPanels, g_psPushButtons2 + 6, 0,
+    RectangularButtonStruct(g_psPanels+1, g_psPushButtons2 + 6, 0,
     					    &g_sKentec320x240x16_SSD2119, rect_x2, rect_y2, rect_x, rect_y,
                             PB_STYLE_FILL | PB_STYLE_OUTLINE | PB_STYLE_TEXT | PB_STYLE_RELEASE_NOTIFY ,
                             ClrLightGreen, ClrGold, ClrGray, ClrBlack,
                             &g_sFontCm14, "RRC", 0, 0, 0, 0, OnButtonPress2),
-    RectangularButtonStruct(g_psPanels, g_psPushButtons2 + 7, 0,
+    RectangularButtonStruct(g_psPanels+1, g_psPushButtons2 + 7, 0,
     						&g_sKentec320x240x16_SSD2119, rect_x3, rect_y2, rect_x, rect_y,
 	                        PB_STYLE_FILL | PB_STYLE_OUTLINE | PB_STYLE_TEXT | PB_STYLE_RELEASE_NOTIFY ,
 	                        ClrLightGreen, ClrGold, ClrGray, ClrBlack,
 	                        &g_sFontCm14, "BPSK", 0, 0, 0, 0, OnButtonPress2),
-	RectangularButtonStruct(g_psPanels, 0, 0,
+	RectangularButtonStruct(g_psPanels+1, 0, 0,
 						    &g_sKentec320x240x16_SSD2119, rect_x4, rect_y2, rect_x, rect_y,
 							PB_STYLE_FILL | PB_STYLE_OUTLINE | PB_STYLE_TEXT | PB_STYLE_RELEASE_NOTIFY ,
 							ClrLightGreen, ClrGold, ClrGray, ClrBlack,
@@ -513,10 +522,10 @@ tPushButtonWidget g_psPushButtons2[] =
 
 tCanvasWidget g_psButtonCanvas[] =
 {
-    CanvasStruct(g_psPanels, g_psButtonCanvas+1, 0,
+    CanvasStruct(g_psPanels+1, g_psButtonCanvas+1, 0,
                  &g_sKentec320x240x16_SSD2119, 0, 24, 320, 166,
                  CANVAS_STYLE_FILL, ClrSeashell, 0, 0, 0, 0, 0, 0),
-    CanvasStruct(g_psPanels, g_psPushButtons2, 0,
+    CanvasStruct(g_psPanels+1, g_psPushButtons2, 0,
                  &g_sKentec320x240x16_SSD2119, 0, 24, 320, 166,
                  CANVAS_STYLE_APP_DRAWN, 0, 0, 0, 0, 0, 0, OnBlockDiagramPaint),
 };
@@ -528,55 +537,56 @@ tCanvasWidget g_psButtonCanvas[] =
 
 //*****************************************************************************
 //
-// The second panel, which contains the Status LEDs
+// The third panel, which contains the Status LEDs
 //
 //*****************************************************************************
-Canvas(g_sLED_Display, g_psPanels+1, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
+Canvas(g_sLED_Display, g_psPanels+2, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
        320, 166, CANVAS_STYLE_APP_DRAWN, 0, 0, 0, 0, 0, 0, OnLEDStatusPaint);
 
 //*****************************************************************************
 //
-// The third panel, which contains Status Data in string form
+// The fourth panel, which contains Status Data in string form
 //
 //*****************************************************************************
-Canvas(g_sStatusData, g_psPanels + 2, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
+Canvas(g_sStatusData, g_psPanels + 3, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
        320, 166, CANVAS_STYLE_APP_DRAWN, 0, 0, 0, 0, 0, 0, OnDataPaint);
 //*****************************************************************************
 //
-// The fourth panel, which contains Rx Status Info
+// The fifth panel, which contains Rx Status Info
 //
 //*****************************************************************************
-Canvas(g_sRxStatus, g_psPanels + 3, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
+Canvas(g_sRxStatus, g_psPanels + 4, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
        320, 166, CANVAS_STYLE_APP_DRAWN, 0, 0, 0, 0, 0, 0, OnRxStatusPaint);
 
 //*****************************************************************************
 //
-// The fifth panel, which contains PLL Status Info
+// The sixth panel, which contains PLL Status Info
 //
 //*****************************************************************************
-Canvas(g_sPLLStatus, g_psPanels + 4, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
+Canvas(g_sPLLStatus, g_psPanels + 5, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
        320, 166, CANVAS_STYLE_APP_DRAWN, 0, 0, 0, 0, 0, 0, OnPLLStatusPaint);
 //*****************************************************************************
 //
-// The sixth panel, which contains SYNC Status Info
+// The seventh panel, which contains SYNC Status Info
 //
 //*****************************************************************************
-Canvas(g_sSYNCStatus, g_psPanels + 5, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
+Canvas(g_sSYNCStatus, g_psPanels + 6, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
        320, 166, CANVAS_STYLE_APP_DRAWN, 0, 0, 0, 0, 0, 0, OnSYNCStatusPaint);
 //*****************************************************************************
 //
-// The seventh panel, which contains PLL Status Info
+// The eigth panel, which contains PLL Status Info
 //
 //*****************************************************************************
-Canvas(g_sRXMSGStatus, g_psPanels + 6, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
+Canvas(g_sRXMSGStatus, g_psPanels + 7, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
        320, 166, CANVAS_STYLE_APP_DRAWN, 0, 0, 0, 0, 0, 0, OnRXMSGStatusPaint);
 //*****************************************************************************
 //
-// The eigth panel, which draws some Primitives
+// The ninth panel, which draws some Primitives
 //
 //*****************************************************************************
-Canvas(g_sPrimitives, g_psPanels + 7, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
+Canvas(g_sPrimitives, g_psPanels + 8, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
 	   320, 166, CANVAS_STYLE_APP_DRAWN, 0, 0, 0, 0, 0, 0, OnPrimitivePaint);
+
 //*****************************************************************************
 //
 // An array of canvas widgets, one per panel.  Each canvas is filled with
@@ -585,6 +595,8 @@ Canvas(g_sPrimitives, g_psPanels + 7, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
 //*****************************************************************************
 tCanvasWidget g_psPanels[] =
 {
+    CanvasStruct(0, 0, &g_sDrawImage, &g_sKentec320x240x16_SSD2119, 0, 24,
+                 320, 186, CANVAS_STYLE_FILL, ClrBlack, 0, 0, 0, 0, 0, 0),
 	CanvasStruct(0, 0, &g_psButtonCanvas, &g_sKentec320x240x16_SSD2119, 0, 24,
 	             320, 166, CANVAS_STYLE_FILL, ClrBlack, 0, 0, 0, 0, 0, 0),
 	CanvasStruct(0, 0, &g_sLED_Display , &g_sKentec320x240x16_SSD2119, 0, 24,
@@ -599,9 +611,11 @@ tCanvasWidget g_psPanels[] =
 			     320, 166, CANVAS_STYLE_FILL, ClrLime, 0, 0, 0, 0, 0, 0),
     CanvasStruct(0, 0, &g_sRXMSGStatus, &g_sKentec320x240x16_SSD2119, 0, 24,
 			     320, 166, CANVAS_STYLE_FILL, ClrLime, 0, 0, 0, 0, 0, 0),
+
 };
 /*
-
+    CanvasStruct(0, 0, &g_sDrawImage, &g_sKentec320x240x16_SSD2119, 0,
+                 24, 320, 186, CANVAS_STYLE_FILL, ClrBlack, 0, 0, 0, 0, g_pui9Image, 0),
 	             	CanvasStruct(0, 0, &g_sPrimitives  , &g_sKentec320x240x16_SSD2119, 0, 24,
 			     320, 166, CANVAS_STYLE_FILL, ClrSeashell, 0, 0, 0, 0, 0, 0),
 };
@@ -621,6 +635,7 @@ tCanvasWidget g_psPanels[] =
 //*****************************************************************************
 char *g_pcPanelNames[] =
 {
+    "     Tube Image     ",
 	"     Block Diagram  ",
     "     Status LEDs    ",
     "     Status Data    ",
@@ -628,16 +643,17 @@ char *g_pcPanelNames[] =
     "     PLL Status     ",
     "     SYNC Status    ",
     "     Rx MSG Status  ",
-    "     Sliders     ",
-    "     S/W Update    "
+    "     Sliders        ",
+    "     S/W Update     "
 };
-#define Block_Diagram  0
-#define LED_Panel      1
-#define Data_Panel 	   2
-#define RX_Panel       3
-#define PLL_Panel      4
-#define SYNC_Panel     5
-#define RXMSG_Panel    6
+#define Tube Panel     0
+#define Block_Diagram  1
+#define LED_Panel      2
+#define Data_Panel 	   3
+#define RX_Panel       4
+#define PLL_Panel      5
+#define SYNC_Panel     6
+#define RXMSG_Panel    7
 //*****************************************************************************
 //
 // The buttons and text across the bottom of the screen.
@@ -829,7 +845,19 @@ OnNext(tWidget *pWidget)
 
 }
 
+//*****************************************************************************
+//
+// Handles paint requests for the Tube Image Painting.
+//
+//*****************************************************************************
+void
+DrawTubeImage(tWidget *pWidget, tContext *pContext)
+{
 
+    GrImageDraw(pContext, g_pui9Image, 0, 0);
+    GrFlush(pContext);
+
+}
 //*****************************************************************************
 //
 // Handles paint requests for the primitives g_psButtonCanvas widget.

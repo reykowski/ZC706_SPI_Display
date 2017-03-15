@@ -11,6 +11,7 @@ GEN_CMDS__FLAG :=
 
 ORDERED_OBJS += \
 "./Kentec320x240x16_ssd2119_8bit.obj" \
+"./TubeImage.obj" \
 "./ZC706_SPI_Display.obj" \
 "./images.obj" \
 "./tm4c123gh6pm_startup_ccs.obj" \
@@ -166,8 +167,8 @@ Display_Parameters.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "Kentec320x240x16_ssd2119_8bit.obj" "ZC706_SPI_Display.obj" "images.obj" "tm4c123gh6pm_startup_ccs.obj" "touch.obj" "ustdlib.obj" "drivers\rgb.obj" "utils\uartstdio.obj" 
-	-$(RM) "Kentec320x240x16_ssd2119_8bit.d" "ZC706_SPI_Display.d" "images.d" "tm4c123gh6pm_startup_ccs.d" "touch.d" "ustdlib.d" "drivers\rgb.d" "utils\uartstdio.d" 
+	-$(RM) "Kentec320x240x16_ssd2119_8bit.obj" "TubeImage.obj" "ZC706_SPI_Display.obj" "images.obj" "tm4c123gh6pm_startup_ccs.obj" "touch.obj" "ustdlib.obj" "drivers\rgb.obj" "utils\uartstdio.obj" 
+	-$(RM) "Kentec320x240x16_ssd2119_8bit.d" "TubeImage.d" "ZC706_SPI_Display.d" "images.d" "tm4c123gh6pm_startup_ccs.d" "touch.d" "ustdlib.d" "drivers\rgb.d" "utils\uartstdio.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
