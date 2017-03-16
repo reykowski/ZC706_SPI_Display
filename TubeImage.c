@@ -1,3 +1,22 @@
+//typedef struct
+//{
+    //
+    // Specifies the format of the image data; will be one of
+    // IMAGE_FMT_1BPP_UNCOMP, IMAGE_FMT_4BPP_UNCOMP, IMAGE_FMT_8BPP_UNCOMP,
+    // IMAGE_FMT_1BPP_COMP, IMAGE_FMT_4BPP_COMP, or IMAGE_FMT_8BPP_COMP. The
+    // xxx_COMP varieties indicate that the image data is compressed.
+    // unsigned char ucFormat;
+    //
+    // The width of the image in pixels.
+    // unsigned short usWidth;
+    //
+    // The height of the image in pixels.
+    // unsigned short usHeight;
+    //
+    // The image data. This is the structure member that C can not handle
+    // efficiently at compile time.
+    // unsigned char pucData[];
+//}
 #include <stdint.h>
 #include <stdbool.h>
 #include "grlib/grlib.h"
@@ -6,8 +25,8 @@ const uint8_t g_pui9Image[] =
 {
     IMAGE_FMT_4BPP_COMP,
     64, 1,
-    240, 0,
-
+//    240, 0,
+    166, 0,
     15,
     0x04, 0x05, 0x0e,
     0x1a, 0x05, 0x21,

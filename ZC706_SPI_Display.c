@@ -270,10 +270,13 @@
     void OnRXMSGStatusPaint(tWidget *pWidget, tContext *pContext);
     void OnPrimitivePaint(tWidget *pWidget, tContext *pContext);
     void OnRadioChange(tWidget *pWidget, uint32_t bSelected);
-    void DrawTubeImage(tWidget *pWidget, tContext *pContext);           // Panel 9
+    void DrawFirstImage(tWidget *pWidget, tContext *pContext);           // Panel 9
 
     extern tCanvasWidget g_psPanels[10];
-    extern const uint8_t g_pui9Image[];
+    extern const uint8_t g_pui_Soothing_Image[];    //Soothing Image
+    extern const uint8_t g_pui_Stormy_Image[];      //Stormy Image
+    extern const uint8_t g_pui_Lightning_Image[];      //Lightning Image
+    extern const uint8_t g_pui_Harmony_Image[];      //Harmony Image
     tContext *p1Context;
 
 
@@ -456,7 +459,7 @@ uint8_t SysTickIntHandler()
 //
 //*****************************************************************************
 Canvas(g_sDrawImage, g_psPanels, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
-       320, 186, CANVAS_STYLE_APP_DRAWN, 0, 0, 0, 0, 0, 0, DrawTubeImage);
+       320, 216, CANVAS_STYLE_APP_DRAWN, 0, 0, 0, 0, 0, 0, DrawFirstImage);
 //*****************************************************************************
 //
 // The second panel, which contains the Block Diagram with Push Buttons
@@ -596,7 +599,7 @@ Canvas(g_sPrimitives, g_psPanels + 8, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
 tCanvasWidget g_psPanels[] =
 {
     CanvasStruct(0, 0, &g_sDrawImage, &g_sKentec320x240x16_SSD2119, 0, 24,
-                 320, 186, CANVAS_STYLE_FILL, ClrBlack, 0, 0, 0, 0, 0, 0),
+                 320, 216, CANVAS_STYLE_FILL, ClrBlack, 0, 0, 0, 0, 0, 0),
 	CanvasStruct(0, 0, &g_psButtonCanvas, &g_sKentec320x240x16_SSD2119, 0, 24,
 	             320, 166, CANVAS_STYLE_FILL, ClrBlack, 0, 0, 0, 0, 0, 0),
 	CanvasStruct(0, 0, &g_sLED_Display , &g_sKentec320x240x16_SSD2119, 0, 24,
@@ -635,7 +638,7 @@ tCanvasWidget g_psPanels[] =
 //*****************************************************************************
 char *g_pcPanelNames[] =
 {
-    "     Tube Image     ",
+    "                    ",
 	"     Block Diagram  ",
     "     Status LEDs    ",
     "     Status Data    ",
@@ -664,8 +667,8 @@ RectangularButton(g_sPrevious, 0, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 190,
                   &g_sFontCm20, "-", g_pucBlue50x50, g_pucBlue50x50Press, 0, 0,
                   OnPrevious);
 
-Canvas(g_sTitle, 0, 0, 0, &g_sKentec320x240x16_SSD2119, 50, 190, 220, 50,
-       CANVAS_STYLE_TEXT | CANVAS_STYLE_TEXT_OPAQUE, 0, 0, ClrSilver,
+Canvas(g_sTitle, 0, ClrBlack, 0, &g_sKentec320x240x16_SSD2119, 50, 190, 220, 50,
+       CANVAS_STYLE_TEXT | CANVAS_STYLE_FILL, 0, 0, ClrSilver,
        &g_sFontCm20, 0, 0, 0);
 
 RectangularButton(g_sNext, 0, 0, 0, &g_sKentec320x240x16_SSD2119, 270, 190,
@@ -711,7 +714,7 @@ OnPrevious(tWidget *pWidget)
     if(g_ulPanel == 0)
     {
         return;
-    }
+   }
 
     //
     // Remove the current panel.
@@ -729,18 +732,6 @@ OnPrevious(tWidget *pWidget)
     	//
     	g_ulPanel--;
     }
-
-    //
-    // Add and draw the new panel.
-    //
-    WidgetAdd(WIDGET_ROOT, (tWidget *)(g_psPanels + g_ulPanel));
-    WidgetPaint((tWidget *)(g_psPanels + g_ulPanel));
-
-    //
-    // Set the title of this panel.
-    //
-    CanvasTextSet(&g_sTitle, g_pcPanelNames[g_ulPanel]);
-    WidgetPaint((tWidget *)&g_sTitle);
 
     //
     // See if this is the first panel.
@@ -772,6 +763,24 @@ OnPrevious(tWidget *pWidget)
         WidgetPaint((tWidget *)&g_sNext);
     }
 
+
+      //
+      // Add and draw the new panel.
+      //
+      WidgetAdd(WIDGET_ROOT, (tWidget *)(g_psPanels + g_ulPanel));
+      WidgetPaint((tWidget *)(g_psPanels + g_ulPanel));
+
+    if(g_ulPanel == 0)
+    {
+        return;
+    }
+
+//
+// Set the title of this panel.
+//
+      CanvasTextSet(&g_sTitle, g_pcPanelNames[g_ulPanel]);
+      WidgetPaint((tWidget *)&g_sTitle);
+
 }
 
 //*****************************************************************************
@@ -782,6 +791,7 @@ OnPrevious(tWidget *pWidget)
 void
 OnNext(tWidget *pWidget)
 {
+    tRectangle sRect;
     //
     // There is nothing to be done if the last panel is already being
     // displayed.
@@ -807,7 +817,14 @@ OnNext(tWidget *pWidget)
     //
     WidgetAdd(WIDGET_ROOT, (tWidget *)(g_psPanels + g_ulPanel));
     WidgetPaint((tWidget *)(g_psPanels + g_ulPanel));
-
+/*
+    sRect.i16XMin = 0;
+    sRect.i16YMin = 210;
+    sRect.i16XMax = Display_Width- 1;
+    sRect.i16YMax = 39;
+    GrContextForegroundSet(pContext, ClrBlack);
+    GrRectFill(pContext, &sRect);
+*/
     //
     // Set the title of this panel.
     //
@@ -851,10 +868,27 @@ OnNext(tWidget *pWidget)
 //
 //*****************************************************************************
 void
-DrawTubeImage(tWidget *pWidget, tContext *pContext)
+DrawFirstImage(tWidget *pWidget, tContext *pContext)
 {
-
-    GrImageDraw(pContext, g_pui9Image, 0, 0);
+/*    //
+    // Clear the next button from the display since the last panel is being
+    // displayed.
+    //
+    PushButtonImageOff(&g_sNext);
+    PushButtonTextOff(&g_sNext);
+    PushButtonFillOn(&g_sNext);
+    WidgetPaint((tWidget *)&g_sNext);
+    //
+    // Clear the previous button from the display since the first panel is
+    // being displayed.
+    //
+    PushButtonImageOff(&g_sPrevious);
+    PushButtonTextOff(&g_sPrevious);
+    PushButtonFillOn(&g_sPrevious);
+    WidgetPaint((tWidget *)&g_sPrevious);
+*/
+//    GrImageDraw(pContext, g_pui_Lightning_Image, 0, 24);
+    GrImageDraw(pContext, g_pui_Harmony_Image, 0, 24);
     GrFlush(pContext);
 
 }
