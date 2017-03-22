@@ -1,0 +1,96 @@
+\section{touch.\+c File Reference}
+\label{touch_8c}\index{touch.\+c@{touch.\+c}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}inc/hw\+\_\+adc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}inc/hw\+\_\+gpio.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}inc/hw\+\_\+ints.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}inc/hw\+\_\+memmap.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}inc/hw\+\_\+timer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}inc/hw\+\_\+types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}driverlib/adc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}driverlib/gpio.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}driverlib/interrupt.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}driverlib/sysctl.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}driverlib/timer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}grlib/grlib.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}grlib/widget.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}touch.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Kentec320x240x16\+\_\+ssd2119\+\_\+8bit.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ L\+A\+N\+D\+S\+C\+A\+PE}
+\item 
+\#define \textbf{ T\+S\+\_\+\+P\+\_\+\+P\+E\+R\+I\+PH}~S\+Y\+S\+C\+T\+L\+\_\+\+P\+E\+R\+I\+P\+H\+\_\+\+G\+P\+I\+OE
+\item 
+\#define \textbf{ T\+S\+\_\+\+P\+\_\+\+B\+A\+SE}~G\+P\+I\+O\+\_\+\+P\+O\+R\+T\+E\+\_\+\+B\+A\+SE
+\item 
+\#define \textbf{ T\+S\+\_\+\+N\+\_\+\+P\+E\+R\+I\+PH}~S\+Y\+S\+C\+T\+L\+\_\+\+P\+E\+R\+I\+P\+H\+\_\+\+G\+P\+I\+OA
+\item 
+\#define \textbf{ T\+S\+\_\+\+N\+\_\+\+B\+A\+SE}~G\+P\+I\+O\+\_\+\+P\+O\+R\+T\+A\+\_\+\+B\+A\+SE
+\item 
+\#define \textbf{ T\+S\+\_\+\+X\+P\+\_\+\+P\+IN}~G\+P\+I\+O\+\_\+\+P\+I\+N\+\_\+4
+\item 
+\#define \textbf{ T\+S\+\_\+\+Y\+P\+\_\+\+P\+IN}~G\+P\+I\+O\+\_\+\+P\+I\+N\+\_\+5
+\item 
+\#define \textbf{ T\+S\+\_\+\+X\+N\+\_\+\+P\+IN}~G\+P\+I\+O\+\_\+\+P\+I\+N\+\_\+3
+\item 
+\#define \textbf{ T\+S\+\_\+\+Y\+N\+\_\+\+P\+IN}~G\+P\+I\+O\+\_\+\+P\+I\+N\+\_\+2
+\item 
+\#define \textbf{ A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H\+\_\+\+XP}~A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H9
+\item 
+\#define \textbf{ A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H\+\_\+\+YP}~A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H8
+\item 
+\#define \textbf{ N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+M\+\_\+\+S\+E\+TS}~2
+\item 
+\#define \textbf{ N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+MS}~7
+\item 
+\#define \textbf{ S\+E\+T\+\_\+\+N\+O\+R\+M\+AL}~0
+\item 
+\#define \textbf{ S\+E\+T\+\_\+\+S\+R\+A\+M\+\_\+\+F\+L\+A\+SH}~1
+\item 
+\#define \textbf{ T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+N\+IT}~0
+\item 
+\#define \textbf{ T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+A\+D\+\_\+X}~1
+\item 
+\#define \textbf{ T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+A\+D\+\_\+Y}~2
+\item 
+\#define \textbf{ T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+K\+I\+P\+\_\+X}~3
+\item 
+\#define \textbf{ T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+K\+I\+P\+\_\+Y}~4
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \textbf{ Touch\+Screen\+Debouncer} (void)
+\item 
+void \textbf{ Touch\+Screen\+Int\+Handler} (void)
+\item 
+void \textbf{ Touch\+Screen\+Init} (void)
+\item 
+void \textbf{ Touch\+Screen\+Callback\+Set} (int32\+\_\+t($\ast$pfn\+Callback)(uint32\+\_\+t ul\+Message, int32\+\_\+t lX, int32\+\_\+t lY))
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const int32\+\_\+t \textbf{ g\+\_\+l\+Touch\+Parameters} [\textbf{ N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+M\+\_\+\+S\+E\+TS}][\textbf{ N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+MS}]
+\item 
+const int32\+\_\+t $\ast$ \textbf{ g\+\_\+pl\+Parm\+Set}
+\item 
+int16\+\_\+t \textbf{ g\+\_\+s\+Touch\+Min} = \textbf{ T\+O\+U\+C\+H\+\_\+\+M\+IN}
+\item 
+static uint32\+\_\+t \textbf{ g\+\_\+ul\+T\+S\+State}
+\item 
+volatile int16\+\_\+t \textbf{ g\+\_\+s\+TouchX}
+\item 
+volatile int16\+\_\+t \textbf{ g\+\_\+s\+TouchY}
+\item 
+static int32\+\_\+t($\ast$ \textbf{ g\+\_\+pfn\+T\+S\+Handler} )(uint32\+\_\+t ul\+Message, int32\+\_\+t lX, int32\+\_\+t lY)
+\item 
+static uint8\+\_\+t \textbf{ g\+\_\+c\+State} = 0
+\item 
+static int16\+\_\+t \textbf{ g\+\_\+ps\+Samples} [8]
+\item 
+static int8\+\_\+t \textbf{ g\+\_\+c\+Index} = 0
+\end{DoxyCompactItemize}

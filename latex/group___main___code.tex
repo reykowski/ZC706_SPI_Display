@@ -1,0 +1,1838 @@
+\section{Main\+\_\+\+Code}
+\label{group___main___code}\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ timeout}~4e5
+\item 
+\#define \textbf{ Display\+\_\+\+Width}~320
+\item 
+\#define \textbf{ Display\+\_\+\+Height}~240
+\item 
+\#define \textbf{ P11\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 10)+45
+\item 
+\#define \textbf{ P21\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 10)+45
+\item 
+\#define \textbf{ P31\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 10)+45
+\item 
+\#define \textbf{ P41\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 10)+45
+\item 
+\#define \textbf{ P51\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 10)+45
+\item 
+\#define \textbf{ P61\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 10)+45
+\item 
+\#define \textbf{ P12\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 2)+80
+\item 
+\#define \textbf{ P22\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 2)+80
+\item 
+\#define \textbf{ P32\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 2)+80
+\item 
+\#define \textbf{ P42\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 2)+80
+\item 
+\#define \textbf{ P52\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 2)+80
+\item 
+\#define \textbf{ P62\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 2)+80
+\item 
+\#define \textbf{ P11\+\_\+y}~30
+\item 
+\#define \textbf{ P21\+\_\+y}~60
+\item 
+\#define \textbf{ P31\+\_\+y}~90
+\item 
+\#define \textbf{ P41\+\_\+y}~120
+\item 
+\#define \textbf{ P51\+\_\+y}~150
+\item 
+\#define \textbf{ P61\+\_\+y}~180
+\item 
+\#define \textbf{ P12\+\_\+y}~30
+\item 
+\#define \textbf{ P22\+\_\+y}~60
+\item 
+\#define \textbf{ P32\+\_\+y}~90
+\item 
+\#define \textbf{ P42\+\_\+y}~120
+\item 
+\#define \textbf{ P52\+\_\+y}~150
+\item 
+\#define \textbf{ P62\+\_\+y}~180
+\item 
+\#define \textbf{ S11\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 10)+45
+\item 
+\#define \textbf{ S21\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 10)+45
+\item 
+\#define \textbf{ S31\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 10)+45
+\item 
+\#define \textbf{ S41\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 10)+45
+\item 
+\#define \textbf{ S51\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 10)+45
+\item 
+\#define \textbf{ S61\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 10)+45
+\item 
+\#define \textbf{ S12\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 2)+80
+\item 
+\#define \textbf{ S22\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 2)+80
+\item 
+\#define \textbf{ S32\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 2)+80
+\item 
+\#define \textbf{ S42\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 2)+80
+\item 
+\#define \textbf{ S52\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 2)+80
+\item 
+\#define \textbf{ S62\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 2)+80
+\item 
+\#define \textbf{ S11\+\_\+y}~30
+\item 
+\#define \textbf{ S21\+\_\+y}~60
+\item 
+\#define \textbf{ S31\+\_\+y}~90
+\item 
+\#define \textbf{ S41\+\_\+y}~120
+\item 
+\#define \textbf{ S51\+\_\+y}~150
+\item 
+\#define \textbf{ S61\+\_\+y}~180
+\item 
+\#define \textbf{ S12\+\_\+y}~30
+\item 
+\#define \textbf{ S22\+\_\+y}~60
+\item 
+\#define \textbf{ S32\+\_\+y}~90
+\item 
+\#define \textbf{ S42\+\_\+y}~120
+\item 
+\#define \textbf{ S52\+\_\+y}~150
+\item 
+\#define \textbf{ S62\+\_\+y}~180
+\item 
+\#define \textbf{ str\+\_\+\+A\+GC}~\char`\"{}A\+G\+C\+: \char`\"{}
+\item 
+\#define \textbf{ str\+\_\+\+Lock}~\char`\"{}Lock\+: \char`\"{}
+\item 
+\#define \textbf{ str\+\_\+\+H\+O\+LD}~\char`\"{}H\+O\+L\+D\+: \char`\"{}
+\item 
+\#define \textbf{ str\+\_\+\+E\+VM}~\char`\"{}E\+V\+M\+: \char`\"{}
+\item 
+\#define \textbf{ str\+\_\+\+F\+R\+A\+ME}~\char`\"{}F\+R\+A\+M\+E\+: \char`\"{}
+\item 
+\#define \textbf{ str\+\_\+\+C\+RC}~\char`\"{}C\+R\+C\+: \char`\"{}
+\item 
+\#define \textbf{ str\+\_\+\+B\+ER}~\char`\"{}B\+E\+R\+: \char`\"{}
+\item 
+\#define \textbf{ str\+\_\+\+NA}~\char`\"{}-\/-\/-\/\+: \char`\"{}
+\item 
+\#define \textbf{ str\+\_\+\+L\+E\+D1}~\char`\"{}A\+GC\char`\"{}
+\item 
+\#define \textbf{ str\+\_\+\+L\+E\+D2}~\char`\"{}Lock\char`\"{}
+\item 
+\#define \textbf{ str\+\_\+\+L\+E\+D3}~\char`\"{}H\+O\+LD\char`\"{}
+\item 
+\#define \textbf{ str\+\_\+\+L\+E\+D4}~\char`\"{}E\+VM\char`\"{}
+\item 
+\#define \textbf{ str\+\_\+\+L\+E\+D5}~\char`\"{}F\+R\+A\+ME\char`\"{}
+\item 
+\#define \textbf{ str\+\_\+\+L\+E\+D6}~\char`\"{}C\+RC\char`\"{}
+\item 
+\#define \textbf{ str\+\_\+\+L\+E\+D7}~\char`\"{}B\+ER\char`\"{}
+\item 
+\#define \textbf{ str\+\_\+\+L\+E\+D8}~\char`\"{}-\/-\/-\/\char`\"{}
+\item 
+\#define \textbf{ str\+\_\+\+L\+E\+D9}~\char`\"{}-\/-\/-\/\char`\"{}
+\item 
+\#define \textbf{ str\+\_\+\+L\+E\+D10}~\char`\"{}-\/-\/-\/\char`\"{}
+\item 
+\#define \textbf{ light\+\_\+is\+\_\+red}~2
+\item 
+\#define \textbf{ light\+\_\+is\+\_\+yellow}~1
+\item 
+\#define \textbf{ light\+\_\+is\+\_\+green}~0
+\item 
+\#define \textbf{ N\+U\+M\+\_\+\+S\+S\+I\+\_\+\+D\+A\+TA}~128
+\item 
+\#define \textbf{ N\+U\+M\+\_\+\+S\+S\+I\+\_\+\+D\+A\+TA}~128
+\item 
+\#define \textbf{ rect\+\_\+x}~45
+\item 
+\#define \textbf{ rect\+\_\+x}~45
+\item 
+\#define \textbf{ rect\+\_\+x}~45
+\item 
+\#define \textbf{ rect\+\_\+x}~45
+\item 
+\#define \textbf{ rect\+\_\+y}~45
+\item 
+\#define \textbf{ rect\+\_\+y}~45
+\item 
+\#define \textbf{ rect\+\_\+y}~45
+\item 
+\#define \textbf{ rect\+\_\+y}~45
+\item 
+\#define \textbf{ rect\+\_\+x1}~20
+\item 
+\#define \textbf{ rect\+\_\+x1}~20
+\item 
+\#define \textbf{ rect\+\_\+x2}~95
+\item 
+\#define \textbf{ rect\+\_\+x2}~95
+\item 
+\#define \textbf{ rect\+\_\+x3}~170
+\item 
+\#define \textbf{ rect\+\_\+x3}~170
+\item 
+\#define \textbf{ rect\+\_\+x4}~245
+\item 
+\#define \textbf{ rect\+\_\+x4}~245
+\item 
+\#define \textbf{ rect\+\_\+y1}~45
+\item 
+\#define \textbf{ rect\+\_\+y1}~45
+\item 
+\#define \textbf{ rect\+\_\+y2}~120
+\item 
+\#define \textbf{ rect\+\_\+y2}~120
+\item 
+\#define \textbf{ N\+U\+M\+\_\+\+P\+U\+S\+H\+\_\+\+B\+U\+T\+T\+O\+N\+S2}
+\item 
+\#define \textbf{ N\+U\+M\+\_\+\+P\+A\+N\+E\+LS}~(sizeof(\textbf{ g\+\_\+ps\+Panels}) / sizeof(\textbf{ g\+\_\+ps\+Panels}[0]))
+\item 
+\#define \textbf{ First\+\_\+\+Panel}~0
+\item 
+\#define \textbf{ Block\+\_\+\+Diagram}~1
+\item 
+\#define \textbf{ L\+E\+D\+\_\+\+Panel}~2
+\item 
+\#define \textbf{ Data\+\_\+\+Panel}~3
+\item 
+\#define \textbf{ R\+X\+\_\+\+Panel}~4
+\item 
+\#define \textbf{ P\+L\+L\+\_\+\+Panel}~5
+\item 
+\#define \textbf{ S\+Y\+N\+C\+\_\+\+Panel}~6
+\item 
+\#define \textbf{ R\+X\+M\+S\+G\+\_\+\+Panel}~7
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ On\+Previous} (t\+Widget $\ast$p\+Widget)
+\item 
+void \textbf{ On\+Next} (t\+Widget $\ast$p\+Widget)
+\item 
+void \textbf{ On\+First} (t\+Widget $\ast$p\+Widget)
+\item 
+void \textbf{ On\+Button\+Press2} (t\+Widget $\ast$p\+Widget)
+\item 
+void \textbf{ On\+Rx\+Button\+Press} (t\+Widget $\ast$p\+Widget)
+\item 
+void \textbf{ On\+P\+L\+L\+Button\+Press} (t\+Widget $\ast$p\+Widget)
+\item 
+void \textbf{ On\+S\+Y\+N\+C\+Button\+Press} (t\+Widget $\ast$p\+Widget)
+\item 
+void \textbf{ On\+R\+X\+M\+S\+G\+Button\+Press} (t\+Widget $\ast$p\+Widget)
+\item 
+void \textbf{ On\+Block\+Diagram\+Paint} (t\+Widget $\ast$p\+Widget, t\+Context $\ast$p\+Context)
+\item 
+void \textbf{ On\+L\+E\+D\+Status\+Paint} (t\+Widget $\ast$p\+Widget, t\+Context $\ast$p\+Context)
+\item 
+void \textbf{ On\+Data\+Paint} (t\+Widget $\ast$p\+Widget, t\+Context $\ast$p\+Context)
+\item 
+void \textbf{ On\+Rx\+Status\+Paint} (t\+Widget $\ast$p\+Widget, t\+Context $\ast$p\+Context)
+\item 
+void \textbf{ On\+P\+L\+L\+Status\+Paint} (t\+Widget $\ast$p\+Widget, t\+Context $\ast$p\+Context)
+\item 
+void \textbf{ On\+S\+Y\+N\+C\+Status\+Paint} (t\+Widget $\ast$p\+Widget, t\+Context $\ast$p\+Context)
+\item 
+void \textbf{ On\+R\+X\+M\+S\+G\+Status\+Paint} (t\+Widget $\ast$p\+Widget, t\+Context $\ast$p\+Context)
+\item 
+void \textbf{ On\+Primitive\+Paint} (t\+Widget $\ast$p\+Widget, t\+Context $\ast$p\+Context)
+\item 
+void \textbf{ On\+Radio\+Change} (t\+Widget $\ast$p\+Widget, uint32\+\_\+t b\+Selected)
+\item 
+void \textbf{ Draw\+First\+Image} (t\+Widget $\ast$p\+Widget, t\+Context $\ast$p\+Context)
+\item 
+t\+D\+M\+A\+Control\+Table s\+D\+M\+A\+Control\+Table [64] \textbf{ \+\_\+\+\_\+attribute\+\_\+\+\_\+} ((aligned(1024)))
+\item 
+void \textbf{ S\+S\+I1\+Int\+Handler} (void)
+\item 
+uint8\+\_\+t \textbf{ Sys\+Tick\+Int\+Handler} ()
+\item 
+\textbf{ Canvas} (g\+\_\+s\+Draw\+Image, \textbf{ g\+\_\+ps\+Panels}, 0, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 0, 24, 320, 216, C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+A\+P\+P\+\_\+\+D\+R\+A\+WN, 0, 0, 0, 0, 0, 0, \textbf{ Draw\+First\+Image})
+\item 
+\textbf{ Canvas} (g\+\_\+s\+L\+E\+D\+\_\+\+Display, \textbf{ g\+\_\+ps\+Panels}+2, 0, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 0, 24, 320, 166, C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+A\+P\+P\+\_\+\+D\+R\+A\+WN, 0, 0, 0, 0, 0, 0, \textbf{ On\+L\+E\+D\+Status\+Paint})
+\item 
+\textbf{ Canvas} (g\+\_\+s\+Status\+Data, \textbf{ g\+\_\+ps\+Panels}+3, 0, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 0, 24, 320, 166, C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+A\+P\+P\+\_\+\+D\+R\+A\+WN, 0, 0, 0, 0, 0, 0, \textbf{ On\+Data\+Paint})
+\item 
+\textbf{ Canvas} (g\+\_\+s\+Rx\+Status, \textbf{ g\+\_\+ps\+Panels}+4, 0, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 0, 24, 320, 166, C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+A\+P\+P\+\_\+\+D\+R\+A\+WN, 0, 0, 0, 0, 0, 0, \textbf{ On\+Rx\+Status\+Paint})
+\item 
+\textbf{ Canvas} (g\+\_\+s\+P\+L\+L\+Status, \textbf{ g\+\_\+ps\+Panels}+5, 0, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 0, 24, 320, 166, C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+A\+P\+P\+\_\+\+D\+R\+A\+WN, 0, 0, 0, 0, 0, 0, \textbf{ On\+P\+L\+L\+Status\+Paint})
+\item 
+\textbf{ Canvas} (g\+\_\+s\+S\+Y\+N\+C\+Status, \textbf{ g\+\_\+ps\+Panels}+6, 0, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 0, 24, 320, 166, C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+A\+P\+P\+\_\+\+D\+R\+A\+WN, 0, 0, 0, 0, 0, 0, \textbf{ On\+S\+Y\+N\+C\+Status\+Paint})
+\item 
+\textbf{ Canvas} (g\+\_\+s\+R\+X\+M\+S\+G\+Status, \textbf{ g\+\_\+ps\+Panels}+7, 0, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 0, 24, 320, 166, C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+A\+P\+P\+\_\+\+D\+R\+A\+WN, 0, 0, 0, 0, 0, 0, \textbf{ On\+R\+X\+M\+S\+G\+Status\+Paint})
+\item 
+\textbf{ Canvas} (g\+\_\+s\+Primitives, \textbf{ g\+\_\+ps\+Panels}+8, 0, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 0, 24, 320, 166, C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+A\+P\+P\+\_\+\+D\+R\+A\+WN, 0, 0, 0, 0, 0, 0, \textbf{ On\+Primitive\+Paint})
+\item 
+\textbf{ Rectangular\+Button} (g\+\_\+s\+Previous, 0, 0, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 0, 190, 50, 50, P\+B\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+F\+I\+LL, Clr\+Black, Clr\+Black, 0, Clr\+Silver, \&g\+\_\+s\+Font\+Cm20, \char`\"{}-\/\char`\"{}, \textbf{ g\+\_\+puc\+Blue50x50}, \textbf{ g\+\_\+puc\+Blue50x50\+Press}, 0, 0, \textbf{ On\+Previous})
+\item 
+\textbf{ Canvas} (g\+\_\+s\+Title, 0, Clr\+Black, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 50, 190, 220, 50, C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+T\+E\+XT$\vert$C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+F\+I\+LL, 0, 0, Clr\+Silver, \&g\+\_\+s\+Font\+Cm20, 0, 0, 0)
+\item 
+\textbf{ Rectangular\+Button} (g\+\_\+s\+Next, 0, 0, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 270, 190, 50, 50, P\+B\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+I\+MG$\vert$P\+B\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+T\+E\+XT, Clr\+Black, Clr\+Black, 0, Clr\+Silver, \&g\+\_\+s\+Font\+Cm20, \char`\"{}+\char`\"{}, \textbf{ g\+\_\+puc\+Blue50x50}, \textbf{ g\+\_\+puc\+Blue50x50\+Press}, 0, 0, \textbf{ On\+Next})
+\item 
+\textbf{ Rectangular\+Button} (g\+\_\+s\+First, 0, 0, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 0, 24, 320, 166, P\+B\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+O\+U\+T\+L\+I\+NE$\vert$P\+B\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+T\+E\+X\+T\+\_\+\+O\+P\+A\+Q\+UE, Clr\+Black, Clr\+Black, 0, Clr\+Silver, \&g\+\_\+s\+Font\+Cm20, \char`\"{}\char`\"{}, \textbf{ g\+\_\+puc\+Blue50x50}, \textbf{ g\+\_\+puc\+Blue50x50\+Press}, 0, 0, \textbf{ On\+First})
+\item 
+void \textbf{ Gr\+String\+Draw\+Right} (const t\+Context $\ast$p\+Context, const char $\ast$pc\+String, int32\+\_\+t i32\+Length, int32\+\_\+t i32X, int32\+\_\+t i32Y, uint32\+\_\+t b\+Opaque)
+\item 
+void \textbf{ Configure\+U\+A\+RT} (void)
+\item 
+void \textbf{ Init\+S\+P\+I1} (void)
+\item 
+void \textbf{ Median\+\_\+\+Filter\+\_\+for\+\_\+3} (float $\ast$data\+\_\+in)
+\item 
+void \textbf{ float\+\_\+to\+\_\+int\+\_\+and\+\_\+fract} (float float\+\_\+value, int32\+\_\+t $\ast$i32\+Integer\+Part, int32\+\_\+t $\ast$i32\+Fraction\+Part)
+\item 
+void \textbf{ delay\+\_\+cycles} (long cycles)
+\item 
+void \textbf{ Update\+Scope} (t\+Context $\ast$p\+Context, uint8\+\_\+t $\ast$i\+\_\+\+Curve, float fnew\+\_\+\+Value, float fmin, float fmax, uint8\+\_\+t yp\+\_\+min, uint8\+\_\+t yp\+\_\+max, char $\ast$scope\+\_\+string)
+\item 
+int \textbf{ main} (void)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+float \textbf{ f\+B\+ER} =0
+\item 
+float \textbf{ f\+Temp2} =0
+\item 
+float \textbf{ f\+Temp\+Int} =0
+\item 
+float \textbf{ f\+A\+GC} =0
+\item 
+float \textbf{ f\+Lock} =0
+\item 
+float \textbf{ f\+Hold} =0
+\item 
+float \textbf{ f\+E\+VM} =0
+\item 
+float \textbf{ f\+Frame} =0
+\item 
+float \textbf{ f\+C\+RC} =0
+\item 
+float \textbf{ f\+B\+Temp1} [3] = \{0,0,0\}
+\item 
+float \textbf{ f\+B\+Temp2} [3] = \{0,0,0\}
+\item 
+float \textbf{ f\+B\+Temp\+Int} [3] = \{0,0,0\}
+\item 
+float \textbf{ f\+B\+Vin0} [3] = \{0,0,0\}
+\item 
+float \textbf{ f\+B\+Vin1} [3] = \{0,0,0\}
+\item 
+float \textbf{ f\+B\+Vin2} [3] = \{0,0,0\}
+\item 
+float \textbf{ f\+B\+Vin3} [3] = \{0,0,0\}
+\item 
+float \textbf{ f\+B\+Isense1} [3] = \{0,0,0\}
+\item 
+float \textbf{ f\+B\+Isense2} [3] = \{0,0,0\}
+\item 
+float \textbf{ f\+A\+D\+C\+\_\+\+Val} =0
+\item 
+float \textbf{ f\+Rsense} = 0.\+010
+\item 
+float \textbf{ f\+Vref0} = 2.\+5
+\item 
+float \textbf{ f\+Vref1} = 2.\+5
+\item 
+float \textbf{ f\+Vref2} = 2.\+5
+\item 
+float \textbf{ f\+Vref3} = 2.\+5
+\item 
+uint16\+\_\+t \textbf{ i\+\_\+counter} =0
+\item 
+uint8\+\_\+t \textbf{ i\+A\+G\+C\+\_\+\+Curve} [320] =\{ [ 0 ... 319 ] = (186-\/25)\}
+\item 
+uint8\+\_\+t \textbf{ i\+Lock\+\_\+\+Curve} [320] =\{ [ 0 ... 319 ] = 132\}
+\item 
+uint8\+\_\+t \textbf{ i\+Hold\+\_\+\+Curve} [320] =\{ [ 0 ... 319 ] = 186\}
+\item 
+uint8\+\_\+t \textbf{ i\+C\+R\+C\+\_\+\+Curve} [320] =\{ [ 0 ... 319 ] = 186\}
+\item 
+uint8\+\_\+t \textbf{ i\+Frame\+\_\+\+Curve} [320] =\{ [ 0 ... 319 ] = 186\}
+\item 
+float \textbf{ my\+\_\+noise}
+\item 
+static char \textbf{ val\+\_\+\+A\+G\+C\+\_\+\+Str} [20]
+\item 
+static char \textbf{ val\+\_\+\+Lock\+\_\+\+Str} [20]
+\item 
+static char \textbf{ val\+\_\+\+H\+O\+L\+D\+\_\+\+Str} [20]
+\item 
+static char \textbf{ val\+\_\+\+E\+V\+M\+\_\+\+Str} [20]
+\item 
+static char \textbf{ val\+\_\+\+Frame\+\_\+\+Str} [20]
+\item 
+static char \textbf{ val\+\_\+\+C\+R\+C\+\_\+\+Str} [20]
+\item 
+static char \textbf{ val\+\_\+\+B\+E\+R\+\_\+\+Str} [20]
+\item 
+static char \textbf{ val8\+\_\+string} [20]
+\item 
+static char \textbf{ val9\+\_\+string} [20]
+\item 
+static char \textbf{ val10\+\_\+string} [20]
+\item 
+static char \textbf{ val11\+\_\+string} [20]
+\item 
+static char \textbf{ val12\+\_\+string} [20]
+\item 
+uint16\+\_\+t \textbf{ i16average} = 16
+\item 
+uint8\+\_\+t \textbf{ Sys\+Tick\+\_\+\+Semafore} = 1
+\item 
+volatile uint32\+\_\+t \textbf{ g\+\_\+ul\+S\+S\+I1\+R\+X\+FF} = 0
+\item 
+int32\+\_\+t \textbf{ g\+\_\+ul\+Data\+Rx2} [\textbf{ N\+U\+M\+\_\+\+S\+S\+I\+\_\+\+D\+A\+TA}]
+\item 
+uint8\+\_\+t \textbf{ i\+Health} = 0
+\item 
+uint8\+\_\+t \textbf{ i\+Health\+\_\+old} = 0
+\item 
+uint8\+\_\+t \textbf{ i\+Light\+\_\+\+A\+GC} = 0
+\item 
+uint8\+\_\+t \textbf{ i\+Light\+\_\+\+Lock} = 0
+\item 
+uint8\+\_\+t \textbf{ i\+Light\+\_\+\+Hold} = 0
+\item 
+uint8\+\_\+t \textbf{ i\+Light\+\_\+\+E\+VM} = 0
+\item 
+uint8\+\_\+t \textbf{ i\+Light\+\_\+\+Frame} = 0
+\item 
+uint8\+\_\+t \textbf{ i\+Light\+\_\+\+C\+RC} = 0
+\item 
+uint8\+\_\+t \textbf{ i\+Light\+\_\+\+B\+ER} = 0
+\item 
+t\+Canvas\+Widget \textbf{ g\+\_\+ps\+Panels} [10]
+\item 
+const uint8\+\_\+t \textbf{ g\+\_\+pui\+\_\+\+Soothing\+\_\+\+Image} [$\,$]
+\item 
+const uint8\+\_\+t \textbf{ g\+\_\+pui\+\_\+\+Stormy\+\_\+\+Image} [$\,$]
+\item 
+const uint8\+\_\+t \textbf{ g\+\_\+pui\+\_\+\+Lightning\+\_\+\+Image} [$\,$]
+\item 
+const uint8\+\_\+t \textbf{ g\+\_\+pui\+\_\+\+Harmony\+\_\+\+Image} [$\,$]
+\item 
+const uint8\+\_\+t \textbf{ g\+\_\+pui\+\_\+\+Flower\+\_\+\+Image} [$\,$]
+\item 
+t\+Context $\ast$ \textbf{ p1\+Context}
+\item 
+uint32\+\_\+t \textbf{ g\+\_\+pui32\+Colors} [3]
+\item 
+uint32\+\_\+t \textbf{ g\+\_\+ul\+Button\+State}
+\item 
+uint32\+\_\+t \textbf{ g\+\_\+ul\+Button\+State2}
+\item 
+t\+Push\+Button\+Widget \textbf{ g\+\_\+ps\+Push\+Buttons2} [$\,$]
+\item 
+t\+Canvas\+Widget \textbf{ g\+\_\+ps\+Button\+Canvas} [$\,$]
+\item 
+char $\ast$ \textbf{ g\+\_\+pc\+Panel\+Names} [$\,$]
+\item 
+uint32\+\_\+t \textbf{ g\+\_\+ul\+Panel}
+\item 
+uint32\+\_\+t \textbf{ g\+\_\+ul\+Previous\+Panel}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\label{group___main___code_gaeb8f4edb5d7f2440810e87b876d92c17}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Block\+\_\+\+Diagram@{Block\+\_\+\+Diagram}}
+\index{Block\+\_\+\+Diagram@{Block\+\_\+\+Diagram}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Block\+\_\+\+Diagram}
+{\footnotesize\ttfamily \#define Block\+\_\+\+Diagram~1}
+
+\mbox{\label{group___main___code_gac52fbca34275ec884e6bc27fb8d4386a}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Data\+\_\+\+Panel@{Data\+\_\+\+Panel}}
+\index{Data\+\_\+\+Panel@{Data\+\_\+\+Panel}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Data\+\_\+\+Panel}
+{\footnotesize\ttfamily \#define Data\+\_\+\+Panel~3}
+
+\mbox{\label{group___main___code_ga71d314bc45b5167ffc9071ad83c565a0}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Display\+\_\+\+Height@{Display\+\_\+\+Height}}
+\index{Display\+\_\+\+Height@{Display\+\_\+\+Height}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Display\+\_\+\+Height}
+{\footnotesize\ttfamily \#define Display\+\_\+\+Height~240}
+
+\mbox{\label{group___main___code_ga58000cf9bc724d4812d27dca14407aae}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Display\+\_\+\+Width@{Display\+\_\+\+Width}}
+\index{Display\+\_\+\+Width@{Display\+\_\+\+Width}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Display\+\_\+\+Width}
+{\footnotesize\ttfamily \#define Display\+\_\+\+Width~320}
+
+\mbox{\label{group___main___code_ga97e2934ec3716650dd79dc4c367e881c}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!First\+\_\+\+Panel@{First\+\_\+\+Panel}}
+\index{First\+\_\+\+Panel@{First\+\_\+\+Panel}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{First\+\_\+\+Panel}
+{\footnotesize\ttfamily \#define First\+\_\+\+Panel~0}
+
+\mbox{\label{group___main___code_gac7bc6aa47d211536c509c7c5e868bb69}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!L\+E\+D\+\_\+\+Panel@{L\+E\+D\+\_\+\+Panel}}
+\index{L\+E\+D\+\_\+\+Panel@{L\+E\+D\+\_\+\+Panel}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{L\+E\+D\+\_\+\+Panel}
+{\footnotesize\ttfamily \#define L\+E\+D\+\_\+\+Panel~2}
+
+\mbox{\label{group___main___code_ga343a2695a67c9654485cee8dc8de2886}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!light\+\_\+is\+\_\+green@{light\+\_\+is\+\_\+green}}
+\index{light\+\_\+is\+\_\+green@{light\+\_\+is\+\_\+green}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{light\+\_\+is\+\_\+green}
+{\footnotesize\ttfamily \#define light\+\_\+is\+\_\+green~0}
+
+\mbox{\label{group___main___code_ga834ff761c18ea52e1910d7e36cbf8f24}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!light\+\_\+is\+\_\+red@{light\+\_\+is\+\_\+red}}
+\index{light\+\_\+is\+\_\+red@{light\+\_\+is\+\_\+red}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{light\+\_\+is\+\_\+red}
+{\footnotesize\ttfamily \#define light\+\_\+is\+\_\+red~2}
+
+\mbox{\label{group___main___code_gaf6e15ef8ddcba6aae30751628dab80dd}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!light\+\_\+is\+\_\+yellow@{light\+\_\+is\+\_\+yellow}}
+\index{light\+\_\+is\+\_\+yellow@{light\+\_\+is\+\_\+yellow}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{light\+\_\+is\+\_\+yellow}
+{\footnotesize\ttfamily \#define light\+\_\+is\+\_\+yellow~1}
+
+\mbox{\label{group___main___code_ga9998aa1c8b935b9fe1d5c7fc638cd106}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!N\+U\+M\+\_\+\+P\+A\+N\+E\+LS@{N\+U\+M\+\_\+\+P\+A\+N\+E\+LS}}
+\index{N\+U\+M\+\_\+\+P\+A\+N\+E\+LS@{N\+U\+M\+\_\+\+P\+A\+N\+E\+LS}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{N\+U\+M\+\_\+\+P\+A\+N\+E\+LS}
+{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+P\+A\+N\+E\+LS~(sizeof(\textbf{ g\+\_\+ps\+Panels}) / sizeof(\textbf{ g\+\_\+ps\+Panels}[0]))}
+
+\mbox{\label{group___main___code_gab59895809a5f40c1f148ddd4e70204a1}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!N\+U\+M\+\_\+\+P\+U\+S\+H\+\_\+\+B\+U\+T\+T\+O\+N\+S2@{N\+U\+M\+\_\+\+P\+U\+S\+H\+\_\+\+B\+U\+T\+T\+O\+N\+S2}}
+\index{N\+U\+M\+\_\+\+P\+U\+S\+H\+\_\+\+B\+U\+T\+T\+O\+N\+S2@{N\+U\+M\+\_\+\+P\+U\+S\+H\+\_\+\+B\+U\+T\+T\+O\+N\+S2}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{N\+U\+M\+\_\+\+P\+U\+S\+H\+\_\+\+B\+U\+T\+T\+O\+N\+S2}
+{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+P\+U\+S\+H\+\_\+\+B\+U\+T\+T\+O\+N\+S2}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+(\textcolor{keyword}{sizeof}(g_psPushButtons2) /   \(\backslash\)
+                                 \textcolor{keyword}{sizeof}(g_psPushButtons2[0]))
+\end{DoxyCode}
+\mbox{\label{group___main___code_gadf2adfc802f3e48a3750b1b928cb1623}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!N\+U\+M\+\_\+\+S\+S\+I\+\_\+\+D\+A\+TA@{N\+U\+M\+\_\+\+S\+S\+I\+\_\+\+D\+A\+TA}}
+\index{N\+U\+M\+\_\+\+S\+S\+I\+\_\+\+D\+A\+TA@{N\+U\+M\+\_\+\+S\+S\+I\+\_\+\+D\+A\+TA}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{N\+U\+M\+\_\+\+S\+S\+I\+\_\+\+D\+A\+TA\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+S\+S\+I\+\_\+\+D\+A\+TA~128}
+
+\mbox{\label{group___main___code_gadf2adfc802f3e48a3750b1b928cb1623}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!N\+U\+M\+\_\+\+S\+S\+I\+\_\+\+D\+A\+TA@{N\+U\+M\+\_\+\+S\+S\+I\+\_\+\+D\+A\+TA}}
+\index{N\+U\+M\+\_\+\+S\+S\+I\+\_\+\+D\+A\+TA@{N\+U\+M\+\_\+\+S\+S\+I\+\_\+\+D\+A\+TA}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{N\+U\+M\+\_\+\+S\+S\+I\+\_\+\+D\+A\+TA\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+S\+S\+I\+\_\+\+D\+A\+TA~128}
+
+\mbox{\label{group___main___code_gaa1c66f444797386b7d3c621f258cc093}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P11\+\_\+x@{P11\+\_\+x}}
+\index{P11\+\_\+x@{P11\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P11\+\_\+x}
+{\footnotesize\ttfamily \#define P11\+\_\+x~(\textbf{ Display\+\_\+\+Width} / 10)+45}
+
+\mbox{\label{group___main___code_ga6696e87fbaec6b00ede4fc58b918f2bf}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P11\+\_\+y@{P11\+\_\+y}}
+\index{P11\+\_\+y@{P11\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P11\+\_\+y}
+{\footnotesize\ttfamily \#define P11\+\_\+y~30}
+
+\mbox{\label{group___main___code_gaac842d5d71f93cb14a8760d7b9270b77}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P12\+\_\+x@{P12\+\_\+x}}
+\index{P12\+\_\+x@{P12\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P12\+\_\+x}
+{\footnotesize\ttfamily \#define P12\+\_\+x~(\textbf{ Display\+\_\+\+Width} / 2)+80}
+
+\mbox{\label{group___main___code_ga74038a09eb655dad5dc1b8521529a85b}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P12\+\_\+y@{P12\+\_\+y}}
+\index{P12\+\_\+y@{P12\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P12\+\_\+y}
+{\footnotesize\ttfamily \#define P12\+\_\+y~30}
+
+\mbox{\label{group___main___code_ga11a5bab46786036c39df13ba03002329}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P21\+\_\+x@{P21\+\_\+x}}
+\index{P21\+\_\+x@{P21\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P21\+\_\+x}
+{\footnotesize\ttfamily \#define P21\+\_\+x~(\textbf{ Display\+\_\+\+Width} / 10)+45}
+
+\mbox{\label{group___main___code_gac983b4656cef6b3d44ec5b053a4f1fcb}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P21\+\_\+y@{P21\+\_\+y}}
+\index{P21\+\_\+y@{P21\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P21\+\_\+y}
+{\footnotesize\ttfamily \#define P21\+\_\+y~60}
+
+\mbox{\label{group___main___code_gada5a5cf6746091f149a2795cce161822}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P22\+\_\+x@{P22\+\_\+x}}
+\index{P22\+\_\+x@{P22\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P22\+\_\+x}
+{\footnotesize\ttfamily \#define P22\+\_\+x~(\textbf{ Display\+\_\+\+Width} / 2)+80}
+
+\mbox{\label{group___main___code_gac24e38840f6a1846e2076f0a4b89bfe0}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P22\+\_\+y@{P22\+\_\+y}}
+\index{P22\+\_\+y@{P22\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P22\+\_\+y}
+{\footnotesize\ttfamily \#define P22\+\_\+y~60}
+
+\mbox{\label{group___main___code_ga382cb072dc8805682651dc9449b6f770}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P31\+\_\+x@{P31\+\_\+x}}
+\index{P31\+\_\+x@{P31\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P31\+\_\+x}
+{\footnotesize\ttfamily \#define P31\+\_\+x~(\textbf{ Display\+\_\+\+Width} / 10)+45}
+
+\mbox{\label{group___main___code_ga8ed55487d2136ee87bcce26e2110cdf1}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P31\+\_\+y@{P31\+\_\+y}}
+\index{P31\+\_\+y@{P31\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P31\+\_\+y}
+{\footnotesize\ttfamily \#define P31\+\_\+y~90}
+
+\mbox{\label{group___main___code_ga6485f16e0cc8c494d8607dbe26fdf3eb}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P32\+\_\+x@{P32\+\_\+x}}
+\index{P32\+\_\+x@{P32\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P32\+\_\+x}
+{\footnotesize\ttfamily \#define P32\+\_\+x~(\textbf{ Display\+\_\+\+Width} / 2)+80}
+
+\mbox{\label{group___main___code_gaa1f3e99067dff1f92e01d3dad43760d7}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P32\+\_\+y@{P32\+\_\+y}}
+\index{P32\+\_\+y@{P32\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P32\+\_\+y}
+{\footnotesize\ttfamily \#define P32\+\_\+y~90}
+
+\mbox{\label{group___main___code_ga5f584ab1ce419d1b27e0f819b70e0e34}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P41\+\_\+x@{P41\+\_\+x}}
+\index{P41\+\_\+x@{P41\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P41\+\_\+x}
+{\footnotesize\ttfamily \#define P41\+\_\+x~(\textbf{ Display\+\_\+\+Width} / 10)+45}
+
+\mbox{\label{group___main___code_ga434340a3c3756494f45f9efeaeead543}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P41\+\_\+y@{P41\+\_\+y}}
+\index{P41\+\_\+y@{P41\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P41\+\_\+y}
+{\footnotesize\ttfamily \#define P41\+\_\+y~120}
+
+\mbox{\label{group___main___code_ga73ee313659aecb71fbebd948aed270f9}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P42\+\_\+x@{P42\+\_\+x}}
+\index{P42\+\_\+x@{P42\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P42\+\_\+x}
+{\footnotesize\ttfamily \#define P42\+\_\+x~(\textbf{ Display\+\_\+\+Width} / 2)+80}
+
+\mbox{\label{group___main___code_gaa26cf42a0ce878930b087d8cff9d2348}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P42\+\_\+y@{P42\+\_\+y}}
+\index{P42\+\_\+y@{P42\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P42\+\_\+y}
+{\footnotesize\ttfamily \#define P42\+\_\+y~120}
+
+\mbox{\label{group___main___code_gad3eb7c84f6e85f0f94d5c380541652ef}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P51\+\_\+x@{P51\+\_\+x}}
+\index{P51\+\_\+x@{P51\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P51\+\_\+x}
+{\footnotesize\ttfamily \#define P51\+\_\+x~(\textbf{ Display\+\_\+\+Width} / 10)+45}
+
+\mbox{\label{group___main___code_ga3eb921fb477f760a47755e17b7619a83}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P51\+\_\+y@{P51\+\_\+y}}
+\index{P51\+\_\+y@{P51\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P51\+\_\+y}
+{\footnotesize\ttfamily \#define P51\+\_\+y~150}
+
+\mbox{\label{group___main___code_gab3b3bea207f7a0647e7cd0d9870424e0}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P52\+\_\+x@{P52\+\_\+x}}
+\index{P52\+\_\+x@{P52\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P52\+\_\+x}
+{\footnotesize\ttfamily \#define P52\+\_\+x~(\textbf{ Display\+\_\+\+Width} / 2)+80}
+
+\mbox{\label{group___main___code_gaf78ef2b3e1bfdb2989120722aef28744}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P52\+\_\+y@{P52\+\_\+y}}
+\index{P52\+\_\+y@{P52\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P52\+\_\+y}
+{\footnotesize\ttfamily \#define P52\+\_\+y~150}
+
+\mbox{\label{group___main___code_gaaa14686a8881a6ea26e0d04d36e5e3a0}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P61\+\_\+x@{P61\+\_\+x}}
+\index{P61\+\_\+x@{P61\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P61\+\_\+x}
+{\footnotesize\ttfamily \#define P61\+\_\+x~(\textbf{ Display\+\_\+\+Width} / 10)+45}
+
+\mbox{\label{group___main___code_gad7cfe045d984f02e9c22ca68838c2c74}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P61\+\_\+y@{P61\+\_\+y}}
+\index{P61\+\_\+y@{P61\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P61\+\_\+y}
+{\footnotesize\ttfamily \#define P61\+\_\+y~180}
+
+\mbox{\label{group___main___code_ga6efbc9f5d2faf54597e7ea23a7e34e20}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P62\+\_\+x@{P62\+\_\+x}}
+\index{P62\+\_\+x@{P62\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P62\+\_\+x}
+{\footnotesize\ttfamily \#define P62\+\_\+x~(\textbf{ Display\+\_\+\+Width} / 2)+80}
+
+\mbox{\label{group___main___code_ga3771d465742ede3990b92912fc99a8dd}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P62\+\_\+y@{P62\+\_\+y}}
+\index{P62\+\_\+y@{P62\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P62\+\_\+y}
+{\footnotesize\ttfamily \#define P62\+\_\+y~180}
+
+\mbox{\label{group___main___code_ga78bceb7d1668dfc1aaf75d2b1b9dc3dc}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!P\+L\+L\+\_\+\+Panel@{P\+L\+L\+\_\+\+Panel}}
+\index{P\+L\+L\+\_\+\+Panel@{P\+L\+L\+\_\+\+Panel}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{P\+L\+L\+\_\+\+Panel}
+{\footnotesize\ttfamily \#define P\+L\+L\+\_\+\+Panel~5}
+
+\mbox{\label{group___main___code_ga9129ac94dcd824261aad2a32db14d373}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!rect\+\_\+x@{rect\+\_\+x}}
+\index{rect\+\_\+x@{rect\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{rect\+\_\+x\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \#define rect\+\_\+x~45}
+
+\mbox{\label{group___main___code_ga9129ac94dcd824261aad2a32db14d373}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!rect\+\_\+x@{rect\+\_\+x}}
+\index{rect\+\_\+x@{rect\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{rect\+\_\+x\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \#define rect\+\_\+x~45}
+
+\mbox{\label{group___main___code_ga9129ac94dcd824261aad2a32db14d373}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!rect\+\_\+x@{rect\+\_\+x}}
+\index{rect\+\_\+x@{rect\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{rect\+\_\+x\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \#define rect\+\_\+x~45}
+
+\mbox{\label{group___main___code_ga9129ac94dcd824261aad2a32db14d373}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!rect\+\_\+x@{rect\+\_\+x}}
+\index{rect\+\_\+x@{rect\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{rect\+\_\+x\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \#define rect\+\_\+x~45}
+
+\mbox{\label{group___main___code_ga4067a7f46167035e72991d8f78606e6a}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!rect\+\_\+x1@{rect\+\_\+x1}}
+\index{rect\+\_\+x1@{rect\+\_\+x1}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{rect\+\_\+x1\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define rect\+\_\+x1~20}
+
+\mbox{\label{group___main___code_ga4067a7f46167035e72991d8f78606e6a}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!rect\+\_\+x1@{rect\+\_\+x1}}
+\index{rect\+\_\+x1@{rect\+\_\+x1}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{rect\+\_\+x1\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define rect\+\_\+x1~20}
+
+\mbox{\label{group___main___code_gab4e3c35e64bebce6e28b7f6158d681f7}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!rect\+\_\+x2@{rect\+\_\+x2}}
+\index{rect\+\_\+x2@{rect\+\_\+x2}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{rect\+\_\+x2\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define rect\+\_\+x2~95}
+
+\mbox{\label{group___main___code_gab4e3c35e64bebce6e28b7f6158d681f7}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!rect\+\_\+x2@{rect\+\_\+x2}}
+\index{rect\+\_\+x2@{rect\+\_\+x2}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{rect\+\_\+x2\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define rect\+\_\+x2~95}
+
+\mbox{\label{group___main___code_gaa6a86105a5b34b0f489fafc0ed0cb36f}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!rect\+\_\+x3@{rect\+\_\+x3}}
+\index{rect\+\_\+x3@{rect\+\_\+x3}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{rect\+\_\+x3\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define rect\+\_\+x3~170}
+
+\mbox{\label{group___main___code_gaa6a86105a5b34b0f489fafc0ed0cb36f}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!rect\+\_\+x3@{rect\+\_\+x3}}
+\index{rect\+\_\+x3@{rect\+\_\+x3}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{rect\+\_\+x3\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define rect\+\_\+x3~170}
+
+\mbox{\label{group___main___code_gae08b250ac064838d0c55cfcfeda0f976}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!rect\+\_\+x4@{rect\+\_\+x4}}
+\index{rect\+\_\+x4@{rect\+\_\+x4}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{rect\+\_\+x4\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define rect\+\_\+x4~245}
+
+\mbox{\label{group___main___code_gae08b250ac064838d0c55cfcfeda0f976}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!rect\+\_\+x4@{rect\+\_\+x4}}
+\index{rect\+\_\+x4@{rect\+\_\+x4}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{rect\+\_\+x4\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define rect\+\_\+x4~245}
+
+\mbox{\label{group___main___code_ga8a3b76e821089bab4e615724ffce329a}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!rect\+\_\+y@{rect\+\_\+y}}
+\index{rect\+\_\+y@{rect\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{rect\+\_\+y\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \#define rect\+\_\+y~45}
+
+\mbox{\label{group___main___code_ga8a3b76e821089bab4e615724ffce329a}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!rect\+\_\+y@{rect\+\_\+y}}
+\index{rect\+\_\+y@{rect\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{rect\+\_\+y\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \#define rect\+\_\+y~45}
+
+\mbox{\label{group___main___code_ga8a3b76e821089bab4e615724ffce329a}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!rect\+\_\+y@{rect\+\_\+y}}
+\index{rect\+\_\+y@{rect\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{rect\+\_\+y\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \#define rect\+\_\+y~45}
+
+\mbox{\label{group___main___code_ga8a3b76e821089bab4e615724ffce329a}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!rect\+\_\+y@{rect\+\_\+y}}
+\index{rect\+\_\+y@{rect\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{rect\+\_\+y\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \#define rect\+\_\+y~45}
+
+\mbox{\label{group___main___code_gafbe5eb5a123111559303f58855a04108}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!rect\+\_\+y1@{rect\+\_\+y1}}
+\index{rect\+\_\+y1@{rect\+\_\+y1}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{rect\+\_\+y1\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define rect\+\_\+y1~45}
+
+\mbox{\label{group___main___code_gafbe5eb5a123111559303f58855a04108}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!rect\+\_\+y1@{rect\+\_\+y1}}
+\index{rect\+\_\+y1@{rect\+\_\+y1}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{rect\+\_\+y1\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define rect\+\_\+y1~45}
+
+\mbox{\label{group___main___code_ga00f5399c4db592df5bd272f5cd89509c}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!rect\+\_\+y2@{rect\+\_\+y2}}
+\index{rect\+\_\+y2@{rect\+\_\+y2}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{rect\+\_\+y2\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define rect\+\_\+y2~120}
+
+\mbox{\label{group___main___code_ga00f5399c4db592df5bd272f5cd89509c}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!rect\+\_\+y2@{rect\+\_\+y2}}
+\index{rect\+\_\+y2@{rect\+\_\+y2}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{rect\+\_\+y2\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define rect\+\_\+y2~120}
+
+\mbox{\label{group___main___code_ga9486aee0d23a6c29239dd217530010de}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!R\+X\+\_\+\+Panel@{R\+X\+\_\+\+Panel}}
+\index{R\+X\+\_\+\+Panel@{R\+X\+\_\+\+Panel}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{R\+X\+\_\+\+Panel}
+{\footnotesize\ttfamily \#define R\+X\+\_\+\+Panel~4}
+
+\mbox{\label{group___main___code_ga5e23a268af397809c19ea39902b5287a}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!R\+X\+M\+S\+G\+\_\+\+Panel@{R\+X\+M\+S\+G\+\_\+\+Panel}}
+\index{R\+X\+M\+S\+G\+\_\+\+Panel@{R\+X\+M\+S\+G\+\_\+\+Panel}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{R\+X\+M\+S\+G\+\_\+\+Panel}
+{\footnotesize\ttfamily \#define R\+X\+M\+S\+G\+\_\+\+Panel~7}
+
+\mbox{\label{group___main___code_ga0bb2a8c6b65ee5beda1bc3ddbeeff5ed}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S11\+\_\+x@{S11\+\_\+x}}
+\index{S11\+\_\+x@{S11\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S11\+\_\+x}
+{\footnotesize\ttfamily \#define S11\+\_\+x~(\textbf{ Display\+\_\+\+Width}/ 10)+45}
+
+\mbox{\label{group___main___code_ga31d4e50cdaaa312bbc1210faa3bf93ac}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S11\+\_\+y@{S11\+\_\+y}}
+\index{S11\+\_\+y@{S11\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S11\+\_\+y}
+{\footnotesize\ttfamily \#define S11\+\_\+y~30}
+
+\mbox{\label{group___main___code_ga64dfaf58ee54b1499280d92c96dc4e39}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S12\+\_\+x@{S12\+\_\+x}}
+\index{S12\+\_\+x@{S12\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S12\+\_\+x}
+{\footnotesize\ttfamily \#define S12\+\_\+x~(\textbf{ Display\+\_\+\+Width}/ 2)+80}
+
+\mbox{\label{group___main___code_gaa6e7be051a1c768282be590cf36286c6}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S12\+\_\+y@{S12\+\_\+y}}
+\index{S12\+\_\+y@{S12\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S12\+\_\+y}
+{\footnotesize\ttfamily \#define S12\+\_\+y~30}
+
+\mbox{\label{group___main___code_ga1453b4036febe234be09ce34ad809810}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S21\+\_\+x@{S21\+\_\+x}}
+\index{S21\+\_\+x@{S21\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S21\+\_\+x}
+{\footnotesize\ttfamily \#define S21\+\_\+x~(\textbf{ Display\+\_\+\+Width}/ 10)+45}
+
+\mbox{\label{group___main___code_ga28da3264cceb7528ecfcf88651883bde}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S21\+\_\+y@{S21\+\_\+y}}
+\index{S21\+\_\+y@{S21\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S21\+\_\+y}
+{\footnotesize\ttfamily \#define S21\+\_\+y~60}
+
+\mbox{\label{group___main___code_gadbab1541eb2b8f8c8810888fa252a1ec}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S22\+\_\+x@{S22\+\_\+x}}
+\index{S22\+\_\+x@{S22\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S22\+\_\+x}
+{\footnotesize\ttfamily \#define S22\+\_\+x~(\textbf{ Display\+\_\+\+Width}/ 2)+80}
+
+\mbox{\label{group___main___code_gadafe33a3f0f72c54eb82eed2e4ce66ef}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S22\+\_\+y@{S22\+\_\+y}}
+\index{S22\+\_\+y@{S22\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S22\+\_\+y}
+{\footnotesize\ttfamily \#define S22\+\_\+y~60}
+
+\mbox{\label{group___main___code_ga01128ddda60793052a53d99635d871c6}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S31\+\_\+x@{S31\+\_\+x}}
+\index{S31\+\_\+x@{S31\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S31\+\_\+x}
+{\footnotesize\ttfamily \#define S31\+\_\+x~(\textbf{ Display\+\_\+\+Width}/ 10)+45}
+
+\mbox{\label{group___main___code_gaae2ceae30e90e3114ced0fc57c57343e}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S31\+\_\+y@{S31\+\_\+y}}
+\index{S31\+\_\+y@{S31\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S31\+\_\+y}
+{\footnotesize\ttfamily \#define S31\+\_\+y~90}
+
+\mbox{\label{group___main___code_gaad4e41a6a03ee8798aff9a6b771e306d}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S32\+\_\+x@{S32\+\_\+x}}
+\index{S32\+\_\+x@{S32\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S32\+\_\+x}
+{\footnotesize\ttfamily \#define S32\+\_\+x~(\textbf{ Display\+\_\+\+Width}/ 2)+80}
+
+\mbox{\label{group___main___code_ga002d3b26c7c77f65a60e7c504535cb35}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S32\+\_\+y@{S32\+\_\+y}}
+\index{S32\+\_\+y@{S32\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S32\+\_\+y}
+{\footnotesize\ttfamily \#define S32\+\_\+y~90}
+
+\mbox{\label{group___main___code_ga7cd84ca81554dfef3963c03439d087fa}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S41\+\_\+x@{S41\+\_\+x}}
+\index{S41\+\_\+x@{S41\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S41\+\_\+x}
+{\footnotesize\ttfamily \#define S41\+\_\+x~(\textbf{ Display\+\_\+\+Width}/ 10)+45}
+
+\mbox{\label{group___main___code_ga1dc49deb0d2505079572bb9034c12626}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S41\+\_\+y@{S41\+\_\+y}}
+\index{S41\+\_\+y@{S41\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S41\+\_\+y}
+{\footnotesize\ttfamily \#define S41\+\_\+y~120}
+
+\mbox{\label{group___main___code_gac8726f2103ad6ff92d358ed1aa31dbb6}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S42\+\_\+x@{S42\+\_\+x}}
+\index{S42\+\_\+x@{S42\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S42\+\_\+x}
+{\footnotesize\ttfamily \#define S42\+\_\+x~(\textbf{ Display\+\_\+\+Width}/ 2)+80}
+
+\mbox{\label{group___main___code_gae1956eee46a70c76fd98d46c4d73bb46}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S42\+\_\+y@{S42\+\_\+y}}
+\index{S42\+\_\+y@{S42\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S42\+\_\+y}
+{\footnotesize\ttfamily \#define S42\+\_\+y~120}
+
+\mbox{\label{group___main___code_ga17999e27f3a1aba4588f9b3437235833}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S51\+\_\+x@{S51\+\_\+x}}
+\index{S51\+\_\+x@{S51\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S51\+\_\+x}
+{\footnotesize\ttfamily \#define S51\+\_\+x~(\textbf{ Display\+\_\+\+Width}/ 10)+45}
+
+\mbox{\label{group___main___code_ga8371c925f06fc2808882f491bb68537b}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S51\+\_\+y@{S51\+\_\+y}}
+\index{S51\+\_\+y@{S51\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S51\+\_\+y}
+{\footnotesize\ttfamily \#define S51\+\_\+y~150}
+
+\mbox{\label{group___main___code_gadd1048216537436583ec735d161f805e}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S52\+\_\+x@{S52\+\_\+x}}
+\index{S52\+\_\+x@{S52\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S52\+\_\+x}
+{\footnotesize\ttfamily \#define S52\+\_\+x~(\textbf{ Display\+\_\+\+Width}/ 2)+80}
+
+\mbox{\label{group___main___code_ga822282025dc6413c7f2eb4253c6f7b4a}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S52\+\_\+y@{S52\+\_\+y}}
+\index{S52\+\_\+y@{S52\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S52\+\_\+y}
+{\footnotesize\ttfamily \#define S52\+\_\+y~150}
+
+\mbox{\label{group___main___code_ga2cd8e3e0ac7dbb420bcbc8e2b3bb3393}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S61\+\_\+x@{S61\+\_\+x}}
+\index{S61\+\_\+x@{S61\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S61\+\_\+x}
+{\footnotesize\ttfamily \#define S61\+\_\+x~(\textbf{ Display\+\_\+\+Width}/ 10)+45}
+
+\mbox{\label{group___main___code_ga65856d4ad2ed21ab7cf50e9cdb031f53}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S61\+\_\+y@{S61\+\_\+y}}
+\index{S61\+\_\+y@{S61\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S61\+\_\+y}
+{\footnotesize\ttfamily \#define S61\+\_\+y~180}
+
+\mbox{\label{group___main___code_gac6183fd3669f5517dd839063f4bb2b09}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S62\+\_\+x@{S62\+\_\+x}}
+\index{S62\+\_\+x@{S62\+\_\+x}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S62\+\_\+x}
+{\footnotesize\ttfamily \#define S62\+\_\+x~(\textbf{ Display\+\_\+\+Width}/ 2)+80}
+
+\mbox{\label{group___main___code_ga9e7f0807f23cc44a3ddea1469bd68931}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S62\+\_\+y@{S62\+\_\+y}}
+\index{S62\+\_\+y@{S62\+\_\+y}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S62\+\_\+y}
+{\footnotesize\ttfamily \#define S62\+\_\+y~180}
+
+\mbox{\label{group___main___code_ga214bbf60b621c9bf9da6fa304089cee5}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!str\+\_\+\+A\+GC@{str\+\_\+\+A\+GC}}
+\index{str\+\_\+\+A\+GC@{str\+\_\+\+A\+GC}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{str\+\_\+\+A\+GC}
+{\footnotesize\ttfamily \#define str\+\_\+\+A\+GC~\char`\"{}A\+G\+C\+: \char`\"{}}
+
+\mbox{\label{group___main___code_gae2bbabaf8a43c6d1380bdcef457c635e}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!str\+\_\+\+B\+ER@{str\+\_\+\+B\+ER}}
+\index{str\+\_\+\+B\+ER@{str\+\_\+\+B\+ER}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{str\+\_\+\+B\+ER}
+{\footnotesize\ttfamily \#define str\+\_\+\+B\+ER~\char`\"{}B\+E\+R\+: \char`\"{}}
+
+\mbox{\label{group___main___code_gafec5061f6a1b75515e1eee085cd510a4}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!str\+\_\+\+C\+RC@{str\+\_\+\+C\+RC}}
+\index{str\+\_\+\+C\+RC@{str\+\_\+\+C\+RC}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{str\+\_\+\+C\+RC}
+{\footnotesize\ttfamily \#define str\+\_\+\+C\+RC~\char`\"{}C\+R\+C\+: \char`\"{}}
+
+\mbox{\label{group___main___code_gac65562f1ab6ef0f1995669c684af2a32}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!str\+\_\+\+E\+VM@{str\+\_\+\+E\+VM}}
+\index{str\+\_\+\+E\+VM@{str\+\_\+\+E\+VM}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{str\+\_\+\+E\+VM}
+{\footnotesize\ttfamily \#define str\+\_\+\+E\+VM~\char`\"{}E\+V\+M\+: \char`\"{}}
+
+\mbox{\label{group___main___code_gadf0a00efcd343cc739fc367fd523a0b0}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!str\+\_\+\+F\+R\+A\+ME@{str\+\_\+\+F\+R\+A\+ME}}
+\index{str\+\_\+\+F\+R\+A\+ME@{str\+\_\+\+F\+R\+A\+ME}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{str\+\_\+\+F\+R\+A\+ME}
+{\footnotesize\ttfamily \#define str\+\_\+\+F\+R\+A\+ME~\char`\"{}F\+R\+A\+M\+E\+: \char`\"{}}
+
+\mbox{\label{group___main___code_ga906dc0b7e23fb4cd508d7048d7efe286}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!str\+\_\+\+H\+O\+LD@{str\+\_\+\+H\+O\+LD}}
+\index{str\+\_\+\+H\+O\+LD@{str\+\_\+\+H\+O\+LD}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{str\+\_\+\+H\+O\+LD}
+{\footnotesize\ttfamily \#define str\+\_\+\+H\+O\+LD~\char`\"{}H\+O\+L\+D\+: \char`\"{}}
+
+\mbox{\label{group___main___code_gaf998b8731987466fdf3941dc1c4670a3}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!str\+\_\+\+L\+E\+D1@{str\+\_\+\+L\+E\+D1}}
+\index{str\+\_\+\+L\+E\+D1@{str\+\_\+\+L\+E\+D1}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{str\+\_\+\+L\+E\+D1}
+{\footnotesize\ttfamily \#define str\+\_\+\+L\+E\+D1~\char`\"{}A\+GC\char`\"{}}
+
+\mbox{\label{group___main___code_ga02d184f6387a2c4adb71d1e5e94f7533}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!str\+\_\+\+L\+E\+D10@{str\+\_\+\+L\+E\+D10}}
+\index{str\+\_\+\+L\+E\+D10@{str\+\_\+\+L\+E\+D10}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{str\+\_\+\+L\+E\+D10}
+{\footnotesize\ttfamily \#define str\+\_\+\+L\+E\+D10~\char`\"{}-\/-\/-\/\char`\"{}}
+
+\mbox{\label{group___main___code_gaf9e1c64121454aa496c6e8678faef95f}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!str\+\_\+\+L\+E\+D2@{str\+\_\+\+L\+E\+D2}}
+\index{str\+\_\+\+L\+E\+D2@{str\+\_\+\+L\+E\+D2}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{str\+\_\+\+L\+E\+D2}
+{\footnotesize\ttfamily \#define str\+\_\+\+L\+E\+D2~\char`\"{}Lock\char`\"{}}
+
+\mbox{\label{group___main___code_gaa1c0e72b3ce6aa744e11450a348016e5}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!str\+\_\+\+L\+E\+D3@{str\+\_\+\+L\+E\+D3}}
+\index{str\+\_\+\+L\+E\+D3@{str\+\_\+\+L\+E\+D3}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{str\+\_\+\+L\+E\+D3}
+{\footnotesize\ttfamily \#define str\+\_\+\+L\+E\+D3~\char`\"{}H\+O\+LD\char`\"{}}
+
+\mbox{\label{group___main___code_gaddbeb8c5577cd55b6d2ddc47877b19e9}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!str\+\_\+\+L\+E\+D4@{str\+\_\+\+L\+E\+D4}}
+\index{str\+\_\+\+L\+E\+D4@{str\+\_\+\+L\+E\+D4}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{str\+\_\+\+L\+E\+D4}
+{\footnotesize\ttfamily \#define str\+\_\+\+L\+E\+D4~\char`\"{}E\+VM\char`\"{}}
+
+\mbox{\label{group___main___code_gad0a54cb6e50a845d80d44a930b931854}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!str\+\_\+\+L\+E\+D5@{str\+\_\+\+L\+E\+D5}}
+\index{str\+\_\+\+L\+E\+D5@{str\+\_\+\+L\+E\+D5}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{str\+\_\+\+L\+E\+D5}
+{\footnotesize\ttfamily \#define str\+\_\+\+L\+E\+D5~\char`\"{}F\+R\+A\+ME\char`\"{}}
+
+\mbox{\label{group___main___code_gaeeb36e4a6d625ca3cd93c1911cbe0c52}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!str\+\_\+\+L\+E\+D6@{str\+\_\+\+L\+E\+D6}}
+\index{str\+\_\+\+L\+E\+D6@{str\+\_\+\+L\+E\+D6}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{str\+\_\+\+L\+E\+D6}
+{\footnotesize\ttfamily \#define str\+\_\+\+L\+E\+D6~\char`\"{}C\+RC\char`\"{}}
+
+\mbox{\label{group___main___code_ga847bade53a98783bc202498783ac8389}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!str\+\_\+\+L\+E\+D7@{str\+\_\+\+L\+E\+D7}}
+\index{str\+\_\+\+L\+E\+D7@{str\+\_\+\+L\+E\+D7}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{str\+\_\+\+L\+E\+D7}
+{\footnotesize\ttfamily \#define str\+\_\+\+L\+E\+D7~\char`\"{}B\+ER\char`\"{}}
+
+\mbox{\label{group___main___code_ga0806817c012c3f6b421f6ff101c663e7}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!str\+\_\+\+L\+E\+D8@{str\+\_\+\+L\+E\+D8}}
+\index{str\+\_\+\+L\+E\+D8@{str\+\_\+\+L\+E\+D8}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{str\+\_\+\+L\+E\+D8}
+{\footnotesize\ttfamily \#define str\+\_\+\+L\+E\+D8~\char`\"{}-\/-\/-\/\char`\"{}}
+
+\mbox{\label{group___main___code_ga907124841bfa4cf0bec4530c20a1c922}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!str\+\_\+\+L\+E\+D9@{str\+\_\+\+L\+E\+D9}}
+\index{str\+\_\+\+L\+E\+D9@{str\+\_\+\+L\+E\+D9}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{str\+\_\+\+L\+E\+D9}
+{\footnotesize\ttfamily \#define str\+\_\+\+L\+E\+D9~\char`\"{}-\/-\/-\/\char`\"{}}
+
+\mbox{\label{group___main___code_ga1795d4ee9c710cb188c6f5c4095b5bce}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!str\+\_\+\+Lock@{str\+\_\+\+Lock}}
+\index{str\+\_\+\+Lock@{str\+\_\+\+Lock}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{str\+\_\+\+Lock}
+{\footnotesize\ttfamily \#define str\+\_\+\+Lock~\char`\"{}Lock\+: \char`\"{}}
+
+\mbox{\label{group___main___code_ga9b778b0ed9c20744202d6ae945dd057b}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!str\+\_\+\+NA@{str\+\_\+\+NA}}
+\index{str\+\_\+\+NA@{str\+\_\+\+NA}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{str\+\_\+\+NA}
+{\footnotesize\ttfamily \#define str\+\_\+\+NA~\char`\"{}-\/-\/-\/\+: \char`\"{}}
+
+\mbox{\label{group___main___code_gac5dfbb6e923641f0a0b65da0be18c999}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S\+Y\+N\+C\+\_\+\+Panel@{S\+Y\+N\+C\+\_\+\+Panel}}
+\index{S\+Y\+N\+C\+\_\+\+Panel@{S\+Y\+N\+C\+\_\+\+Panel}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S\+Y\+N\+C\+\_\+\+Panel}
+{\footnotesize\ttfamily \#define S\+Y\+N\+C\+\_\+\+Panel~6}
+
+\mbox{\label{group___main___code_gae6c5811c029a6ee1565195f9e17ddec2}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!timeout@{timeout}}
+\index{timeout@{timeout}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{timeout}
+{\footnotesize\ttfamily \#define timeout~4e5}
+
+\doxyref{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}{p.}{_z_c706___s_p_i___display_8c} -\/ Display data retrieved from Z\+C706 via S\+PI port.
+
+The data is displayed using TI E\+K-\/\+T\+M4\+C123\+G\+XL launchpad and Kentec 320x240 (E\+B-\/\+L\+M4\+F120-\/\+L35) display.
+
+Code uses the Stellaris Graphics Library and Tiva\+Ware™ Peripheral Driver Library
+
+This code configures the S\+S\+I1 as S\+PI Slave on an T\+M4\+C123G launchpad (E\+K-\/\+T\+M4\+C123\+G\+XL) evaluation board. RX timeout interrupt is configured for S\+S\+I1. Four 16bit words are sent from Z\+C706 F\+P\+GA. The S\+S\+I1 RX timeout interrupt is enabled. The code then waits for the interrupt to fire. Once the interrupt is fired, the data from slave RX F\+I\+FO is read, checked and assembled to a 32 bit word The 32bit words are stored in an array for further processing and disply U\+A\+R\+T0 is used to send information to host at 115200 baud and 8-\/n-\/1 mode.
+
+This example uses the following peripherals and I/O signals on E\+K-\/\+T\+M4\+C123\+G\+XL.
+
+
+\begin{DoxyItemize}
+\item S\+S\+I1 peripheral
+\item G\+P\+IO Port D peripheral (for S\+S\+I1 pins)
+\item S\+S\+I1\+C\+LK -\/ P\+D0 -\/ Clock
+\item S\+S\+I1\+Fss -\/ P\+D1 -\/ Enable
+\item S\+S\+I1\+Rx -\/ P\+D2 -\/ M\+O\+SI
+\item S\+S\+I1\+Tx -\/ P\+D3 -\/ M\+I\+SO (currently not used)
+\end{DoxyItemize}
+
+The following U\+A\+RT signals are configured only for displaying console messages for this example. These are not required for operation of S\+S\+I0.
+\begin{DoxyItemize}
+\item U\+A\+R\+T0 peripheral
+\item G\+P\+IO Port A peripheral (for U\+A\+R\+T0 pins)
+\item U\+A\+R\+T0\+RX -\/ P\+A0
+\item U\+A\+R\+T0\+TX -\/ P\+A1
+\end{DoxyItemize}
+
+This example uses the following interrupt handlers. To use this example in your own application you must add these interrupt handlers to your vector table.
+\begin{DoxyItemize}
+\item S\+S\+I1\+Int\+Handler. 
+\end{DoxyItemize}
+
+\subsection{Function Documentation}
+\mbox{\label{group___main___code_ga9f16cf799af396846e96534b1111bb51}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!\+\_\+\+\_\+attribute\+\_\+\+\_\+@{\+\_\+\+\_\+attribute\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+attribute\+\_\+\+\_\+@{\+\_\+\+\_\+attribute\+\_\+\+\_\+}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{\+\_\+\+\_\+attribute\+\_\+\+\_\+()}
+{\footnotesize\ttfamily t\+D\+M\+A\+Control\+Table s\+D\+M\+A\+Control\+Table [64] \+\_\+\+\_\+attribute\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{(aligned(1024))}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_gaaeb882a8b5d1b6dbf45724019d4a40ed}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Canvas@{Canvas}}
+\index{Canvas@{Canvas}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Canvas()\hspace{0.1cm}{\footnotesize\ttfamily [1/9]}}
+{\footnotesize\ttfamily Canvas (\begin{DoxyParamCaption}\item[{g\+\_\+s\+Draw\+Image}]{,  }\item[{\textbf{ g\+\_\+ps\+Panels}}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\&}]{g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119,  }\item[{0}]{,  }\item[{24}]{,  }\item[{320}]{,  }\item[{216}]{,  }\item[{C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+A\+P\+P\+\_\+\+D\+R\+A\+WN}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\textbf{ Draw\+First\+Image}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_gabf86298569e7019955f68bfef67cc640}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Canvas@{Canvas}}
+\index{Canvas@{Canvas}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Canvas()\hspace{0.1cm}{\footnotesize\ttfamily [2/9]}}
+{\footnotesize\ttfamily Canvas (\begin{DoxyParamCaption}\item[{g\+\_\+s\+L\+E\+D\+\_\+\+Display}]{,  }\item[{\textbf{ g\+\_\+ps\+Panels}+}]{2,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\&}]{g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119,  }\item[{0}]{,  }\item[{24}]{,  }\item[{320}]{,  }\item[{166}]{,  }\item[{C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+A\+P\+P\+\_\+\+D\+R\+A\+WN}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\textbf{ On\+L\+E\+D\+Status\+Paint}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_gab6480020301480fd7b51984967a65d12}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Canvas@{Canvas}}
+\index{Canvas@{Canvas}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Canvas()\hspace{0.1cm}{\footnotesize\ttfamily [3/9]}}
+{\footnotesize\ttfamily Canvas (\begin{DoxyParamCaption}\item[{g\+\_\+s\+Status\+Data}]{,  }\item[{\textbf{ g\+\_\+ps\+Panels}+}]{3,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\&}]{g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119,  }\item[{0}]{,  }\item[{24}]{,  }\item[{320}]{,  }\item[{166}]{,  }\item[{C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+A\+P\+P\+\_\+\+D\+R\+A\+WN}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\textbf{ On\+Data\+Paint}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga895f67c47ec964c23b222f1637939380}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Canvas@{Canvas}}
+\index{Canvas@{Canvas}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Canvas()\hspace{0.1cm}{\footnotesize\ttfamily [4/9]}}
+{\footnotesize\ttfamily Canvas (\begin{DoxyParamCaption}\item[{g\+\_\+s\+Rx\+Status}]{,  }\item[{\textbf{ g\+\_\+ps\+Panels}+}]{4,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\&}]{g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119,  }\item[{0}]{,  }\item[{24}]{,  }\item[{320}]{,  }\item[{166}]{,  }\item[{C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+A\+P\+P\+\_\+\+D\+R\+A\+WN}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\textbf{ On\+Rx\+Status\+Paint}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga8436a49742a869952dfbd819971b51f0}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Canvas@{Canvas}}
+\index{Canvas@{Canvas}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Canvas()\hspace{0.1cm}{\footnotesize\ttfamily [5/9]}}
+{\footnotesize\ttfamily Canvas (\begin{DoxyParamCaption}\item[{g\+\_\+s\+P\+L\+L\+Status}]{,  }\item[{\textbf{ g\+\_\+ps\+Panels}+}]{5,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\&}]{g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119,  }\item[{0}]{,  }\item[{24}]{,  }\item[{320}]{,  }\item[{166}]{,  }\item[{C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+A\+P\+P\+\_\+\+D\+R\+A\+WN}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\textbf{ On\+P\+L\+L\+Status\+Paint}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_gafdde1a2b4d0d050160441da3e3f7337d}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Canvas@{Canvas}}
+\index{Canvas@{Canvas}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Canvas()\hspace{0.1cm}{\footnotesize\ttfamily [6/9]}}
+{\footnotesize\ttfamily Canvas (\begin{DoxyParamCaption}\item[{g\+\_\+s\+S\+Y\+N\+C\+Status}]{,  }\item[{\textbf{ g\+\_\+ps\+Panels}+}]{6,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\&}]{g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119,  }\item[{0}]{,  }\item[{24}]{,  }\item[{320}]{,  }\item[{166}]{,  }\item[{C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+A\+P\+P\+\_\+\+D\+R\+A\+WN}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\textbf{ On\+S\+Y\+N\+C\+Status\+Paint}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga17e90f1597249993b7b9b7d982796c37}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Canvas@{Canvas}}
+\index{Canvas@{Canvas}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Canvas()\hspace{0.1cm}{\footnotesize\ttfamily [7/9]}}
+{\footnotesize\ttfamily Canvas (\begin{DoxyParamCaption}\item[{g\+\_\+s\+R\+X\+M\+S\+G\+Status}]{,  }\item[{\textbf{ g\+\_\+ps\+Panels}+}]{7,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\&}]{g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119,  }\item[{0}]{,  }\item[{24}]{,  }\item[{320}]{,  }\item[{166}]{,  }\item[{C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+A\+P\+P\+\_\+\+D\+R\+A\+WN}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\textbf{ On\+R\+X\+M\+S\+G\+Status\+Paint}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga4d6b883b649e00c90d7b944bfdb96ce9}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Canvas@{Canvas}}
+\index{Canvas@{Canvas}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Canvas()\hspace{0.1cm}{\footnotesize\ttfamily [8/9]}}
+{\footnotesize\ttfamily Canvas (\begin{DoxyParamCaption}\item[{g\+\_\+s\+Primitives}]{,  }\item[{\textbf{ g\+\_\+ps\+Panels}+}]{8,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\&}]{g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119,  }\item[{0}]{,  }\item[{24}]{,  }\item[{320}]{,  }\item[{166}]{,  }\item[{C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+A\+P\+P\+\_\+\+D\+R\+A\+WN}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\textbf{ On\+Primitive\+Paint}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga6f8675ceddda7dd9689dfc4c7f68a055}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Canvas@{Canvas}}
+\index{Canvas@{Canvas}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Canvas()\hspace{0.1cm}{\footnotesize\ttfamily [9/9]}}
+{\footnotesize\ttfamily Canvas (\begin{DoxyParamCaption}\item[{g\+\_\+s\+Title}]{,  }\item[{0}]{,  }\item[{Clr\+Black}]{,  }\item[{0}]{,  }\item[{\&}]{g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119,  }\item[{50}]{,  }\item[{190}]{,  }\item[{220}]{,  }\item[{50}]{,  }\item[{C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+T\+E\+XT$\vert$}]{C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+F\+I\+LL,  }\item[{0}]{,  }\item[{0}]{,  }\item[{Clr\+Silver}]{,  }\item[{\&}]{g\+\_\+s\+Font\+Cm20,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga5f60b6a60802eccd1ae9526e776a476c}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Configure\+U\+A\+RT@{Configure\+U\+A\+RT}}
+\index{Configure\+U\+A\+RT@{Configure\+U\+A\+RT}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Configure\+U\+A\+R\+T()}
+{\footnotesize\ttfamily void Configure\+U\+A\+RT (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga0525ca5d817859ebae44410340ac3916}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!delay\+\_\+cycles@{delay\+\_\+cycles}}
+\index{delay\+\_\+cycles@{delay\+\_\+cycles}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{delay\+\_\+cycles()}
+{\footnotesize\ttfamily void delay\+\_\+cycles (\begin{DoxyParamCaption}\item[{long}]{cycles }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_gaa1cd966200b7e170561dcb60fe4c6c3f}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Draw\+First\+Image@{Draw\+First\+Image}}
+\index{Draw\+First\+Image@{Draw\+First\+Image}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Draw\+First\+Image()}
+{\footnotesize\ttfamily void Draw\+First\+Image (\begin{DoxyParamCaption}\item[{t\+Widget $\ast$}]{p\+Widget,  }\item[{t\+Context $\ast$}]{p\+Context }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_gaaf7f6c9bfa5e9257aa6f309b95e6cbd7}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!float\+\_\+to\+\_\+int\+\_\+and\+\_\+fract@{float\+\_\+to\+\_\+int\+\_\+and\+\_\+fract}}
+\index{float\+\_\+to\+\_\+int\+\_\+and\+\_\+fract@{float\+\_\+to\+\_\+int\+\_\+and\+\_\+fract}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{float\+\_\+to\+\_\+int\+\_\+and\+\_\+fract()}
+{\footnotesize\ttfamily void float\+\_\+to\+\_\+int\+\_\+and\+\_\+fract (\begin{DoxyParamCaption}\item[{float}]{float\+\_\+value,  }\item[{int32\+\_\+t $\ast$}]{i32\+Integer\+Part,  }\item[{int32\+\_\+t $\ast$}]{i32\+Fraction\+Part }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_gac0af5ede4250ca08dee3532cabcbcb15}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Gr\+String\+Draw\+Right@{Gr\+String\+Draw\+Right}}
+\index{Gr\+String\+Draw\+Right@{Gr\+String\+Draw\+Right}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Gr\+String\+Draw\+Right()}
+{\footnotesize\ttfamily void Gr\+String\+Draw\+Right (\begin{DoxyParamCaption}\item[{const t\+Context $\ast$}]{p\+Context,  }\item[{const char $\ast$}]{pc\+String,  }\item[{int32\+\_\+t}]{i32\+Length,  }\item[{int32\+\_\+t}]{i32X,  }\item[{int32\+\_\+t}]{i32Y,  }\item[{uint32\+\_\+t}]{b\+Opaque }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga33ebffa85853b61832f3921c7f350ea0}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Init\+S\+P\+I1@{Init\+S\+P\+I1}}
+\index{Init\+S\+P\+I1@{Init\+S\+P\+I1}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Init\+S\+P\+I1()}
+{\footnotesize\ttfamily void Init\+S\+P\+I1 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga840291bc02cba5474a4cb46a9b9566fe}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!main@{main}}
+\index{main@{main}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{main()}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga4e58351d3b085655c8f49bf7b2920499}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Median\+\_\+\+Filter\+\_\+for\+\_\+3@{Median\+\_\+\+Filter\+\_\+for\+\_\+3}}
+\index{Median\+\_\+\+Filter\+\_\+for\+\_\+3@{Median\+\_\+\+Filter\+\_\+for\+\_\+3}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Median\+\_\+\+Filter\+\_\+for\+\_\+3()}
+{\footnotesize\ttfamily void Median\+\_\+\+Filter\+\_\+for\+\_\+3 (\begin{DoxyParamCaption}\item[{float $\ast$}]{data\+\_\+in }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga2a7824534f96093310440026c7f5ce62}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!On\+Block\+Diagram\+Paint@{On\+Block\+Diagram\+Paint}}
+\index{On\+Block\+Diagram\+Paint@{On\+Block\+Diagram\+Paint}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{On\+Block\+Diagram\+Paint()}
+{\footnotesize\ttfamily void On\+Block\+Diagram\+Paint (\begin{DoxyParamCaption}\item[{t\+Widget $\ast$}]{p\+Widget,  }\item[{t\+Context $\ast$}]{p\+Context }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_gab289d75e8191d40b75fb7db1866aa72a}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!On\+Button\+Press2@{On\+Button\+Press2}}
+\index{On\+Button\+Press2@{On\+Button\+Press2}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{On\+Button\+Press2()}
+{\footnotesize\ttfamily void On\+Button\+Press2 (\begin{DoxyParamCaption}\item[{t\+Widget $\ast$}]{p\+Widget }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga99e0b06993adb411df977e6b11d9c8b1}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!On\+Data\+Paint@{On\+Data\+Paint}}
+\index{On\+Data\+Paint@{On\+Data\+Paint}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{On\+Data\+Paint()}
+{\footnotesize\ttfamily void On\+Data\+Paint (\begin{DoxyParamCaption}\item[{t\+Widget $\ast$}]{p\+Widget,  }\item[{t\+Context $\ast$}]{p\+Context }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga77ecb6c171c9e84489a00a828b869afe}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!On\+First@{On\+First}}
+\index{On\+First@{On\+First}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{On\+First()}
+{\footnotesize\ttfamily void On\+First (\begin{DoxyParamCaption}\item[{t\+Widget $\ast$}]{p\+Widget }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga8b5d2903c12ac89f6a31517c88bf60a1}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!On\+L\+E\+D\+Status\+Paint@{On\+L\+E\+D\+Status\+Paint}}
+\index{On\+L\+E\+D\+Status\+Paint@{On\+L\+E\+D\+Status\+Paint}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{On\+L\+E\+D\+Status\+Paint()}
+{\footnotesize\ttfamily void On\+L\+E\+D\+Status\+Paint (\begin{DoxyParamCaption}\item[{t\+Widget $\ast$}]{p\+Widget,  }\item[{t\+Context $\ast$}]{p\+Context }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga15b732e975e76d959fa978aad34431d8}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!On\+Next@{On\+Next}}
+\index{On\+Next@{On\+Next}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{On\+Next()}
+{\footnotesize\ttfamily void On\+Next (\begin{DoxyParamCaption}\item[{t\+Widget $\ast$}]{p\+Widget }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_gaf794f7efdb3af4d8e827fbb42de48a0e}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!On\+P\+L\+L\+Button\+Press@{On\+P\+L\+L\+Button\+Press}}
+\index{On\+P\+L\+L\+Button\+Press@{On\+P\+L\+L\+Button\+Press}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{On\+P\+L\+L\+Button\+Press()}
+{\footnotesize\ttfamily void On\+P\+L\+L\+Button\+Press (\begin{DoxyParamCaption}\item[{t\+Widget $\ast$}]{p\+Widget }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga464dae9fab9b22b834c87f7575f1d543}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!On\+P\+L\+L\+Status\+Paint@{On\+P\+L\+L\+Status\+Paint}}
+\index{On\+P\+L\+L\+Status\+Paint@{On\+P\+L\+L\+Status\+Paint}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{On\+P\+L\+L\+Status\+Paint()}
+{\footnotesize\ttfamily void On\+P\+L\+L\+Status\+Paint (\begin{DoxyParamCaption}\item[{t\+Widget $\ast$}]{p\+Widget,  }\item[{t\+Context $\ast$}]{p\+Context }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga007cfc98eb116aa5882115296546bba7}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!On\+Previous@{On\+Previous}}
+\index{On\+Previous@{On\+Previous}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{On\+Previous()}
+{\footnotesize\ttfamily void On\+Previous (\begin{DoxyParamCaption}\item[{t\+Widget $\ast$}]{p\+Widget }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga9ac8398ccddfa5d7735ac8444e13a0b6}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!On\+Primitive\+Paint@{On\+Primitive\+Paint}}
+\index{On\+Primitive\+Paint@{On\+Primitive\+Paint}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{On\+Primitive\+Paint()}
+{\footnotesize\ttfamily void On\+Primitive\+Paint (\begin{DoxyParamCaption}\item[{t\+Widget $\ast$}]{p\+Widget,  }\item[{t\+Context $\ast$}]{p\+Context }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_gad6cce1ed7a03163bc7df6955b75867fe}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!On\+Radio\+Change@{On\+Radio\+Change}}
+\index{On\+Radio\+Change@{On\+Radio\+Change}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{On\+Radio\+Change()}
+{\footnotesize\ttfamily void On\+Radio\+Change (\begin{DoxyParamCaption}\item[{t\+Widget $\ast$}]{p\+Widget,  }\item[{uint32\+\_\+t}]{b\+Selected }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_gaa721b74855b3d3bba7f488f28ba36373}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!On\+Rx\+Button\+Press@{On\+Rx\+Button\+Press}}
+\index{On\+Rx\+Button\+Press@{On\+Rx\+Button\+Press}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{On\+Rx\+Button\+Press()}
+{\footnotesize\ttfamily void On\+Rx\+Button\+Press (\begin{DoxyParamCaption}\item[{t\+Widget $\ast$}]{p\+Widget }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_gaf1708451a1c4b10ce0622e3358ccc21f}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!On\+R\+X\+M\+S\+G\+Button\+Press@{On\+R\+X\+M\+S\+G\+Button\+Press}}
+\index{On\+R\+X\+M\+S\+G\+Button\+Press@{On\+R\+X\+M\+S\+G\+Button\+Press}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{On\+R\+X\+M\+S\+G\+Button\+Press()}
+{\footnotesize\ttfamily void On\+R\+X\+M\+S\+G\+Button\+Press (\begin{DoxyParamCaption}\item[{t\+Widget $\ast$}]{p\+Widget }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_gab6f01db5a082853ad25d435e3da6396f}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!On\+R\+X\+M\+S\+G\+Status\+Paint@{On\+R\+X\+M\+S\+G\+Status\+Paint}}
+\index{On\+R\+X\+M\+S\+G\+Status\+Paint@{On\+R\+X\+M\+S\+G\+Status\+Paint}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{On\+R\+X\+M\+S\+G\+Status\+Paint()}
+{\footnotesize\ttfamily void On\+R\+X\+M\+S\+G\+Status\+Paint (\begin{DoxyParamCaption}\item[{t\+Widget $\ast$}]{p\+Widget,  }\item[{t\+Context $\ast$}]{p\+Context }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga36ab4c6d664c923b483707cb16886798}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!On\+Rx\+Status\+Paint@{On\+Rx\+Status\+Paint}}
+\index{On\+Rx\+Status\+Paint@{On\+Rx\+Status\+Paint}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{On\+Rx\+Status\+Paint()}
+{\footnotesize\ttfamily void On\+Rx\+Status\+Paint (\begin{DoxyParamCaption}\item[{t\+Widget $\ast$}]{p\+Widget,  }\item[{t\+Context $\ast$}]{p\+Context }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_gafde0999c3d03d1ee702343cd4a0d8c8a}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!On\+S\+Y\+N\+C\+Button\+Press@{On\+S\+Y\+N\+C\+Button\+Press}}
+\index{On\+S\+Y\+N\+C\+Button\+Press@{On\+S\+Y\+N\+C\+Button\+Press}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{On\+S\+Y\+N\+C\+Button\+Press()}
+{\footnotesize\ttfamily void On\+S\+Y\+N\+C\+Button\+Press (\begin{DoxyParamCaption}\item[{t\+Widget $\ast$}]{p\+Widget }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_gaeae2329bef86c1832d220a4838443e63}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!On\+S\+Y\+N\+C\+Status\+Paint@{On\+S\+Y\+N\+C\+Status\+Paint}}
+\index{On\+S\+Y\+N\+C\+Status\+Paint@{On\+S\+Y\+N\+C\+Status\+Paint}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{On\+S\+Y\+N\+C\+Status\+Paint()}
+{\footnotesize\ttfamily void On\+S\+Y\+N\+C\+Status\+Paint (\begin{DoxyParamCaption}\item[{t\+Widget $\ast$}]{p\+Widget,  }\item[{t\+Context $\ast$}]{p\+Context }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga55ec5e1d2ab466023fd879b6acd94ec3}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Rectangular\+Button@{Rectangular\+Button}}
+\index{Rectangular\+Button@{Rectangular\+Button}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Rectangular\+Button()\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Rectangular\+Button (\begin{DoxyParamCaption}\item[{g\+\_\+s\+Previous}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\&}]{g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119,  }\item[{0}]{,  }\item[{190}]{,  }\item[{50}]{,  }\item[{50}]{,  }\item[{P\+B\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+F\+I\+LL}]{,  }\item[{Clr\+Black}]{,  }\item[{Clr\+Black}]{,  }\item[{0}]{,  }\item[{Clr\+Silver}]{,  }\item[{\&}]{g\+\_\+s\+Font\+Cm20,  }\item[{\char`\"{}-\/\char`\"{}}]{,  }\item[{\textbf{ g\+\_\+puc\+Blue50x50}}]{,  }\item[{\textbf{ g\+\_\+puc\+Blue50x50\+Press}}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\textbf{ On\+Previous}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_gaddfb30cf40e2a8ff7abbbd1ba23d4a95}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Rectangular\+Button@{Rectangular\+Button}}
+\index{Rectangular\+Button@{Rectangular\+Button}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Rectangular\+Button()\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Rectangular\+Button (\begin{DoxyParamCaption}\item[{g\+\_\+s\+Next}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\&}]{g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119,  }\item[{270}]{,  }\item[{190}]{,  }\item[{50}]{,  }\item[{50}]{,  }\item[{P\+B\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+I\+MG$\vert$}]{P\+B\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+T\+E\+XT,  }\item[{Clr\+Black}]{,  }\item[{Clr\+Black}]{,  }\item[{0}]{,  }\item[{Clr\+Silver}]{,  }\item[{\&}]{g\+\_\+s\+Font\+Cm20,  }\item[{\char`\"{}+\char`\"{}}]{,  }\item[{\textbf{ g\+\_\+puc\+Blue50x50}}]{,  }\item[{\textbf{ g\+\_\+puc\+Blue50x50\+Press}}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\textbf{ On\+Next}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga78e3b237888df9aaa749f01c4ef2f0b2}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Rectangular\+Button@{Rectangular\+Button}}
+\index{Rectangular\+Button@{Rectangular\+Button}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Rectangular\+Button()\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Rectangular\+Button (\begin{DoxyParamCaption}\item[{g\+\_\+s\+First}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\&}]{g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119,  }\item[{0}]{,  }\item[{24}]{,  }\item[{320}]{,  }\item[{166}]{,  }\item[{P\+B\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+O\+U\+T\+L\+I\+NE$\vert$}]{P\+B\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+T\+E\+X\+T\+\_\+\+O\+P\+A\+Q\+UE,  }\item[{Clr\+Black}]{,  }\item[{Clr\+Black}]{,  }\item[{0}]{,  }\item[{Clr\+Silver}]{,  }\item[{\&}]{g\+\_\+s\+Font\+Cm20,  }\item[{\char`\"{}\char`\"{}}]{,  }\item[{\textbf{ g\+\_\+puc\+Blue50x50}}]{,  }\item[{\textbf{ g\+\_\+puc\+Blue50x50\+Press}}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{\textbf{ On\+First}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga4285eaa646aafc1fec121d92450152d1}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!S\+S\+I1\+Int\+Handler@{S\+S\+I1\+Int\+Handler}}
+\index{S\+S\+I1\+Int\+Handler@{S\+S\+I1\+Int\+Handler}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{S\+S\+I1\+Int\+Handler()}
+{\footnotesize\ttfamily void S\+S\+I1\+Int\+Handler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga868094f92ed330ac6af8e9e74720a8e7}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Sys\+Tick\+Int\+Handler@{Sys\+Tick\+Int\+Handler}}
+\index{Sys\+Tick\+Int\+Handler@{Sys\+Tick\+Int\+Handler}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Sys\+Tick\+Int\+Handler()}
+{\footnotesize\ttfamily uint8\+\_\+t Sys\+Tick\+Int\+Handler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{group___main___code_ga0d089be4f05b9c53f66cfdd66f496e84}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Update\+Scope@{Update\+Scope}}
+\index{Update\+Scope@{Update\+Scope}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Update\+Scope()}
+{\footnotesize\ttfamily void Update\+Scope (\begin{DoxyParamCaption}\item[{t\+Context $\ast$}]{p\+Context,  }\item[{uint8\+\_\+t $\ast$}]{i\+\_\+\+Curve,  }\item[{float}]{fnew\+\_\+\+Value,  }\item[{float}]{fmin,  }\item[{float}]{fmax,  }\item[{uint8\+\_\+t}]{yp\+\_\+min,  }\item[{uint8\+\_\+t}]{yp\+\_\+max,  }\item[{char $\ast$}]{scope\+\_\+string }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\label{group___main___code_ga7aef3144aaf3dc4a006a587929fa6ba6}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+A\+D\+C\+\_\+\+Val@{f\+A\+D\+C\+\_\+\+Val}}
+\index{f\+A\+D\+C\+\_\+\+Val@{f\+A\+D\+C\+\_\+\+Val}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+A\+D\+C\+\_\+\+Val}
+{\footnotesize\ttfamily float f\+A\+D\+C\+\_\+\+Val =0}
+
+\mbox{\label{group___main___code_ga8ab840751fdff561455c1960ad695109}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+A\+GC@{f\+A\+GC}}
+\index{f\+A\+GC@{f\+A\+GC}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+A\+GC}
+{\footnotesize\ttfamily float f\+A\+GC =0}
+
+\mbox{\label{group___main___code_ga5559420553013689c172854ea09e6400}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+B\+ER@{f\+B\+ER}}
+\index{f\+B\+ER@{f\+B\+ER}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+B\+ER}
+{\footnotesize\ttfamily float f\+B\+ER =0}
+
+\mbox{\label{group___main___code_ga0d4b6e0e6f406017c6cad1b50e5adb76}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+B\+Isense1@{f\+B\+Isense1}}
+\index{f\+B\+Isense1@{f\+B\+Isense1}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+B\+Isense1}
+{\footnotesize\ttfamily float f\+B\+Isense1[3] = \{0,0,0\}}
+
+\mbox{\label{group___main___code_ga35516b10684f2b04ff17ca3fdb53a185}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+B\+Isense2@{f\+B\+Isense2}}
+\index{f\+B\+Isense2@{f\+B\+Isense2}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+B\+Isense2}
+{\footnotesize\ttfamily float f\+B\+Isense2[3] = \{0,0,0\}}
+
+\mbox{\label{group___main___code_gaf9804674f636e63dc5c5c93bcb26d6bb}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+B\+Temp1@{f\+B\+Temp1}}
+\index{f\+B\+Temp1@{f\+B\+Temp1}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+B\+Temp1}
+{\footnotesize\ttfamily float f\+B\+Temp1[3] = \{0,0,0\}}
+
+\mbox{\label{group___main___code_ga2a34ca1a5aecb126efbd6be1a530abe7}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+B\+Temp2@{f\+B\+Temp2}}
+\index{f\+B\+Temp2@{f\+B\+Temp2}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+B\+Temp2}
+{\footnotesize\ttfamily float f\+B\+Temp2[3] = \{0,0,0\}}
+
+\mbox{\label{group___main___code_gae312348d890e15cf8bcd4d27a6120f45}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+B\+Temp\+Int@{f\+B\+Temp\+Int}}
+\index{f\+B\+Temp\+Int@{f\+B\+Temp\+Int}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+B\+Temp\+Int}
+{\footnotesize\ttfamily float f\+B\+Temp\+Int[3] = \{0,0,0\}}
+
+\mbox{\label{group___main___code_ga62c287be7257c125208136aa9bfe9f2a}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+B\+Vin0@{f\+B\+Vin0}}
+\index{f\+B\+Vin0@{f\+B\+Vin0}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+B\+Vin0}
+{\footnotesize\ttfamily float f\+B\+Vin0[3] = \{0,0,0\}}
+
+\mbox{\label{group___main___code_ga8a49642f742a6010d13a8da86e235843}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+B\+Vin1@{f\+B\+Vin1}}
+\index{f\+B\+Vin1@{f\+B\+Vin1}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+B\+Vin1}
+{\footnotesize\ttfamily float f\+B\+Vin1[3] = \{0,0,0\}}
+
+\mbox{\label{group___main___code_gae0c6c036790625eedf09704a9115aff9}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+B\+Vin2@{f\+B\+Vin2}}
+\index{f\+B\+Vin2@{f\+B\+Vin2}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+B\+Vin2}
+{\footnotesize\ttfamily float f\+B\+Vin2[3] = \{0,0,0\}}
+
+\mbox{\label{group___main___code_gafaa0bbc0bc9eebf6e0f890982c8bafb1}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+B\+Vin3@{f\+B\+Vin3}}
+\index{f\+B\+Vin3@{f\+B\+Vin3}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+B\+Vin3}
+{\footnotesize\ttfamily float f\+B\+Vin3[3] = \{0,0,0\}}
+
+\mbox{\label{group___main___code_ga48f554524341e92cb13dcffa82b67665}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+C\+RC@{f\+C\+RC}}
+\index{f\+C\+RC@{f\+C\+RC}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+C\+RC}
+{\footnotesize\ttfamily float f\+C\+RC =0}
+
+\mbox{\label{group___main___code_ga7fd372d66829a559cbe680c64227f286}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+E\+VM@{f\+E\+VM}}
+\index{f\+E\+VM@{f\+E\+VM}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+E\+VM}
+{\footnotesize\ttfamily float f\+E\+VM =0}
+
+\mbox{\label{group___main___code_gac3711404eb05bf30af2196555bbdd476}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+Frame@{f\+Frame}}
+\index{f\+Frame@{f\+Frame}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+Frame}
+{\footnotesize\ttfamily float f\+Frame =0}
+
+\mbox{\label{group___main___code_gab0be3ff2d6dc92057d3f0a61a55e8700}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+Hold@{f\+Hold}}
+\index{f\+Hold@{f\+Hold}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+Hold}
+{\footnotesize\ttfamily float f\+Hold =0}
+
+\mbox{\label{group___main___code_gad9df17ac38221c58dff243dcfd84d119}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+Lock@{f\+Lock}}
+\index{f\+Lock@{f\+Lock}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+Lock}
+{\footnotesize\ttfamily float f\+Lock =0}
+
+\mbox{\label{group___main___code_ga64f03b31139c15d771fd26299f4df463}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+Rsense@{f\+Rsense}}
+\index{f\+Rsense@{f\+Rsense}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+Rsense}
+{\footnotesize\ttfamily float f\+Rsense = 0.\+010}
+
+\mbox{\label{group___main___code_ga0659f0f2724dfb417ff3f0195731b83b}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+Temp2@{f\+Temp2}}
+\index{f\+Temp2@{f\+Temp2}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+Temp2}
+{\footnotesize\ttfamily float f\+Temp2 =0}
+
+\mbox{\label{group___main___code_gaa03328d5cc6c883054318a2b1cbb228e}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+Temp\+Int@{f\+Temp\+Int}}
+\index{f\+Temp\+Int@{f\+Temp\+Int}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+Temp\+Int}
+{\footnotesize\ttfamily float f\+Temp\+Int =0}
+
+\mbox{\label{group___main___code_gab55a6708ec23a16528e9783f9bdba438}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+Vref0@{f\+Vref0}}
+\index{f\+Vref0@{f\+Vref0}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+Vref0}
+{\footnotesize\ttfamily float f\+Vref0 = 2.\+5}
+
+\mbox{\label{group___main___code_gad3fc498b402265f2c61bae47cb13c796}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+Vref1@{f\+Vref1}}
+\index{f\+Vref1@{f\+Vref1}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+Vref1}
+{\footnotesize\ttfamily float f\+Vref1 = 2.\+5}
+
+\mbox{\label{group___main___code_ga92af393ff29b9f6e357b7071b9b25ee7}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+Vref2@{f\+Vref2}}
+\index{f\+Vref2@{f\+Vref2}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+Vref2}
+{\footnotesize\ttfamily float f\+Vref2 = 2.\+5}
+
+\mbox{\label{group___main___code_gaafd0be10e6f9c28bba5014ab5366a874}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!f\+Vref3@{f\+Vref3}}
+\index{f\+Vref3@{f\+Vref3}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{f\+Vref3}
+{\footnotesize\ttfamily float f\+Vref3 = 2.\+5}
+
+\mbox{\label{group___main___code_ga80c1597bc4273bd96815beb9c9991230}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!g\+\_\+pc\+Panel\+Names@{g\+\_\+pc\+Panel\+Names}}
+\index{g\+\_\+pc\+Panel\+Names@{g\+\_\+pc\+Panel\+Names}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{g\+\_\+pc\+Panel\+Names}
+{\footnotesize\ttfamily char$\ast$ g\+\_\+pc\+Panel\+Names[$\,$]}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+    \textcolor{stringliteral}{"     First Panel    "},
+    \textcolor{stringliteral}{"     Block Diagram  "},
+    \textcolor{stringliteral}{"     Status LEDs    "},
+    \textcolor{stringliteral}{"     Status Data    "},
+    \textcolor{stringliteral}{"     Rx Status      "},
+    \textcolor{stringliteral}{"     PLL Status     "},
+    \textcolor{stringliteral}{"     SYNC Status    "},
+    \textcolor{stringliteral}{"     Rx MSG Status  "},
+    \textcolor{stringliteral}{"     Sliders        "},
+    \textcolor{stringliteral}{"     S/W Update     "}
+\}
+\end{DoxyCode}
+\mbox{\label{group___main___code_ga319634c9f0d3d67ce4e630cb4b8be14e}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!g\+\_\+ps\+Button\+Canvas@{g\+\_\+ps\+Button\+Canvas}}
+\index{g\+\_\+ps\+Button\+Canvas@{g\+\_\+ps\+Button\+Canvas}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{g\+\_\+ps\+Button\+Canvas}
+{\footnotesize\ttfamily t\+Canvas\+Widget g\+\_\+ps\+Button\+Canvas[$\,$]}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+    CanvasStruct(g_psPanels+1, g_psButtonCanvas+1, 0,
+                 &g_sKentec320x240x16_SSD2119, 0, 24, 320, 166,
+                 CANVAS\_STYLE\_FILL, ClrSeashell, 0, 0, 0, 0, 0, 0),
+    CanvasStruct(g_psPanels+1, g_psPushButtons2, 0,
+                 &g_sKentec320x240x16_SSD2119, 0, 24, 320, 166,
+                 CANVAS\_STYLE\_APP\_DRAWN, 0, 0, 0, 0, 0, 0, OnBlockDiagramPaint),
+\}
+\end{DoxyCode}
+\mbox{\label{group___main___code_gae989b75249d946105b62a2ea415642cc}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!g\+\_\+ps\+Panels@{g\+\_\+ps\+Panels}}
+\index{g\+\_\+ps\+Panels@{g\+\_\+ps\+Panels}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{g\+\_\+ps\+Panels}
+{\footnotesize\ttfamily t\+Canvas\+Widget g\+\_\+ps\+Panels}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+    CanvasStruct(0, 0, &g\_sDrawImage, &g_sKentec320x240x16_SSD2119, 0, 24,
+                 320, 216, CANVAS\_STYLE\_FILL, ClrBlack, 0, 0, 0, 0, 0, 0),
+    CanvasStruct(0, 0, &g_psButtonCanvas, &g_sKentec320x240x16_SSD2119, 0, 24,
+                 320, 166, CANVAS\_STYLE\_FILL, ClrBlack, 0, 0, 0, 0, 0, 0),
+    CanvasStruct(0, 0, &g\_sLED\_Display , &g_sKentec320x240x16_SSD2119, 0, 24,
+                 320, 166, CANVAS\_STYLE\_FILL, ClrBlack, 0, 0, 0, 0, 0, 0),
+    CanvasStruct(0, 0, &g\_sStatusData, &g_sKentec320x240x16_SSD2119, 0, 24,
+                 320, 166, CANVAS\_STYLE\_FILL, ClrLime, 0, 0, 0, 0, 0, 0),
+    CanvasStruct(0, 0, &g\_sRxStatus, &g_sKentec320x240x16_SSD2119, 0, 24,
+                 320, 166, CANVAS\_STYLE\_FILL, ClrLime, 0, 0, 0, 0, 0, 0),
+    CanvasStruct(0, 0, &g\_sPLLStatus, &g_sKentec320x240x16_SSD2119, 0, 24,
+                 320, 166, CANVAS\_STYLE\_FILL, ClrLime, 0, 0, 0, 0, 0, 0),
+    CanvasStruct(0, 0, &g\_sSYNCStatus, &g_sKentec320x240x16_SSD2119, 0, 24,
+                 320, 166, CANVAS\_STYLE\_FILL, ClrLime, 0, 0, 0, 0, 0, 0),
+    CanvasStruct(0, 0, &g\_sRXMSGStatus, &g_sKentec320x240x16_SSD2119, 0, 24,
+                 320, 166, CANVAS\_STYLE\_FILL, ClrLime, 0, 0, 0, 0, 0, 0),
+
+\}
+\end{DoxyCode}
+\mbox{\label{group___main___code_ga46bab50a6c7fe8ea4e637d1a71d4791b}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!g\+\_\+ps\+Push\+Buttons2@{g\+\_\+ps\+Push\+Buttons2}}
+\index{g\+\_\+ps\+Push\+Buttons2@{g\+\_\+ps\+Push\+Buttons2}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{g\+\_\+ps\+Push\+Buttons2}
+{\footnotesize\ttfamily t\+Push\+Button\+Widget g\+\_\+ps\+Push\+Buttons2[$\,$]}
+
+\mbox{\label{group___main___code_ga33c8c8d4df3a9355844a55e94698634c}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!g\+\_\+pui32\+Colors@{g\+\_\+pui32\+Colors}}
+\index{g\+\_\+pui32\+Colors@{g\+\_\+pui32\+Colors}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{g\+\_\+pui32\+Colors}
+{\footnotesize\ttfamily uint32\+\_\+t g\+\_\+pui32\+Colors[3]}
+
+\mbox{\label{group___main___code_gaaef316b4659b209dc42fe0d23a30c430}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!g\+\_\+pui\+\_\+\+Flower\+\_\+\+Image@{g\+\_\+pui\+\_\+\+Flower\+\_\+\+Image}}
+\index{g\+\_\+pui\+\_\+\+Flower\+\_\+\+Image@{g\+\_\+pui\+\_\+\+Flower\+\_\+\+Image}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{g\+\_\+pui\+\_\+\+Flower\+\_\+\+Image}
+{\footnotesize\ttfamily const uint8\+\_\+t g\+\_\+pui\+\_\+\+Flower\+\_\+\+Image[$\,$]}
+
+\mbox{\label{group___main___code_ga1075885303850d4506dfec3115a89ce6}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!g\+\_\+pui\+\_\+\+Harmony\+\_\+\+Image@{g\+\_\+pui\+\_\+\+Harmony\+\_\+\+Image}}
+\index{g\+\_\+pui\+\_\+\+Harmony\+\_\+\+Image@{g\+\_\+pui\+\_\+\+Harmony\+\_\+\+Image}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{g\+\_\+pui\+\_\+\+Harmony\+\_\+\+Image}
+{\footnotesize\ttfamily const uint8\+\_\+t g\+\_\+pui\+\_\+\+Harmony\+\_\+\+Image[$\,$]}
+
+\mbox{\label{group___main___code_gaec5de768e162ea97ea38edc116884019}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!g\+\_\+pui\+\_\+\+Lightning\+\_\+\+Image@{g\+\_\+pui\+\_\+\+Lightning\+\_\+\+Image}}
+\index{g\+\_\+pui\+\_\+\+Lightning\+\_\+\+Image@{g\+\_\+pui\+\_\+\+Lightning\+\_\+\+Image}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{g\+\_\+pui\+\_\+\+Lightning\+\_\+\+Image}
+{\footnotesize\ttfamily const uint8\+\_\+t g\+\_\+pui\+\_\+\+Lightning\+\_\+\+Image[$\,$]}
+
+\mbox{\label{group___main___code_ga732170bbbd5baa35e82a93b76e03f2a5}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!g\+\_\+pui\+\_\+\+Soothing\+\_\+\+Image@{g\+\_\+pui\+\_\+\+Soothing\+\_\+\+Image}}
+\index{g\+\_\+pui\+\_\+\+Soothing\+\_\+\+Image@{g\+\_\+pui\+\_\+\+Soothing\+\_\+\+Image}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{g\+\_\+pui\+\_\+\+Soothing\+\_\+\+Image}
+{\footnotesize\ttfamily const uint8\+\_\+t g\+\_\+pui\+\_\+\+Soothing\+\_\+\+Image[$\,$]}
+
+\mbox{\label{group___main___code_ga0ffe449b6a7006971f1ee871d92780d7}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!g\+\_\+pui\+\_\+\+Stormy\+\_\+\+Image@{g\+\_\+pui\+\_\+\+Stormy\+\_\+\+Image}}
+\index{g\+\_\+pui\+\_\+\+Stormy\+\_\+\+Image@{g\+\_\+pui\+\_\+\+Stormy\+\_\+\+Image}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{g\+\_\+pui\+\_\+\+Stormy\+\_\+\+Image}
+{\footnotesize\ttfamily const uint8\+\_\+t g\+\_\+pui\+\_\+\+Stormy\+\_\+\+Image[$\,$]}
+
+\mbox{\label{group___main___code_ga24916322904cb335f9fb1b83b77d9617}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!g\+\_\+ul\+Button\+State@{g\+\_\+ul\+Button\+State}}
+\index{g\+\_\+ul\+Button\+State@{g\+\_\+ul\+Button\+State}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{g\+\_\+ul\+Button\+State}
+{\footnotesize\ttfamily uint32\+\_\+t g\+\_\+ul\+Button\+State}
+
+\mbox{\label{group___main___code_ga21d73268e9dba3867a9046f43047f789}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!g\+\_\+ul\+Button\+State2@{g\+\_\+ul\+Button\+State2}}
+\index{g\+\_\+ul\+Button\+State2@{g\+\_\+ul\+Button\+State2}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{g\+\_\+ul\+Button\+State2}
+{\footnotesize\ttfamily uint32\+\_\+t g\+\_\+ul\+Button\+State2}
+
+\mbox{\label{group___main___code_ga6a25b631a14feb0fed9df6510cbe1e32}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!g\+\_\+ul\+Data\+Rx2@{g\+\_\+ul\+Data\+Rx2}}
+\index{g\+\_\+ul\+Data\+Rx2@{g\+\_\+ul\+Data\+Rx2}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{g\+\_\+ul\+Data\+Rx2}
+{\footnotesize\ttfamily int32\+\_\+t g\+\_\+ul\+Data\+Rx2[\textbf{ N\+U\+M\+\_\+\+S\+S\+I\+\_\+\+D\+A\+TA}]}
+
+\mbox{\label{group___main___code_gab23cae80b2715963cbac768793be3047}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!g\+\_\+ul\+Panel@{g\+\_\+ul\+Panel}}
+\index{g\+\_\+ul\+Panel@{g\+\_\+ul\+Panel}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{g\+\_\+ul\+Panel}
+{\footnotesize\ttfamily uint32\+\_\+t g\+\_\+ul\+Panel}
+
+\mbox{\label{group___main___code_gafccfaac00ab72e5a9b76f92c6865a0be}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!g\+\_\+ul\+Previous\+Panel@{g\+\_\+ul\+Previous\+Panel}}
+\index{g\+\_\+ul\+Previous\+Panel@{g\+\_\+ul\+Previous\+Panel}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{g\+\_\+ul\+Previous\+Panel}
+{\footnotesize\ttfamily uint32\+\_\+t g\+\_\+ul\+Previous\+Panel}
+
+\mbox{\label{group___main___code_ga4287f30dc7e8ceda26121ecc9213366d}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!g\+\_\+ul\+S\+S\+I1\+R\+X\+FF@{g\+\_\+ul\+S\+S\+I1\+R\+X\+FF}}
+\index{g\+\_\+ul\+S\+S\+I1\+R\+X\+FF@{g\+\_\+ul\+S\+S\+I1\+R\+X\+FF}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{g\+\_\+ul\+S\+S\+I1\+R\+X\+FF}
+{\footnotesize\ttfamily volatile uint32\+\_\+t g\+\_\+ul\+S\+S\+I1\+R\+X\+FF = 0}
+
+\mbox{\label{group___main___code_ga56221e3e5c867ccb648c11b473e29d64}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!i16average@{i16average}}
+\index{i16average@{i16average}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{i16average}
+{\footnotesize\ttfamily uint16\+\_\+t i16average = 16}
+
+\mbox{\label{group___main___code_ga7b076c24e1fb8aecdf66c9ec51d29c36}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!i\+\_\+counter@{i\+\_\+counter}}
+\index{i\+\_\+counter@{i\+\_\+counter}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{i\+\_\+counter}
+{\footnotesize\ttfamily uint16\+\_\+t i\+\_\+counter =0}
+
+\mbox{\label{group___main___code_ga2a697debe3547886f0637f4cb372b073}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!i\+A\+G\+C\+\_\+\+Curve@{i\+A\+G\+C\+\_\+\+Curve}}
+\index{i\+A\+G\+C\+\_\+\+Curve@{i\+A\+G\+C\+\_\+\+Curve}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{i\+A\+G\+C\+\_\+\+Curve}
+{\footnotesize\ttfamily uint8\+\_\+t i\+A\+G\+C\+\_\+\+Curve[320] =\{ [ 0 ... 319 ] = (186-\/25)\}}
+
+\mbox{\label{group___main___code_ga3630f0363dbdcf1d4e3adb98a750c120}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!i\+C\+R\+C\+\_\+\+Curve@{i\+C\+R\+C\+\_\+\+Curve}}
+\index{i\+C\+R\+C\+\_\+\+Curve@{i\+C\+R\+C\+\_\+\+Curve}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{i\+C\+R\+C\+\_\+\+Curve}
+{\footnotesize\ttfamily uint8\+\_\+t i\+C\+R\+C\+\_\+\+Curve[320] =\{ [ 0 ... 319 ] = 186\}}
+
+\mbox{\label{group___main___code_ga97e3c80fd019dc62b57376851dcbeee9}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!i\+Frame\+\_\+\+Curve@{i\+Frame\+\_\+\+Curve}}
+\index{i\+Frame\+\_\+\+Curve@{i\+Frame\+\_\+\+Curve}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{i\+Frame\+\_\+\+Curve}
+{\footnotesize\ttfamily uint8\+\_\+t i\+Frame\+\_\+\+Curve[320] =\{ [ 0 ... 319 ] = 186\}}
+
+\mbox{\label{group___main___code_gabb3ad8c35914e4704602262da0fb2139}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!i\+Health@{i\+Health}}
+\index{i\+Health@{i\+Health}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{i\+Health}
+{\footnotesize\ttfamily uint8\+\_\+t i\+Health = 0}
+
+\mbox{\label{group___main___code_ga381b4d6d16b3506d7edd1f0aabae704d}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!i\+Health\+\_\+old@{i\+Health\+\_\+old}}
+\index{i\+Health\+\_\+old@{i\+Health\+\_\+old}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{i\+Health\+\_\+old}
+{\footnotesize\ttfamily uint8\+\_\+t i\+Health\+\_\+old = 0}
+
+\mbox{\label{group___main___code_ga36bdbf20e1d31ae5478d5a9804065547}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!i\+Hold\+\_\+\+Curve@{i\+Hold\+\_\+\+Curve}}
+\index{i\+Hold\+\_\+\+Curve@{i\+Hold\+\_\+\+Curve}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{i\+Hold\+\_\+\+Curve}
+{\footnotesize\ttfamily uint8\+\_\+t i\+Hold\+\_\+\+Curve[320] =\{ [ 0 ... 319 ] = 186\}}
+
+\mbox{\label{group___main___code_gad00d99980c84ec7cef452b430f3a19ed}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!i\+Light\+\_\+\+A\+GC@{i\+Light\+\_\+\+A\+GC}}
+\index{i\+Light\+\_\+\+A\+GC@{i\+Light\+\_\+\+A\+GC}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{i\+Light\+\_\+\+A\+GC}
+{\footnotesize\ttfamily uint8\+\_\+t i\+Light\+\_\+\+A\+GC = 0}
+
+\mbox{\label{group___main___code_ga401e51bdb0848b65998596f9f3c34edd}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!i\+Light\+\_\+\+B\+ER@{i\+Light\+\_\+\+B\+ER}}
+\index{i\+Light\+\_\+\+B\+ER@{i\+Light\+\_\+\+B\+ER}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{i\+Light\+\_\+\+B\+ER}
+{\footnotesize\ttfamily uint8\+\_\+t i\+Light\+\_\+\+B\+ER = 0}
+
+\mbox{\label{group___main___code_ga41a2953a3569c4bb160b7429ac7ec869}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!i\+Light\+\_\+\+C\+RC@{i\+Light\+\_\+\+C\+RC}}
+\index{i\+Light\+\_\+\+C\+RC@{i\+Light\+\_\+\+C\+RC}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{i\+Light\+\_\+\+C\+RC}
+{\footnotesize\ttfamily uint8\+\_\+t i\+Light\+\_\+\+C\+RC = 0}
+
+\mbox{\label{group___main___code_ga149f4420f89336be4b4301f2d968820d}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!i\+Light\+\_\+\+E\+VM@{i\+Light\+\_\+\+E\+VM}}
+\index{i\+Light\+\_\+\+E\+VM@{i\+Light\+\_\+\+E\+VM}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{i\+Light\+\_\+\+E\+VM}
+{\footnotesize\ttfamily uint8\+\_\+t i\+Light\+\_\+\+E\+VM = 0}
+
+\mbox{\label{group___main___code_ga7110f260be40e055aa0fc9d75faf4845}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!i\+Light\+\_\+\+Frame@{i\+Light\+\_\+\+Frame}}
+\index{i\+Light\+\_\+\+Frame@{i\+Light\+\_\+\+Frame}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{i\+Light\+\_\+\+Frame}
+{\footnotesize\ttfamily uint8\+\_\+t i\+Light\+\_\+\+Frame = 0}
+
+\mbox{\label{group___main___code_ga531ce337d025f67579aa0890d1d66265}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!i\+Light\+\_\+\+Hold@{i\+Light\+\_\+\+Hold}}
+\index{i\+Light\+\_\+\+Hold@{i\+Light\+\_\+\+Hold}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{i\+Light\+\_\+\+Hold}
+{\footnotesize\ttfamily uint8\+\_\+t i\+Light\+\_\+\+Hold = 0}
+
+\mbox{\label{group___main___code_ga4e37fbab7ace1c46baa90954e7f2ad7f}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!i\+Light\+\_\+\+Lock@{i\+Light\+\_\+\+Lock}}
+\index{i\+Light\+\_\+\+Lock@{i\+Light\+\_\+\+Lock}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{i\+Light\+\_\+\+Lock}
+{\footnotesize\ttfamily uint8\+\_\+t i\+Light\+\_\+\+Lock = 0}
+
+\mbox{\label{group___main___code_ga7fe05a145b760af7704c4a029922198f}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!i\+Lock\+\_\+\+Curve@{i\+Lock\+\_\+\+Curve}}
+\index{i\+Lock\+\_\+\+Curve@{i\+Lock\+\_\+\+Curve}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{i\+Lock\+\_\+\+Curve}
+{\footnotesize\ttfamily uint8\+\_\+t i\+Lock\+\_\+\+Curve[320] =\{ [ 0 ... 319 ] = 132\}}
+
+\mbox{\label{group___main___code_ga7afa806b99e853cdcad3d3fef310df26}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!my\+\_\+noise@{my\+\_\+noise}}
+\index{my\+\_\+noise@{my\+\_\+noise}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{my\+\_\+noise}
+{\footnotesize\ttfamily float my\+\_\+noise}
+
+\mbox{\label{group___main___code_gad024764bb63d1ec34f9d9c9ca6da0b6c}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!p1\+Context@{p1\+Context}}
+\index{p1\+Context@{p1\+Context}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{p1\+Context}
+{\footnotesize\ttfamily t\+Context$\ast$ p1\+Context}
+
+\mbox{\label{group___main___code_gaaf99af94e46f3d4cafc2098e652f286d}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!Sys\+Tick\+\_\+\+Semafore@{Sys\+Tick\+\_\+\+Semafore}}
+\index{Sys\+Tick\+\_\+\+Semafore@{Sys\+Tick\+\_\+\+Semafore}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{Sys\+Tick\+\_\+\+Semafore}
+{\footnotesize\ttfamily uint8\+\_\+t Sys\+Tick\+\_\+\+Semafore = 1}
+
+\mbox{\label{group___main___code_ga8780745cf0ffd9b9c4d4327f0b82643c}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!val10\+\_\+string@{val10\+\_\+string}}
+\index{val10\+\_\+string@{val10\+\_\+string}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{val10\+\_\+string}
+{\footnotesize\ttfamily char val10\+\_\+string[20]\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{group___main___code_ga4e9bd25edf298938268b3c013176f5da}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!val11\+\_\+string@{val11\+\_\+string}}
+\index{val11\+\_\+string@{val11\+\_\+string}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{val11\+\_\+string}
+{\footnotesize\ttfamily char val11\+\_\+string[20]\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{group___main___code_ga44adec899b421cf9f008d2258192d39d}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!val12\+\_\+string@{val12\+\_\+string}}
+\index{val12\+\_\+string@{val12\+\_\+string}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{val12\+\_\+string}
+{\footnotesize\ttfamily char val12\+\_\+string[20]\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{group___main___code_ga3e35af4d4bf3c38ca86e3fa8d2ba3b48}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!val8\+\_\+string@{val8\+\_\+string}}
+\index{val8\+\_\+string@{val8\+\_\+string}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{val8\+\_\+string}
+{\footnotesize\ttfamily char val8\+\_\+string[20]\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{group___main___code_gac44d39eba663272501965d27842db95a}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!val9\+\_\+string@{val9\+\_\+string}}
+\index{val9\+\_\+string@{val9\+\_\+string}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{val9\+\_\+string}
+{\footnotesize\ttfamily char val9\+\_\+string[20]\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{group___main___code_gae06bedde8c0dea4af323f5df92a6b2bf}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!val\+\_\+\+A\+G\+C\+\_\+\+Str@{val\+\_\+\+A\+G\+C\+\_\+\+Str}}
+\index{val\+\_\+\+A\+G\+C\+\_\+\+Str@{val\+\_\+\+A\+G\+C\+\_\+\+Str}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{val\+\_\+\+A\+G\+C\+\_\+\+Str}
+{\footnotesize\ttfamily char val\+\_\+\+A\+G\+C\+\_\+\+Str[20]\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{group___main___code_ga4215300a465a6b471ffe3b6701f2558a}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!val\+\_\+\+B\+E\+R\+\_\+\+Str@{val\+\_\+\+B\+E\+R\+\_\+\+Str}}
+\index{val\+\_\+\+B\+E\+R\+\_\+\+Str@{val\+\_\+\+B\+E\+R\+\_\+\+Str}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{val\+\_\+\+B\+E\+R\+\_\+\+Str}
+{\footnotesize\ttfamily char val\+\_\+\+B\+E\+R\+\_\+\+Str[20]\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{group___main___code_ga283116448d684e86c56b6e6cf5a46548}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!val\+\_\+\+C\+R\+C\+\_\+\+Str@{val\+\_\+\+C\+R\+C\+\_\+\+Str}}
+\index{val\+\_\+\+C\+R\+C\+\_\+\+Str@{val\+\_\+\+C\+R\+C\+\_\+\+Str}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{val\+\_\+\+C\+R\+C\+\_\+\+Str}
+{\footnotesize\ttfamily char val\+\_\+\+C\+R\+C\+\_\+\+Str[20]\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{group___main___code_ga824bcd1d9130a840d685501d7c81a679}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!val\+\_\+\+E\+V\+M\+\_\+\+Str@{val\+\_\+\+E\+V\+M\+\_\+\+Str}}
+\index{val\+\_\+\+E\+V\+M\+\_\+\+Str@{val\+\_\+\+E\+V\+M\+\_\+\+Str}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{val\+\_\+\+E\+V\+M\+\_\+\+Str}
+{\footnotesize\ttfamily char val\+\_\+\+E\+V\+M\+\_\+\+Str[20]\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{group___main___code_gac4d4c18c438ce6f5ddf9ce75170b2ad2}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!val\+\_\+\+Frame\+\_\+\+Str@{val\+\_\+\+Frame\+\_\+\+Str}}
+\index{val\+\_\+\+Frame\+\_\+\+Str@{val\+\_\+\+Frame\+\_\+\+Str}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{val\+\_\+\+Frame\+\_\+\+Str}
+{\footnotesize\ttfamily char val\+\_\+\+Frame\+\_\+\+Str[20]\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{group___main___code_gac4723455224e9071ffea0ac3221d5dbb}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!val\+\_\+\+H\+O\+L\+D\+\_\+\+Str@{val\+\_\+\+H\+O\+L\+D\+\_\+\+Str}}
+\index{val\+\_\+\+H\+O\+L\+D\+\_\+\+Str@{val\+\_\+\+H\+O\+L\+D\+\_\+\+Str}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{val\+\_\+\+H\+O\+L\+D\+\_\+\+Str}
+{\footnotesize\ttfamily char val\+\_\+\+H\+O\+L\+D\+\_\+\+Str[20]\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{group___main___code_ga7f511b10565b52eb91670194207d45e0}} 
+\index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!val\+\_\+\+Lock\+\_\+\+Str@{val\+\_\+\+Lock\+\_\+\+Str}}
+\index{val\+\_\+\+Lock\+\_\+\+Str@{val\+\_\+\+Lock\+\_\+\+Str}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
+\subsubsection{val\+\_\+\+Lock\+\_\+\+Str}
+{\footnotesize\ttfamily char val\+\_\+\+Lock\+\_\+\+Str[20]\hspace{0.3cm}{\ttfamily [static]}}
+

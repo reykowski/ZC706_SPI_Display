@@ -1,32 +1,48 @@
-//*****************************************************************************
-//
-// ZC706_SPI_Display.c - Display data retrieved from ZC706 via SPI port.
-//
-// Copyright (c) 2013 Texas Instruments Incorporated.  All rights reserved.
-// Software License Agreement
-// 
-// Texas Instruments (TI) is supplying this software for use solely and
-// exclusively on TI's microcontroller products. The software is owned by
-// TI and/or its suppliers, and is protected under applicable copyright
-// laws. You may not combine this software with "viral" open-source
-// software in order to form a larger program.
-// 
-// THIS SOFTWARE IS PROVIDED "AS IS" AND WITH ALL FAULTS.
-// NO WARRANTIES, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT
-// NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-// A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. TI SHALL NOT, UNDER ANY
-// CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR CONSEQUENTIAL
-// DAMAGES, FOR ANY REASON WHATSOEVER.
-// 
-// This is part of revision 1.0 of the EK-TM4C123GXL Firmware Package.
-//
-//*****************************************************************************
+
+/*! \mainpage My Personal Index Page
+ *
+ * \section intro_sec Introduction
+ *
+ *  \brief     ZC706 Diagnostic Tool Demonstration
+ *  \details   Display data retrieved from ZC706 via SPI port.
+ *  \author    Arne Reykowski
+ *  \version   1.0
+ *  \date      2017
+ *  \pre       First initialize the system.
+ *  \bug
+ *  \warning
+ *  \copyright
+ * This is the introduction.
+ *
+ * \section install_sec Installation
+ *
+ * \subsection step1 Step 1: Opening the box
+ *
+ * etc...
+ */
 
 //*****************************************************************************
 //
+//! \addtogroup Main_Code
+//! @{
+//
+//*****************************************************************************
+//*****************************************************************************
+//!
+//! ZC706_SPI_Display.c - Display data retrieved from ZC706 via SPI port.
+//!
+//! The data is displayed using TI EK-TM4C123GXL launchpad and
+//! Kentec 320x240 (EB-LM4F120-L35) display.
+//!
+//! Code uses the Stellaris Graphics Library
+//! and
+//! TivaWare™ Peripheral Driver Library
+//!
+//!
 //!
 //! This code configures the SSI1 as SPI Slave on an
-//! TM4C123G launchpad evaluation board.  RX timeout interrupt is configured for SSI1.
+//! TM4C123G launchpad (EK-TM4C123GXL) evaluation board.
+//! RX timeout interrupt is configured for SSI1.
 //! Four 16bit words are sent from ZC706 FPGA.
 //! The SSI1 RX timeout interrupt is enabled.
 //! The code then waits for the interrupt to fire.
@@ -191,6 +207,12 @@
 #define str_LED8	"---"
 #define str_LED9	"---"
 #define str_LED10	"---"
+
+
+// Define LED colors
+#define light_is_red        2
+#define light_is_yellow     1
+#define light_is_green       0
 //*****************************************************************************
 //
 // Number of bytes to send and receive.
@@ -246,6 +268,9 @@
     uint8_t	SysTick_Semafore = 1;
     volatile uint32_t g_ulSSI1RXFF = 0;
     int32_t g_ulDataRx2[NUM_SSI_DATA];
+    uint8_t iHealth = 0, iHealth_old = 0;
+    uint8_t iLight_AGC = 0, iLight_Lock = 0, iLight_Hold = 0, iLight_EVM = 0;
+    uint8_t iLight_Frame = 0, iLight_CRC = 0, iLight_BER = 0;
 
 
     //*****************************************************************************
@@ -256,6 +281,8 @@
     //*****************************************************************************
     void OnPrevious(tWidget *pWidget);
     void OnNext(tWidget *pWidget);
+    void OnFirst(tWidget *pWidget);
+    void OnFirst(tWidget *pWidget);
     void OnButtonPress2(tWidget *pWidget);
     void OnRxButtonPress(tWidget *pWidget);
     void OnPLLButtonPress(tWidget *pWidget);
@@ -270,13 +297,16 @@
     void OnRXMSGStatusPaint(tWidget *pWidget, tContext *pContext);
     void OnPrimitivePaint(tWidget *pWidget, tContext *pContext);
     void OnRadioChange(tWidget *pWidget, uint32_t bSelected);
-    void DrawFirstImage(tWidget *pWidget, tContext *pContext);           // Panel 9
+    void DrawFirstImage(tWidget *pWidget, tContext *pContext);           // Panel 1
+
 
     extern tCanvasWidget g_psPanels[10];
     extern const uint8_t g_pui_Soothing_Image[];    //Soothing Image
     extern const uint8_t g_pui_Stormy_Image[];      //Stormy Image
     extern const uint8_t g_pui_Lightning_Image[];      //Lightning Image
     extern const uint8_t g_pui_Harmony_Image[];      //Harmony Image
+    extern const uint8_t g_pui_Flower_Image[];      // Flower Image
+
     tContext *p1Context;
 
 
@@ -638,7 +668,7 @@ tCanvasWidget g_psPanels[] =
 //*****************************************************************************
 char *g_pcPanelNames[] =
 {
-    "                    ",
+    "     First Panel    ",
 	"     Block Diagram  ",
     "     Status LEDs    ",
     "     Status Data    ",
@@ -649,7 +679,7 @@ char *g_pcPanelNames[] =
     "     Sliders        ",
     "     S/W Update     "
 };
-#define Tube Panel     0
+#define First_Panel    0
 #define Block_Diagram  1
 #define LED_Panel      2
 #define Data_Panel 	   3
@@ -676,7 +706,15 @@ RectangularButton(g_sNext, 0, 0, 0, &g_sKentec320x240x16_SSD2119, 270, 190,
                   ClrSilver, &g_sFontCm20, "+", g_pucBlue50x50,
                   g_pucBlue50x50Press, 0, 0, OnNext);
 
-
+//*****************************************************************************
+//
+// The buttons across first panel
+//
+//*****************************************************************************
+RectangularButton(g_sFirst, 0, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
+                  320, 166, PB_STYLE_OUTLINE | PB_STYLE_TEXT_OPAQUE, ClrBlack, ClrBlack, 0, ClrSilver,
+                  &g_sFontCm20, "", g_pucBlue50x50, g_pucBlue50x50Press, 0, 0,
+                  OnFirst);
 //*****************************************************************************
 //
 // The panel that is currently being displayed.
@@ -721,7 +759,8 @@ OnPrevious(tWidget *pWidget)
     //
     WidgetRemove((tWidget *)(g_psPanels + g_ulPanel));
 
-    if (g_ulPanel>2)
+
+    if (g_ulPanel>Data_Panel)
     {
     	g_ulPanel = 0;	// Go back to first panel
     }
@@ -744,7 +783,7 @@ OnPrevious(tWidget *pWidget)
         //
         PushButtonImageOff(&g_sPrevious);
         PushButtonTextOff(&g_sPrevious);
-        PushButtonFillOn(&g_sPrevious);
+        PushButtonFillOff(&g_sPrevious);
         WidgetPaint((tWidget *)&g_sPrevious);
     }
 
@@ -791,7 +830,6 @@ OnPrevious(tWidget *pWidget)
 void
 OnNext(tWidget *pWidget)
 {
-    tRectangle sRect;
     //
     // There is nothing to be done if the last panel is already being
     // displayed.
@@ -817,14 +855,7 @@ OnNext(tWidget *pWidget)
     //
     WidgetAdd(WIDGET_ROOT, (tWidget *)(g_psPanels + g_ulPanel));
     WidgetPaint((tWidget *)(g_psPanels + g_ulPanel));
-/*
-    sRect.i16XMin = 0;
-    sRect.i16YMin = 210;
-    sRect.i16XMax = Display_Width- 1;
-    sRect.i16YMax = 39;
-    GrContextForegroundSet(pContext, ClrBlack);
-    GrRectFill(pContext, &sRect);
-*/
+
     //
     // Set the title of this panel.
     //
@@ -861,34 +892,98 @@ OnNext(tWidget *pWidget)
     }
 
 }
-
 //*****************************************************************************
 //
-// Handles paint requests for the Tube Image Painting.
+// Handles presses of the first panel button.
+//
+//*****************************************************************************
+void
+OnFirst(tWidget *pWidget)
+{
+    //
+    // There is nothing to be done if the last panel is already being
+    // displayed.
+    //
+
+    if(g_ulPanel >= Data_Panel)
+    {
+        return;
+    }
+
+    //
+    // Remove the current panel.
+    //
+    WidgetRemove((tWidget *)(g_psPanels + g_ulPanel));
+    WidgetRemove((tWidget *)(&g_sFirst));               // Remove button
+    //
+    // Increment the panel index.
+    //
+    g_ulPanel++;
+
+    //
+    // Add and draw the new panel.
+    //
+    WidgetAdd(WIDGET_ROOT, (tWidget *)(g_psPanels + g_ulPanel));
+    WidgetPaint((tWidget *)(g_psPanels + g_ulPanel));
+
+    //
+    // Set the title of this panel.
+    //
+    CanvasTextSet(&g_sTitle, g_pcPanelNames[g_ulPanel]);
+    WidgetPaint((tWidget *)&g_sTitle);
+
+    //
+    // See if the previous panel was the first panel.
+    //
+    if(g_ulPanel == 1)
+    {
+        //
+        // Display the previous button.
+        //
+        PushButtonImageOn(&g_sPrevious);
+        PushButtonTextOn(&g_sPrevious);
+        PushButtonFillOff(&g_sPrevious);
+        WidgetPaint((tWidget *)&g_sPrevious);
+    }
+
+    //
+    // See if this is the last panel.
+    //
+//    if(g_ulPanel == Data_Panel)
+//    {
+        //
+        // Clear the next button from the display since the last panel is being
+        // displayed.
+        //
+        PushButtonImageOn(&g_sNext);
+        PushButtonTextOn(&g_sNext);
+        PushButtonFillOn(&g_sNext);
+        WidgetPaint((tWidget *)&g_sNext);
+//   }
+}
+//*****************************************************************************
+//
+// Handles paint requests for the First Panel Image Painting.
 //
 //*****************************************************************************
 void
 DrawFirstImage(tWidget *pWidget, tContext *pContext)
 {
-/*    //
-    // Clear the next button from the display since the last panel is being
-    // displayed.
-    //
-    PushButtonImageOff(&g_sNext);
-    PushButtonTextOff(&g_sNext);
-    PushButtonFillOn(&g_sNext);
-    WidgetPaint((tWidget *)&g_sNext);
-    //
-    // Clear the previous button from the display since the first panel is
-    // being displayed.
-    //
-    PushButtonImageOff(&g_sPrevious);
-    PushButtonTextOff(&g_sPrevious);
-    PushButtonFillOn(&g_sPrevious);
-    WidgetPaint((tWidget *)&g_sPrevious);
-*/
-//    GrImageDraw(pContext, g_pui_Lightning_Image, 0, 24);
-    GrImageDraw(pContext, g_pui_Harmony_Image, 0, 24);
+
+    WidgetAdd(WIDGET_ROOT, (tWidget *)&g_sFirst);       // Add button
+
+    if   (iHealth == 0)
+    {
+        GrImageDraw(pContext, g_pui_Flower_Image, 0, 24);
+        //    GrImageDraw(pContext, g_pui_Harmony_Image, 0, 24);
+    }
+    else
+    {
+        GrImageDraw(pContext, g_pui_Lightning_Image, 0, 24);
+    }
+
+
+
     GrFlush(pContext);
 
 }
@@ -1902,21 +1997,26 @@ main(void)
     // Add the title bLock and the previous and next buttons to the widget
     // tree.
     //
+
     WidgetAdd(WIDGET_ROOT, (tWidget *)&g_sPrevious);
     WidgetAdd(WIDGET_ROOT, (tWidget *)&g_sTitle);
     WidgetAdd(WIDGET_ROOT, (tWidget *)&g_sNext);
 
     //
-    // Add the first panel to the widget tree.
-    //
-    g_ulPanel = 0;
-    WidgetAdd(WIDGET_ROOT, (tWidget *)g_psPanels);
-    CanvasTextSet(&g_sTitle, g_pcPanelNames[0]);
-
-    //
     // Issue the initial paint request to the widgets.
     //
     WidgetPaint(WIDGET_ROOT);
+
+
+    //
+    // Add the first panel to the widget tree.
+    //
+    g_ulPanel = First_Panel;
+    WidgetAdd(WIDGET_ROOT, (tWidget *)g_psPanels);
+    CanvasTextSet(&g_sTitle, g_pcPanelNames[First_Panel]);
+
+    WidgetMessageQueueProcess();
+
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -2103,13 +2203,75 @@ main(void)
     		float_to_int_and_fract(fTempInt, &i32IntegerPart, &i32FractionPart);
             usprintf(val9_string, " %2d.%02d    ", i32IntegerPart, i32FractionPart);
 
+            //
+            // Check light status
+            //
+            if (fAGC>0.0)
+            {
+                iLight_AGC = light_is_red;
+            }
+            else if (fAGC>-0.1)
+            {
+                iLight_AGC = light_is_yellow;
+            }
+            else
+            {
+                iLight_AGC = light_is_green;
+            }
+
+            if (fLock>0)
+            {
+                iLight_Lock = light_is_red;
+            }
+            else if (fLock>-0.1)
+            {
+                iLight_Lock = light_is_yellow;
+            }
+            else
+            {
+                iLight_Lock = light_is_green;
+            }
 
 
+            if (fHold>0)
+            {
+                iLight_Hold = light_is_red;
+            }
+            else
+            {
+                iLight_Hold = light_is_green;
+            }
+
+            if (fFrame>0)
+            {
+                iLight_Frame = light_is_red;
+            }
+            else
+            {
+                iLight_Frame = light_is_green;
+            }
+
+            if (fCRC>0)
+            {
+                iLight_CRC = light_is_red;
+            }
+            else
+            {
+                iLight_CRC = light_is_green;
+            }
+            iHealth = iLight_AGC + iLight_Lock + iLight_Hold + iLight_EVM + iLight_Frame + iLight_CRC + iLight_BER;
             //
             // Check which panel.
             //
             switch(g_ulPanel) {
-
+               case First_Panel :
+                   if (iHealth != iHealth_old)
+                   {
+                       DrawFirstImage((tWidget *) g_ulPanel, &sContext);
+                   }
+                   iHealth_old = iHealth;
+                   // Health status check
+                   break;
                case Block_Diagram  :
                     GrContextFontSet(&sContext, &g_sFontCm20);
            	        PushButtonFillColorSet( g_psPushButtons2 + 0, ClrLightGreen );
@@ -2117,7 +2279,7 @@ main(void)
            	        PushButtonFillColorSet( g_psPushButtons2 + 2, ClrLightGreen );
            	        PushButtonFillColorSet( g_psPushButtons2 + 3, ClrLightGreen );
            	        g_ulButtonState=0;
-           	        if (fAGC>0.0)
+           	        if (iLight_AGC == light_is_red)
            	        {
                 	    //
                 	    // Change color of AGC button to Red
@@ -2126,7 +2288,7 @@ main(void)
                	        g_ulButtonState=1;
            	        }
 
-           	        else if ((fLock>0)|(fHold>0))
+           	        else if ((iLight_Lock == light_is_red)|(iLight_Hold == light_is_red))
            	        {
                 	    //
                 	    // Change color of PLL button to Red
@@ -2135,7 +2297,7 @@ main(void)
                	        g_ulButtonState=2;
            	        }
 
-           	        else if (fFrame>0)
+           	        else if (iLight_Frame == light_is_red)
            	        {
                 	    //
                 	    // Change color of SYNC button to Red
@@ -2144,7 +2306,7 @@ main(void)
                	        g_ulButtonState=4;
            	        }
 
-           	        else if (fCRC>0)
+           	        else if (iLight_CRC == light_is_red)
            	        {
                 	    //
                 	    // Change color of MSG button to Red
@@ -2152,15 +2314,15 @@ main(void)
                 	    PushButtonFillColorSet( g_psPushButtons2 + 3, ClrRed );
                	        g_ulButtonState=8;
            	        }
-                    else if (fAGC>-0.1)
+                    else if (iLight_AGC == light_is_yellow)
                     {
                         //
-                        // Change color of AGC button to Red
+                        // Change color of AGC button to Yellow
                         //
                         PushButtonFillColorSet( g_psPushButtons2 + 0, ClrYellow );
                         g_ulButtonState=1;
                     }
-                    else if (fLock>-0.1)
+                    else if (iLight_Lock == light_is_yellow)
                     {
                         //
                         // Change color of PLL button to Red
@@ -2172,34 +2334,48 @@ main(void)
                     WidgetPaint((tWidget *)(g_psPushButtons2+1) );
                     WidgetPaint((tWidget *)(g_psPushButtons2+2) );
                     WidgetPaint((tWidget *)(g_psPushButtons2+3) );
+                    if (iHealth !=0)
+                    {
+                        GrContextFontSet(&sContext, &g_sFontCm16);
+                        GrContextForegroundSet(&sContext, ClrRed);
+                        GrContextBackgroundSet(&sContext, ClrSeashell);
+                        GrStringDraw(&sContext, "Touch Red Block to Take Action", -1, 20, 95, 1);   // AGC
+                    }
+                    else
+                    {
+                        GrContextFontSet(&sContext, &g_sFontCm16);
+                        GrContextForegroundSet(&sContext, ClrSeashell);
+                        GrContextBackgroundSet(&sContext, ClrSeashell);
+                        GrStringDraw(&sContext, "Touch Red Block to Take Action", -1, 20, 95, 1);   // AGC
+                    }
                     break;
 
                case LED_Panel  :
             	    GrContextForegroundSet(&sContext, ClrLime);
                     //GrContextFontSet(&sContext, &g_sFontCm20);
-            	    if (fAGC>0.0)
+            	    if (iLight_AGC == light_is_red)
             	    {
             	    	GrContextForegroundSet(&sContext, ClrRed);
             	    }
-            	    else if (fAGC>-0.1)
+            	    else if (iLight_AGC == light_is_yellow)
             	    {
             	        GrContextForegroundSet(&sContext, ClrYellow);
             	    }
             	    GrCircleFill(&sContext, (LED_x0 + 0*LED_xd), (LED_y0 + 0*LED_yd), 10);	//AGC
             	    GrContextForegroundSet(&sContext, ClrLime);
 
-            	    if (fLock>0)
+            	    if (iLight_Lock == light_is_red)
             	    {
             	    	GrContextForegroundSet(&sContext, ClrRed);
             	    }
-                    else if (fLock>-0.1)
+                    else if (iLight_Lock == light_is_yellow)
                     {
                         GrContextForegroundSet(&sContext, ClrYellow);
                     }
             	    GrCircleFill(&sContext, (LED_x0 + 1*LED_xd), (LED_y0 + 0*LED_yd), 10);  // Lock
             	    GrContextForegroundSet(&sContext, ClrLime);
 
-            	    if (fHold>0)
+            	    if (iLight_Hold == light_is_red)
             	    {
             	    	GrContextForegroundSet(&sContext, ClrRed);
             	    }
@@ -2208,14 +2384,14 @@ main(void)
 
             	    GrCircleFill(&sContext, (LED_x0 + 3*LED_xd), (LED_y0 + 0*LED_yd), 10);	// EVM
 
-            	    if (fFrame>0)
+            	    if (iLight_Frame == light_is_red)
             	    {
             	    	GrContextForegroundSet(&sContext, ClrRed);
             	    }
             	    GrCircleFill(&sContext, (LED_x0 + 4*LED_xd), (LED_y0 + 0*LED_yd), 10);	// Frame
             	    GrContextForegroundSet(&sContext, ClrLime);
 
-            	    if (fCRC>0)
+            	    if (iLight_CRC == light_is_red)
             	    {
             	    	GrContextForegroundSet(&sContext, ClrRed);
             	    }
@@ -2253,12 +2429,12 @@ main(void)
             	   GrContextBackgroundSet(&sContext, ClrLime);
                    GrContextForegroundSet(&sContext, ClrBlack);
                    GrContextFontSet(&sContext, &g_sFontCm20);
-           	       if (fAGC>0.0)
+           	       if (iLight_AGC == light_is_red)
            	       {
            	    	   GrContextBackgroundSet(&sContext, ClrRed);
            	    	   GrStringDraw(&sContext, "Check input to RX1A ", -1, 32, S21_y-5, 1);
            	       }
-           	       else if (fAGC>-0.1)
+           	       else if (iLight_AGC == light_is_yellow)
            	       {
                        GrContextBackgroundSet(&sContext, ClrYellow);
                        GrStringDraw(&sContext, "Weak Input Signal ", -1, 32, S21_y-5, 1);
@@ -2281,12 +2457,12 @@ main(void)
                    GrContextFontSet(&sContext, &g_sFontCm20);
                    GrStringDrawRight(&sContext, val_Lock_Str, 9, S11_x+80, S11_y, 1);	// Lock
                    GrStringDrawRight(&sContext, val_HOLD_Str, 8, S12_x+70, S12_y, 1);	// Hold Over
-                   if (fLock>0.0)
+                   if (iLight_Lock == light_is_red)
                   {
                       GrContextBackgroundSet(&sContext, ClrRed);
                       GrStringDraw(&sContext, "PLL unLocked ", -1, 20, S21_y-5, 1);
                   }
-                  else if (fLock>0.0)
+                  else if (iLight_Lock == light_is_yellow)
                   {
                       GrContextBackgroundSet(&sContext, ClrYellow);
                       GrStringDraw(&sContext, "PLL Lock Weak", -1, 20, S21_y-5, 1);
@@ -2296,7 +2472,7 @@ main(void)
                       GrStringDraw(&sContext,    "PLL Locked   ", -1, 20, S21_y-5, 1);
                   }
                    GrContextBackgroundSet(&sContext, ClrLime);
-                   if (fHold>0.0)
+                   if (iLight_Hold == light_is_red)
                   {
                       GrContextBackgroundSet(&sContext, ClrRed);
                       GrStringDraw(&sContext, "PLL Hold Mode ", -1, 170, S21_y-5, 1);
@@ -2317,7 +2493,7 @@ main(void)
                    GrContextBackgroundSet(&sContext, ClrLime);
                    GrContextFontSet(&sContext, &g_sFontCm20);
 
-                   if (fFrame>0.0)
+                   if (iLight_Frame == light_is_red)
                   {
                       GrContextBackgroundSet(&sContext, ClrRed);
                       GrStringDraw(&sContext, "Synchronization Error ", -1, 32, S21_y-5, 1);
@@ -2339,7 +2515,7 @@ main(void)
                    GrContextForegroundSet(&sContext, ClrBlack);
                    GrContextBackgroundSet(&sContext, ClrLime);
                    GrContextFontSet(&sContext, &g_sFontCm20);
-                   if (fCRC>0.0)
+                   if (iLight_CRC == light_is_red)
                   {
                       GrContextBackgroundSet(&sContext, ClrRed);
                       GrStringDraw(&sContext, "Check Sum Error ", -1, 32, S21_y-5, 1);

@@ -1,0 +1,336 @@
+\section{Touch\+\_\+api}
+\label{group__touch__api}\index{Touch\+\_\+api@{Touch\+\_\+api}}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ L\+A\+N\+D\+S\+C\+A\+PE}
+\item 
+\#define \textbf{ T\+S\+\_\+\+P\+\_\+\+P\+E\+R\+I\+PH}~S\+Y\+S\+C\+T\+L\+\_\+\+P\+E\+R\+I\+P\+H\+\_\+\+G\+P\+I\+OE
+\item 
+\#define \textbf{ T\+S\+\_\+\+P\+\_\+\+B\+A\+SE}~G\+P\+I\+O\+\_\+\+P\+O\+R\+T\+E\+\_\+\+B\+A\+SE
+\item 
+\#define \textbf{ T\+S\+\_\+\+N\+\_\+\+P\+E\+R\+I\+PH}~S\+Y\+S\+C\+T\+L\+\_\+\+P\+E\+R\+I\+P\+H\+\_\+\+G\+P\+I\+OA
+\item 
+\#define \textbf{ T\+S\+\_\+\+N\+\_\+\+B\+A\+SE}~G\+P\+I\+O\+\_\+\+P\+O\+R\+T\+A\+\_\+\+B\+A\+SE
+\item 
+\#define \textbf{ T\+S\+\_\+\+X\+P\+\_\+\+P\+IN}~G\+P\+I\+O\+\_\+\+P\+I\+N\+\_\+4
+\item 
+\#define \textbf{ T\+S\+\_\+\+Y\+P\+\_\+\+P\+IN}~G\+P\+I\+O\+\_\+\+P\+I\+N\+\_\+5
+\item 
+\#define \textbf{ T\+S\+\_\+\+X\+N\+\_\+\+P\+IN}~G\+P\+I\+O\+\_\+\+P\+I\+N\+\_\+3
+\item 
+\#define \textbf{ T\+S\+\_\+\+Y\+N\+\_\+\+P\+IN}~G\+P\+I\+O\+\_\+\+P\+I\+N\+\_\+2
+\item 
+\#define \textbf{ A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H\+\_\+\+XP}~A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H9
+\item 
+\#define \textbf{ A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H\+\_\+\+YP}~A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H8
+\item 
+\#define \textbf{ N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+M\+\_\+\+S\+E\+TS}~2
+\item 
+\#define \textbf{ N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+MS}~7
+\item 
+\#define \textbf{ S\+E\+T\+\_\+\+N\+O\+R\+M\+AL}~0
+\item 
+\#define \textbf{ S\+E\+T\+\_\+\+S\+R\+A\+M\+\_\+\+F\+L\+A\+SH}~1
+\item 
+\#define \textbf{ T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+N\+IT}~0
+\item 
+\#define \textbf{ T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+A\+D\+\_\+X}~1
+\item 
+\#define \textbf{ T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+A\+D\+\_\+Y}~2
+\item 
+\#define \textbf{ T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+K\+I\+P\+\_\+X}~3
+\item 
+\#define \textbf{ T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+K\+I\+P\+\_\+Y}~4
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \textbf{ Touch\+Screen\+Debouncer} (void)
+\item 
+void \textbf{ Touch\+Screen\+Int\+Handler} (void)
+\item 
+void \textbf{ Touch\+Screen\+Init} (void)
+\item 
+void \textbf{ Touch\+Screen\+Callback\+Set} (int32\+\_\+t($\ast$pfn\+Callback)(uint32\+\_\+t ul\+Message, int32\+\_\+t lX, int32\+\_\+t lY))
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const int32\+\_\+t \textbf{ g\+\_\+l\+Touch\+Parameters} [\textbf{ N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+M\+\_\+\+S\+E\+TS}][\textbf{ N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+MS}]
+\item 
+const int32\+\_\+t $\ast$ \textbf{ g\+\_\+pl\+Parm\+Set}
+\item 
+int16\+\_\+t \textbf{ g\+\_\+s\+Touch\+Min} = \textbf{ T\+O\+U\+C\+H\+\_\+\+M\+IN}
+\item 
+static uint32\+\_\+t \textbf{ g\+\_\+ul\+T\+S\+State}
+\item 
+volatile int16\+\_\+t \textbf{ g\+\_\+s\+TouchX}
+\item 
+volatile int16\+\_\+t \textbf{ g\+\_\+s\+TouchY}
+\item 
+static int32\+\_\+t($\ast$ \textbf{ g\+\_\+pfn\+T\+S\+Handler} )(uint32\+\_\+t ul\+Message, int32\+\_\+t lX, int32\+\_\+t lY)
+\item 
+static uint8\+\_\+t \textbf{ g\+\_\+c\+State} = 0
+\item 
+static int16\+\_\+t \textbf{ g\+\_\+ps\+Samples} [8]
+\item 
+static int8\+\_\+t \textbf{ g\+\_\+c\+Index} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\label{group__touch__api_ga0e157279a5f47461cc4e7fa9d99fdc48}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H\+\_\+\+XP@{A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H\+\_\+\+XP}}
+\index{A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H\+\_\+\+XP@{A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H\+\_\+\+XP}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H\+\_\+\+XP}
+{\footnotesize\ttfamily \#define A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H\+\_\+\+XP~A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H9}
+
+\mbox{\label{group__touch__api_ga29fdcd005512bb990d321741d8debb20}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H\+\_\+\+YP@{A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H\+\_\+\+YP}}
+\index{A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H\+\_\+\+YP@{A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H\+\_\+\+YP}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H\+\_\+\+YP}
+{\footnotesize\ttfamily \#define A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H\+\_\+\+YP~A\+D\+C\+\_\+\+C\+T\+L\+\_\+\+C\+H8}
+
+\mbox{\label{group__touch__api_ga211dd160685be8a5a4f43be3fc3195a4}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!L\+A\+N\+D\+S\+C\+A\+PE@{L\+A\+N\+D\+S\+C\+A\+PE}}
+\index{L\+A\+N\+D\+S\+C\+A\+PE@{L\+A\+N\+D\+S\+C\+A\+PE}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{L\+A\+N\+D\+S\+C\+A\+PE}
+{\footnotesize\ttfamily \#define L\+A\+N\+D\+S\+C\+A\+PE}
+
+\mbox{\label{group__touch__api_ga89c53f0446384144fe8c927f2c795c42}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+M\+\_\+\+S\+E\+TS@{N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+M\+\_\+\+S\+E\+TS}}
+\index{N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+M\+\_\+\+S\+E\+TS@{N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+M\+\_\+\+S\+E\+TS}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+M\+\_\+\+S\+E\+TS}
+{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+M\+\_\+\+S\+E\+TS~2}
+
+\mbox{\label{group__touch__api_ga620e501d3f649048c61fa741ec5ce945}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+MS@{N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+MS}}
+\index{N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+MS@{N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+MS}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+MS}
+{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+MS~7}
+
+\mbox{\label{group__touch__api_ga6fb15b6a77ffa043c8d0701cb1491a4c}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!S\+E\+T\+\_\+\+N\+O\+R\+M\+AL@{S\+E\+T\+\_\+\+N\+O\+R\+M\+AL}}
+\index{S\+E\+T\+\_\+\+N\+O\+R\+M\+AL@{S\+E\+T\+\_\+\+N\+O\+R\+M\+AL}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{S\+E\+T\+\_\+\+N\+O\+R\+M\+AL}
+{\footnotesize\ttfamily \#define S\+E\+T\+\_\+\+N\+O\+R\+M\+AL~0}
+
+\mbox{\label{group__touch__api_ga7a45673f264bd80536daa60f72e313a7}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!S\+E\+T\+\_\+\+S\+R\+A\+M\+\_\+\+F\+L\+A\+SH@{S\+E\+T\+\_\+\+S\+R\+A\+M\+\_\+\+F\+L\+A\+SH}}
+\index{S\+E\+T\+\_\+\+S\+R\+A\+M\+\_\+\+F\+L\+A\+SH@{S\+E\+T\+\_\+\+S\+R\+A\+M\+\_\+\+F\+L\+A\+SH}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{S\+E\+T\+\_\+\+S\+R\+A\+M\+\_\+\+F\+L\+A\+SH}
+{\footnotesize\ttfamily \#define S\+E\+T\+\_\+\+S\+R\+A\+M\+\_\+\+F\+L\+A\+SH~1}
+
+\mbox{\label{group__touch__api_gadf9c6a60b3d6bba9d69fa3014b2ee471}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!T\+S\+\_\+\+N\+\_\+\+B\+A\+SE@{T\+S\+\_\+\+N\+\_\+\+B\+A\+SE}}
+\index{T\+S\+\_\+\+N\+\_\+\+B\+A\+SE@{T\+S\+\_\+\+N\+\_\+\+B\+A\+SE}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{T\+S\+\_\+\+N\+\_\+\+B\+A\+SE}
+{\footnotesize\ttfamily \#define T\+S\+\_\+\+N\+\_\+\+B\+A\+SE~G\+P\+I\+O\+\_\+\+P\+O\+R\+T\+A\+\_\+\+B\+A\+SE}
+
+\mbox{\label{group__touch__api_gacfb7ce3a996ff39806694785952e5288}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!T\+S\+\_\+\+N\+\_\+\+P\+E\+R\+I\+PH@{T\+S\+\_\+\+N\+\_\+\+P\+E\+R\+I\+PH}}
+\index{T\+S\+\_\+\+N\+\_\+\+P\+E\+R\+I\+PH@{T\+S\+\_\+\+N\+\_\+\+P\+E\+R\+I\+PH}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{T\+S\+\_\+\+N\+\_\+\+P\+E\+R\+I\+PH}
+{\footnotesize\ttfamily \#define T\+S\+\_\+\+N\+\_\+\+P\+E\+R\+I\+PH~S\+Y\+S\+C\+T\+L\+\_\+\+P\+E\+R\+I\+P\+H\+\_\+\+G\+P\+I\+OA}
+
+\mbox{\label{group__touch__api_ga9663d7415f7e8c3240312a240781d45d}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!T\+S\+\_\+\+P\+\_\+\+B\+A\+SE@{T\+S\+\_\+\+P\+\_\+\+B\+A\+SE}}
+\index{T\+S\+\_\+\+P\+\_\+\+B\+A\+SE@{T\+S\+\_\+\+P\+\_\+\+B\+A\+SE}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{T\+S\+\_\+\+P\+\_\+\+B\+A\+SE}
+{\footnotesize\ttfamily \#define T\+S\+\_\+\+P\+\_\+\+B\+A\+SE~G\+P\+I\+O\+\_\+\+P\+O\+R\+T\+E\+\_\+\+B\+A\+SE}
+
+\mbox{\label{group__touch__api_gad7acd9d0358788f58a8bb4c3eab4dc3f}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!T\+S\+\_\+\+P\+\_\+\+P\+E\+R\+I\+PH@{T\+S\+\_\+\+P\+\_\+\+P\+E\+R\+I\+PH}}
+\index{T\+S\+\_\+\+P\+\_\+\+P\+E\+R\+I\+PH@{T\+S\+\_\+\+P\+\_\+\+P\+E\+R\+I\+PH}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{T\+S\+\_\+\+P\+\_\+\+P\+E\+R\+I\+PH}
+{\footnotesize\ttfamily \#define T\+S\+\_\+\+P\+\_\+\+P\+E\+R\+I\+PH~S\+Y\+S\+C\+T\+L\+\_\+\+P\+E\+R\+I\+P\+H\+\_\+\+G\+P\+I\+OE}
+
+\mbox{\label{group__touch__api_ga4d873febb3fd4c0c7e3aec6902d43911}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+N\+IT@{T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+N\+IT}}
+\index{T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+N\+IT@{T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+N\+IT}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+N\+IT}
+{\footnotesize\ttfamily \#define T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+N\+IT~0}
+
+\mbox{\label{group__touch__api_ga8aad45d7b09fa59004e5b68f5d728c75}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+A\+D\+\_\+X@{T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+A\+D\+\_\+X}}
+\index{T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+A\+D\+\_\+X@{T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+A\+D\+\_\+X}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+A\+D\+\_\+X}
+{\footnotesize\ttfamily \#define T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+A\+D\+\_\+X~1}
+
+\mbox{\label{group__touch__api_ga4cccb7907945b16e47218c6fcf2388b6}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+A\+D\+\_\+Y@{T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+A\+D\+\_\+Y}}
+\index{T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+A\+D\+\_\+Y@{T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+A\+D\+\_\+Y}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+A\+D\+\_\+Y}
+{\footnotesize\ttfamily \#define T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+A\+D\+\_\+Y~2}
+
+\mbox{\label{group__touch__api_gac9978ea2275a281e1d5f5764bb84cd6c}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+K\+I\+P\+\_\+X@{T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+K\+I\+P\+\_\+X}}
+\index{T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+K\+I\+P\+\_\+X@{T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+K\+I\+P\+\_\+X}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+K\+I\+P\+\_\+X}
+{\footnotesize\ttfamily \#define T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+K\+I\+P\+\_\+X~3}
+
+\mbox{\label{group__touch__api_gabac024681287ead5e3d505b7ab01ae2a}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+K\+I\+P\+\_\+Y@{T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+K\+I\+P\+\_\+Y}}
+\index{T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+K\+I\+P\+\_\+Y@{T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+K\+I\+P\+\_\+Y}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+K\+I\+P\+\_\+Y}
+{\footnotesize\ttfamily \#define T\+S\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+K\+I\+P\+\_\+Y~4}
+
+\mbox{\label{group__touch__api_gab2a99df5fc01a98c3893b075bb374c24}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!T\+S\+\_\+\+X\+N\+\_\+\+P\+IN@{T\+S\+\_\+\+X\+N\+\_\+\+P\+IN}}
+\index{T\+S\+\_\+\+X\+N\+\_\+\+P\+IN@{T\+S\+\_\+\+X\+N\+\_\+\+P\+IN}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{T\+S\+\_\+\+X\+N\+\_\+\+P\+IN}
+{\footnotesize\ttfamily \#define T\+S\+\_\+\+X\+N\+\_\+\+P\+IN~G\+P\+I\+O\+\_\+\+P\+I\+N\+\_\+3}
+
+\mbox{\label{group__touch__api_gae10773f5bbf29015735bc8ab266295c5}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!T\+S\+\_\+\+X\+P\+\_\+\+P\+IN@{T\+S\+\_\+\+X\+P\+\_\+\+P\+IN}}
+\index{T\+S\+\_\+\+X\+P\+\_\+\+P\+IN@{T\+S\+\_\+\+X\+P\+\_\+\+P\+IN}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{T\+S\+\_\+\+X\+P\+\_\+\+P\+IN}
+{\footnotesize\ttfamily \#define T\+S\+\_\+\+X\+P\+\_\+\+P\+IN~G\+P\+I\+O\+\_\+\+P\+I\+N\+\_\+4}
+
+\mbox{\label{group__touch__api_gaa3b92b7981a9eff09323a8b53f18c963}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!T\+S\+\_\+\+Y\+N\+\_\+\+P\+IN@{T\+S\+\_\+\+Y\+N\+\_\+\+P\+IN}}
+\index{T\+S\+\_\+\+Y\+N\+\_\+\+P\+IN@{T\+S\+\_\+\+Y\+N\+\_\+\+P\+IN}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{T\+S\+\_\+\+Y\+N\+\_\+\+P\+IN}
+{\footnotesize\ttfamily \#define T\+S\+\_\+\+Y\+N\+\_\+\+P\+IN~G\+P\+I\+O\+\_\+\+P\+I\+N\+\_\+2}
+
+\mbox{\label{group__touch__api_ga479e742ecfcadc3e989ea606e6d367c8}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!T\+S\+\_\+\+Y\+P\+\_\+\+P\+IN@{T\+S\+\_\+\+Y\+P\+\_\+\+P\+IN}}
+\index{T\+S\+\_\+\+Y\+P\+\_\+\+P\+IN@{T\+S\+\_\+\+Y\+P\+\_\+\+P\+IN}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{T\+S\+\_\+\+Y\+P\+\_\+\+P\+IN}
+{\footnotesize\ttfamily \#define T\+S\+\_\+\+Y\+P\+\_\+\+P\+IN~G\+P\+I\+O\+\_\+\+P\+I\+N\+\_\+5}
+
+
+
+\subsection{Function Documentation}
+\mbox{\label{group__touch__api_ga6c6aca7916fd7466a6bc2d32c02475fe}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!Touch\+Screen\+Callback\+Set@{Touch\+Screen\+Callback\+Set}}
+\index{Touch\+Screen\+Callback\+Set@{Touch\+Screen\+Callback\+Set}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{Touch\+Screen\+Callback\+Set()}
+{\footnotesize\ttfamily void Touch\+Screen\+Callback\+Set (\begin{DoxyParamCaption}\item[{int32\+\_\+t($\ast$)(uint32\+\_\+t ul\+Message, int32\+\_\+t lX, int32\+\_\+t lY)}]{pfn\+Callback }\end{DoxyParamCaption})}
+
+Sets the callback function for touch screen events.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pfn\+Callback} & is a pointer to the function to be called when touch screen events occur.\\
+\hline
+\end{DoxyParams}
+This function sets the address of the function to be called when touch screen events occur. The events that are recognized are the screen being touched ({\ttfamily pen down\textquotesingle{}\textquotesingle{}), the touch position moving while the screen is touched (}pen move\textquotesingle{}\textquotesingle{}), and the screen no longer being touched (``pen up\textquotesingle{}\textquotesingle{}).
+
+\begin{DoxyReturn}{Returns}
+None. 
+\end{DoxyReturn}
+\mbox{\label{group__touch__api_ga7cad1c80ec0300826ded5a05d9c5ed6d}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!Touch\+Screen\+Debouncer@{Touch\+Screen\+Debouncer}}
+\index{Touch\+Screen\+Debouncer@{Touch\+Screen\+Debouncer}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{Touch\+Screen\+Debouncer()}
+{\footnotesize\ttfamily static void Touch\+Screen\+Debouncer (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Debounces presses of the touch screen.
+
+This function is called when a new X/Y sample pair has been captured in order to perform debouncing of the touch screen.
+
+\begin{DoxyReturn}{Returns}
+None. 
+\end{DoxyReturn}
+\mbox{\label{group__touch__api_ga3ed7499a82dd5b0cff388b67cd5d1f55}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!Touch\+Screen\+Init@{Touch\+Screen\+Init}}
+\index{Touch\+Screen\+Init@{Touch\+Screen\+Init}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{Touch\+Screen\+Init()}
+{\footnotesize\ttfamily void Touch\+Screen\+Init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Initializes the touch screen driver.
+
+This function initializes the touch screen driver, beginning the process of reading from the touch screen. This driver uses the following hardware resources\+:
+
+
+\begin{DoxyItemize}
+\item A\+DC sample sequence 3
+\item Timer 1 subtimer A
+\end{DoxyItemize}
+
+\begin{DoxyReturn}{Returns}
+None. 
+\end{DoxyReturn}
+\mbox{\label{group__touch__api_ga77ea6f48d4e85fc17ce57a2efb1e36d3}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!Touch\+Screen\+Int\+Handler@{Touch\+Screen\+Int\+Handler}}
+\index{Touch\+Screen\+Int\+Handler@{Touch\+Screen\+Int\+Handler}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{Touch\+Screen\+Int\+Handler()}
+{\footnotesize\ttfamily void Touch\+Screen\+Int\+Handler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Handles the A\+DC interrupt for the touch screen.
+
+This function is called when the A\+DC sequence that samples the touch screen has completed its acquisition. The touch screen state machine is advanced and the acquired A\+DC sample is processed appropriately.
+
+It is the responsibility of the application using the touch screen driver to ensure that this function is installed in the interrupt vector table for the A\+D\+C3 interrupt.
+
+\begin{DoxyReturn}{Returns}
+None. 
+\end{DoxyReturn}
+
+
+\subsection{Variable Documentation}
+\mbox{\label{group__touch__api_ga85df490ae967e535e0c6db9fc860640c}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!g\+\_\+c\+Index@{g\+\_\+c\+Index}}
+\index{g\+\_\+c\+Index@{g\+\_\+c\+Index}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{g\+\_\+c\+Index}
+{\footnotesize\ttfamily int8\+\_\+t g\+\_\+c\+Index = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{group__touch__api_ga4db924f3786963544bddad98f3299774}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!g\+\_\+c\+State@{g\+\_\+c\+State}}
+\index{g\+\_\+c\+State@{g\+\_\+c\+State}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{g\+\_\+c\+State}
+{\footnotesize\ttfamily uint8\+\_\+t g\+\_\+c\+State = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{group__touch__api_gaea3aa6a5477683a7ff2a7b4b79ba828f}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!g\+\_\+l\+Touch\+Parameters@{g\+\_\+l\+Touch\+Parameters}}
+\index{g\+\_\+l\+Touch\+Parameters@{g\+\_\+l\+Touch\+Parameters}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{g\+\_\+l\+Touch\+Parameters}
+{\footnotesize\ttfamily const int32\+\_\+t g\+\_\+l\+Touch\+Parameters[\textbf{ N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+M\+\_\+\+S\+E\+TS}][\textbf{ N\+U\+M\+\_\+\+T\+O\+U\+C\+H\+\_\+\+P\+A\+R\+A\+MS}]}
+
+\mbox{\label{group__touch__api_ga635afba80995fd207da2d50a0df35ad1}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!g\+\_\+pfn\+T\+S\+Handler@{g\+\_\+pfn\+T\+S\+Handler}}
+\index{g\+\_\+pfn\+T\+S\+Handler@{g\+\_\+pfn\+T\+S\+Handler}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{g\+\_\+pfn\+T\+S\+Handler}
+{\footnotesize\ttfamily int32\+\_\+t($\ast$ g\+\_\+pfn\+T\+S\+Handler) (uint32\+\_\+t ul\+Message, int32\+\_\+t lX, int32\+\_\+t lY)\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{group__touch__api_ga15218c1cfd423a464026786301f25539}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!g\+\_\+pl\+Parm\+Set@{g\+\_\+pl\+Parm\+Set}}
+\index{g\+\_\+pl\+Parm\+Set@{g\+\_\+pl\+Parm\+Set}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{g\+\_\+pl\+Parm\+Set}
+{\footnotesize\ttfamily const int32\+\_\+t$\ast$ g\+\_\+pl\+Parm\+Set}
+
+\mbox{\label{group__touch__api_ga54d750144fb44b7853c478fcbe9af570}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!g\+\_\+ps\+Samples@{g\+\_\+ps\+Samples}}
+\index{g\+\_\+ps\+Samples@{g\+\_\+ps\+Samples}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{g\+\_\+ps\+Samples}
+{\footnotesize\ttfamily int16\+\_\+t g\+\_\+ps\+Samples[8]\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{group__touch__api_gae21b68fd10112a765fe142c6e1dc64a1}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!g\+\_\+s\+Touch\+Min@{g\+\_\+s\+Touch\+Min}}
+\index{g\+\_\+s\+Touch\+Min@{g\+\_\+s\+Touch\+Min}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{g\+\_\+s\+Touch\+Min}
+{\footnotesize\ttfamily int16\+\_\+t g\+\_\+s\+Touch\+Min = \textbf{ T\+O\+U\+C\+H\+\_\+\+M\+IN}}
+
+\mbox{\label{group__touch__api_gabe6ce3514c5a4a3c829aec47380a178e}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!g\+\_\+s\+TouchX@{g\+\_\+s\+TouchX}}
+\index{g\+\_\+s\+TouchX@{g\+\_\+s\+TouchX}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{g\+\_\+s\+TouchX}
+{\footnotesize\ttfamily volatile int16\+\_\+t g\+\_\+s\+TouchX}
+
+\mbox{\label{group__touch__api_gae0cb3a560d0423a9cbef35e4e5001af1}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!g\+\_\+s\+TouchY@{g\+\_\+s\+TouchY}}
+\index{g\+\_\+s\+TouchY@{g\+\_\+s\+TouchY}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{g\+\_\+s\+TouchY}
+{\footnotesize\ttfamily volatile int16\+\_\+t g\+\_\+s\+TouchY}
+
+\mbox{\label{group__touch__api_ga9cee87f7dfb2e5d8fc1d826956cd63e1}} 
+\index{Touch\+\_\+api@{Touch\+\_\+api}!g\+\_\+ul\+T\+S\+State@{g\+\_\+ul\+T\+S\+State}}
+\index{g\+\_\+ul\+T\+S\+State@{g\+\_\+ul\+T\+S\+State}!Touch\+\_\+api@{Touch\+\_\+api}}
+\subsubsection{g\+\_\+ul\+T\+S\+State}
+{\footnotesize\ttfamily uint32\+\_\+t g\+\_\+ul\+T\+S\+State\hspace{0.3cm}{\ttfamily [static]}}
+

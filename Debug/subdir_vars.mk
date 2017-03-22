@@ -12,6 +12,7 @@ C_SRCS += \
 ../Kentec320x240x16_ssd2119_8bit.c \
 ../TubeImage.c \
 ../ZC706_SPI_Display.c \
+../flower320x240.c \
 ../harmony320x240.c \
 ../images.c \
 ../lightning320x240.c \
@@ -25,6 +26,7 @@ C_DEPS += \
 ./Kentec320x240x16_ssd2119_8bit.d \
 ./TubeImage.d \
 ./ZC706_SPI_Display.d \
+./flower320x240.d \
 ./harmony320x240.d \
 ./images.d \
 ./lightning320x240.d \
@@ -38,6 +40,7 @@ OBJS += \
 ./Kentec320x240x16_ssd2119_8bit.obj \
 ./TubeImage.obj \
 ./ZC706_SPI_Display.obj \
+./flower320x240.obj \
 ./harmony320x240.obj \
 ./images.obj \
 ./lightning320x240.obj \
@@ -51,6 +54,7 @@ OBJS__QUOTED += \
 "Kentec320x240x16_ssd2119_8bit.obj" \
 "TubeImage.obj" \
 "ZC706_SPI_Display.obj" \
+"flower320x240.obj" \
 "harmony320x240.obj" \
 "images.obj" \
 "lightning320x240.obj" \
@@ -64,6 +68,7 @@ C_DEPS__QUOTED += \
 "Kentec320x240x16_ssd2119_8bit.d" \
 "TubeImage.d" \
 "ZC706_SPI_Display.d" \
+"flower320x240.d" \
 "harmony320x240.d" \
 "images.d" \
 "lightning320x240.d" \
@@ -77,6 +82,7 @@ C_SRCS__QUOTED += \
 "../Kentec320x240x16_ssd2119_8bit.c" \
 "../TubeImage.c" \
 "../ZC706_SPI_Display.c" \
+"../flower320x240.c" \
 "../harmony320x240.c" \
 "../images.c" \
 "../lightning320x240.c" \

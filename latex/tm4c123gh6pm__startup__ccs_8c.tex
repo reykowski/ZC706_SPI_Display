@@ -1,0 +1,85 @@
+\section{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c File Reference}
+\label{tm4c123gh6pm__startup__ccs_8c}\index{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c@{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ Reset\+I\+SR} (void)
+\item 
+static void \textbf{ Nmi\+SR} (void)
+\item 
+static void \textbf{ Fault\+I\+SR} (void)
+\item 
+static void \textbf{ Int\+Default\+Handler} (void)
+\item 
+void \textbf{ \+\_\+c\+\_\+int00} (void)
+\item 
+void \textbf{ Sys\+Tick\+Int\+Handler} (void)
+\item 
+void \textbf{ R\+G\+B\+Blink\+Int\+Handler} (void)
+\item 
+void \textbf{ S\+S\+I1\+Int\+Handler} (void)
+\item 
+void \textbf{ Touch\+Screen\+Int\+Handler} (void)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \textbf{ \+\_\+\+\_\+\+S\+T\+A\+C\+K\+\_\+\+T\+OP}
+\item 
+void($\ast$const \textbf{ g\+\_\+pfn\+Vectors} [$\,$])(void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\label{tm4c123gh6pm__startup__ccs_8c_a3c8534f5781f4cf53ffbeb6d35880b27}} 
+\index{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c@{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c}!\+\_\+c\+\_\+int00@{\+\_\+c\+\_\+int00}}
+\index{\+\_\+c\+\_\+int00@{\+\_\+c\+\_\+int00}!tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c@{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c}}
+\subsubsection{\+\_\+c\+\_\+int00()}
+{\footnotesize\ttfamily void \+\_\+c\+\_\+int00 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{tm4c123gh6pm__startup__ccs_8c_a50057a2a70b3ab2320bc6e3f93e83d27}} 
+\index{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c@{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c}!Fault\+I\+SR@{Fault\+I\+SR}}
+\index{Fault\+I\+SR@{Fault\+I\+SR}!tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c@{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c}}
+\subsubsection{Fault\+I\+S\+R()}
+{\footnotesize\ttfamily static void Fault\+I\+SR (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{tm4c123gh6pm__startup__ccs_8c_ac62d95950fb9f007b01e80b27290ee43}} 
+\index{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c@{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c}!Int\+Default\+Handler@{Int\+Default\+Handler}}
+\index{Int\+Default\+Handler@{Int\+Default\+Handler}!tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c@{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c}}
+\subsubsection{Int\+Default\+Handler()}
+{\footnotesize\ttfamily static void Int\+Default\+Handler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{tm4c123gh6pm__startup__ccs_8c_ab6bfaa60e7bfe85a2116230a2afdcb40}} 
+\index{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c@{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c}!Nmi\+SR@{Nmi\+SR}}
+\index{Nmi\+SR@{Nmi\+SR}!tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c@{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c}}
+\subsubsection{Nmi\+S\+R()}
+{\footnotesize\ttfamily static void Nmi\+SR (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{tm4c123gh6pm__startup__ccs_8c_a516ff8924be921fa3a1bb7754b1f5734}} 
+\index{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c@{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c}!Reset\+I\+SR@{Reset\+I\+SR}}
+\index{Reset\+I\+SR@{Reset\+I\+SR}!tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c@{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c}}
+\subsubsection{Reset\+I\+S\+R()}
+{\footnotesize\ttfamily void Reset\+I\+SR (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{tm4c123gh6pm__startup__ccs_8c_a0212602c86bdb2fb29ba3e5d4ddbba3a}} 
+\index{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c@{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c}!R\+G\+B\+Blink\+Int\+Handler@{R\+G\+B\+Blink\+Int\+Handler}}
+\index{R\+G\+B\+Blink\+Int\+Handler@{R\+G\+B\+Blink\+Int\+Handler}!tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c@{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c}}
+\subsubsection{R\+G\+B\+Blink\+Int\+Handler()}
+{\footnotesize\ttfamily void R\+G\+B\+Blink\+Int\+Handler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\label{tm4c123gh6pm__startup__ccs_8c_ac1f2b7c32de8681c4f4184ca6efca568}} 
+\index{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c@{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c}!\+\_\+\+\_\+\+S\+T\+A\+C\+K\+\_\+\+T\+OP@{\+\_\+\+\_\+\+S\+T\+A\+C\+K\+\_\+\+T\+OP}}
+\index{\+\_\+\+\_\+\+S\+T\+A\+C\+K\+\_\+\+T\+OP@{\+\_\+\+\_\+\+S\+T\+A\+C\+K\+\_\+\+T\+OP}!tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c@{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c}}
+\subsubsection{\+\_\+\+\_\+\+S\+T\+A\+C\+K\+\_\+\+T\+OP}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+\+\_\+\+S\+T\+A\+C\+K\+\_\+\+T\+OP}
+
+\mbox{\label{tm4c123gh6pm__startup__ccs_8c_a28c770c8f2522f11e2a95f7486620c5b}} 
+\index{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c@{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c}!g\+\_\+pfn\+Vectors@{g\+\_\+pfn\+Vectors}}
+\index{g\+\_\+pfn\+Vectors@{g\+\_\+pfn\+Vectors}!tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c@{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c}}
+\subsubsection{g\+\_\+pfn\+Vectors}
+{\footnotesize\ttfamily void($\ast$ const g\+\_\+pfn\+Vectors[$\,$])(void)}
+

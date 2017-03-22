@@ -1,0 +1,199 @@
+\section{Kentec320x240x16\+\_\+ssd2119\+\_\+8bit.\+c File Reference}
+\label{_kentec320x240x16__ssd2119__8bit_8c}\index{Kentec320x240x16\+\_\+ssd2119\+\_\+8bit.\+c@{Kentec320x240x16\+\_\+ssd2119\+\_\+8bit.\+c}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}inc/hw\+\_\+gpio.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}inc/hw\+\_\+ints.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}inc/hw\+\_\+memmap.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}inc/hw\+\_\+types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}driverlib/gpio.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}driverlib/interrupt.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}driverlib/sysctl.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}driverlib/timer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}driverlib/rom.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}grlib/grlib.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Kentec320x240x16\+\_\+ssd2119\+\_\+8bit.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ L\+A\+N\+D\+S\+C\+A\+PE}
+\item 
+\#define \textbf{ H\+O\+R\+I\+Z\+\_\+\+D\+I\+R\+E\+C\+T\+I\+ON}~0x00
+\item 
+\#define \textbf{ V\+E\+R\+T\+\_\+\+D\+I\+R\+E\+C\+T\+I\+ON}~0x08
+\item 
+\#define \textbf{ M\+A\+P\+P\+E\+D\+\_\+X}(x,  y)~(319 -\/ (x))
+\item 
+\#define \textbf{ M\+A\+P\+P\+E\+D\+\_\+Y}(x,  y)~(239 -\/ (y))
+\item 
+\#define \textbf{ L\+C\+D\+\_\+\+D\+A\+T\+A\+H\+\_\+\+P\+E\+R\+I\+PH}~S\+Y\+S\+C\+T\+L\+\_\+\+P\+E\+R\+I\+P\+H\+\_\+\+G\+P\+I\+OB
+\item 
+\#define \textbf{ L\+C\+D\+\_\+\+D\+A\+T\+A\+H\+\_\+\+B\+A\+SE}~G\+P\+I\+O\+\_\+\+P\+O\+R\+T\+B\+\_\+\+B\+A\+SE
+\item 
+\#define \textbf{ L\+C\+D\+\_\+\+D\+A\+T\+A\+H\+\_\+\+P\+I\+NS}~0x\+FF
+\item 
+\#define \textbf{ L\+C\+D\+\_\+\+C\+S\+\_\+\+P\+E\+R\+I\+PH}~S\+Y\+S\+C\+T\+L\+\_\+\+P\+E\+R\+I\+P\+H\+\_\+\+G\+P\+I\+OA
+\item 
+\#define \textbf{ L\+C\+D\+\_\+\+C\+S\+\_\+\+B\+A\+SE}~G\+P\+I\+O\+\_\+\+P\+O\+R\+T\+A\+\_\+\+B\+A\+SE
+\item 
+\#define \textbf{ L\+C\+D\+\_\+\+C\+S\+\_\+\+P\+IN}~G\+P\+I\+O\+\_\+\+P\+I\+N\+\_\+7
+\item 
+\#define \textbf{ L\+C\+D\+\_\+\+D\+C\+\_\+\+P\+E\+R\+I\+PH}~S\+Y\+S\+C\+T\+L\+\_\+\+P\+E\+R\+I\+P\+H\+\_\+\+G\+P\+I\+OA
+\item 
+\#define \textbf{ L\+C\+D\+\_\+\+D\+C\+\_\+\+B\+A\+SE}~G\+P\+I\+O\+\_\+\+P\+O\+R\+T\+A\+\_\+\+B\+A\+SE
+\item 
+\#define \textbf{ L\+C\+D\+\_\+\+D\+C\+\_\+\+P\+IN}~G\+P\+I\+O\+\_\+\+P\+I\+N\+\_\+6
+\item 
+\#define \textbf{ L\+C\+D\+\_\+\+W\+R\+\_\+\+P\+E\+R\+I\+PH}~S\+Y\+S\+C\+T\+L\+\_\+\+P\+E\+R\+I\+P\+H\+\_\+\+G\+P\+I\+OA
+\item 
+\#define \textbf{ L\+C\+D\+\_\+\+W\+R\+\_\+\+B\+A\+SE}~G\+P\+I\+O\+\_\+\+P\+O\+R\+T\+A\+\_\+\+B\+A\+SE
+\item 
+\#define \textbf{ L\+C\+D\+\_\+\+W\+R\+\_\+\+P\+IN}~G\+P\+I\+O\+\_\+\+P\+I\+N\+\_\+5
+\item 
+\#define \textbf{ L\+C\+D\+\_\+\+R\+D\+\_\+\+P\+E\+R\+I\+PH}~S\+Y\+S\+C\+T\+L\+\_\+\+P\+E\+R\+I\+P\+H\+\_\+\+G\+P\+I\+OA
+\item 
+\#define \textbf{ L\+C\+D\+\_\+\+R\+D\+\_\+\+B\+A\+SE}~G\+P\+I\+O\+\_\+\+P\+O\+R\+T\+A\+\_\+\+B\+A\+SE
+\item 
+\#define \textbf{ L\+C\+D\+\_\+\+R\+D\+\_\+\+P\+IN}~G\+P\+I\+O\+\_\+\+P\+I\+N\+\_\+4
+\item 
+\#define \textbf{ L\+C\+D\+\_\+\+B\+A\+C\+K\+L\+I\+G\+H\+T\+\_\+\+P\+E\+R\+I\+PH}~S\+Y\+S\+C\+T\+L\+\_\+\+P\+E\+R\+I\+P\+H\+\_\+\+G\+P\+I\+OF
+\item 
+\#define \textbf{ L\+C\+D\+\_\+\+B\+A\+C\+K\+L\+I\+G\+H\+T\+\_\+\+B\+A\+SE}~G\+P\+I\+O\+\_\+\+P\+O\+R\+T\+F\+\_\+\+B\+A\+SE
+\item 
+\#define \textbf{ L\+C\+D\+\_\+\+B\+A\+C\+K\+L\+I\+G\+H\+T\+\_\+\+P\+IN}~G\+P\+I\+O\+\_\+\+P\+I\+N\+\_\+3
+\item 
+\#define \textbf{ U\+S\+E\+R\+\_\+\+L\+E\+D\+\_\+\+P\+E\+R\+I\+PH}~S\+Y\+S\+C\+T\+L\+\_\+\+P\+E\+R\+I\+P\+H\+\_\+\+G\+P\+I\+OF
+\item 
+\#define \textbf{ U\+S\+E\+R\+\_\+\+L\+E\+D\+\_\+\+B\+A\+SE}~G\+P\+I\+O\+\_\+\+P\+O\+R\+T\+F\+\_\+\+B\+A\+SE
+\item 
+\#define \textbf{ U\+S\+E\+R\+\_\+\+L\+E\+D\+\_\+\+R\+\_\+\+P\+IN}~G\+P\+I\+O\+\_\+\+P\+I\+N\+\_\+1
+\item 
+\#define \textbf{ U\+S\+E\+R\+\_\+\+L\+E\+D\+\_\+\+G\+\_\+\+P\+IN}~G\+P\+I\+O\+\_\+\+P\+I\+N\+\_\+2
+\item 
+\#define \textbf{ U\+S\+E\+R\+\_\+\+L\+E\+D\+\_\+\+B\+\_\+\+P\+IN}~G\+P\+I\+O\+\_\+\+P\+I\+N\+\_\+3
+\item 
+\#define \textbf{ S\+E\+T\+\_\+\+L\+C\+D\+\_\+\+D\+A\+TA}(uc\+Byte)
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+D\+E\+V\+I\+C\+E\+\_\+\+C\+O\+D\+E\+\_\+\+R\+E\+A\+D\+\_\+\+R\+EG}~0x00
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+O\+S\+C\+\_\+\+S\+T\+A\+R\+T\+\_\+\+R\+EG}~0x00
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+O\+U\+T\+P\+U\+T\+\_\+\+C\+T\+R\+L\+\_\+\+R\+EG}~0x01
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+L\+C\+D\+\_\+\+D\+R\+I\+V\+E\+\_\+\+A\+C\+\_\+\+C\+T\+R\+L\+\_\+\+R\+EG}~0x02
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+P\+W\+R\+\_\+\+C\+T\+R\+L\+\_\+1\+\_\+\+R\+EG}~0x03
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+D\+I\+S\+P\+L\+A\+Y\+\_\+\+C\+T\+R\+L\+\_\+\+R\+EG}~0x07
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+F\+R\+A\+M\+E\+\_\+\+C\+Y\+C\+L\+E\+\_\+\+C\+T\+R\+L\+\_\+\+R\+EG}~0x0B
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+P\+W\+R\+\_\+\+C\+T\+R\+L\+\_\+2\+\_\+\+R\+EG}~0x0C
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+P\+W\+R\+\_\+\+C\+T\+R\+L\+\_\+3\+\_\+\+R\+EG}~0x0D
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+P\+W\+R\+\_\+\+C\+T\+R\+L\+\_\+4\+\_\+\+R\+EG}~0x0E
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+G\+A\+T\+E\+\_\+\+S\+C\+A\+N\+\_\+\+S\+T\+A\+R\+T\+\_\+\+R\+EG}~0x0F
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+S\+L\+E\+E\+P\+\_\+\+M\+O\+D\+E\+\_\+\+R\+EG}~0x10
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+E\+N\+T\+R\+Y\+\_\+\+M\+O\+D\+E\+\_\+\+R\+EG}~0x11
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+G\+E\+N\+\_\+\+I\+F\+\_\+\+C\+T\+R\+L\+\_\+\+R\+EG}~0x15
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+P\+W\+R\+\_\+\+C\+T\+R\+L\+\_\+5\+\_\+\+R\+EG}~0x1E
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+R\+A\+M\+\_\+\+D\+A\+T\+A\+\_\+\+R\+EG}~0x22
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+F\+R\+A\+M\+E\+\_\+\+F\+R\+E\+Q\+\_\+\+R\+EG}~0x25
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+V\+C\+O\+M\+\_\+\+O\+T\+P\+\_\+1\+\_\+\+R\+EG}~0x28
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+V\+C\+O\+M\+\_\+\+O\+T\+P\+\_\+2\+\_\+\+R\+EG}~0x29
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+G\+A\+M\+M\+A\+\_\+\+C\+T\+R\+L\+\_\+1\+\_\+\+R\+EG}~0x30
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+G\+A\+M\+M\+A\+\_\+\+C\+T\+R\+L\+\_\+2\+\_\+\+R\+EG}~0x31
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+G\+A\+M\+M\+A\+\_\+\+C\+T\+R\+L\+\_\+3\+\_\+\+R\+EG}~0x32
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+G\+A\+M\+M\+A\+\_\+\+C\+T\+R\+L\+\_\+4\+\_\+\+R\+EG}~0x33
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+G\+A\+M\+M\+A\+\_\+\+C\+T\+R\+L\+\_\+5\+\_\+\+R\+EG}~0x34
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+G\+A\+M\+M\+A\+\_\+\+C\+T\+R\+L\+\_\+6\+\_\+\+R\+EG}~0x35
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+G\+A\+M\+M\+A\+\_\+\+C\+T\+R\+L\+\_\+7\+\_\+\+R\+EG}~0x36
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+G\+A\+M\+M\+A\+\_\+\+C\+T\+R\+L\+\_\+8\+\_\+\+R\+EG}~0x37
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+G\+A\+M\+M\+A\+\_\+\+C\+T\+R\+L\+\_\+9\+\_\+\+R\+EG}~0x3A
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+G\+A\+M\+M\+A\+\_\+\+C\+T\+R\+L\+\_\+10\+\_\+\+R\+EG}~0x3B
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+V\+\_\+\+R\+A\+M\+\_\+\+P\+O\+S\+\_\+\+R\+EG}~0x44
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+H\+\_\+\+R\+A\+M\+\_\+\+S\+T\+A\+R\+T\+\_\+\+R\+EG}~0x45
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+H\+\_\+\+R\+A\+M\+\_\+\+E\+N\+D\+\_\+\+R\+EG}~0x46
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+X\+\_\+\+R\+A\+M\+\_\+\+A\+D\+D\+R\+\_\+\+R\+EG}~0x4E
+\item 
+\#define \textbf{ S\+S\+D2119\+\_\+\+Y\+\_\+\+R\+A\+M\+\_\+\+A\+D\+D\+R\+\_\+\+R\+EG}~0x4F
+\item 
+\#define \textbf{ E\+N\+T\+R\+Y\+\_\+\+M\+O\+D\+E\+\_\+\+D\+E\+F\+A\+U\+LT}~0x6830
+\item 
+\#define \textbf{ M\+A\+K\+E\+\_\+\+E\+N\+T\+R\+Y\+\_\+\+M\+O\+DE}(x)~((\textbf{ E\+N\+T\+R\+Y\+\_\+\+M\+O\+D\+E\+\_\+\+D\+E\+F\+A\+U\+LT} \& 0x\+F\+F00) $\vert$ (x))
+\item 
+\#define \textbf{ L\+C\+D\+\_\+\+V\+E\+R\+T\+I\+C\+A\+L\+\_\+\+M\+AX}~240
+\item 
+\#define \textbf{ L\+C\+D\+\_\+\+H\+O\+R\+I\+Z\+O\+N\+T\+A\+L\+\_\+\+M\+AX}~320
+\item 
+\#define \textbf{ D\+P\+Y\+C\+O\+L\+O\+R\+T\+R\+A\+N\+S\+L\+A\+TE}(c)
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ \textbf{ pfn\+Write\+Data}) (uint16\+\_\+t us\+Data)
+\item 
+typedef void($\ast$ \textbf{ pfn\+Write\+Command}) (uint8\+\_\+t uc\+Data)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \textbf{ Write\+Data\+G\+P\+IO} (uint16\+\_\+t us\+Data)
+\item 
+static void \textbf{ Write\+Command\+G\+P\+IO} (uint8\+\_\+t uc\+Data)
+\item 
+void \textbf{ L\+E\+D\+\_\+\+ON} (void)
+\item 
+void \textbf{ L\+E\+D\+\_\+\+O\+FF} (void)
+\item 
+static void \textbf{ Init\+G\+P\+I\+O\+L\+C\+D\+Interface} (uint32\+\_\+t ul\+Clock\+MS)
+\item 
+void \textbf{ Kentec320x240x16\+\_\+\+S\+S\+D2119\+Init} (void)
+\item 
+static void \textbf{ Kentec320x240x16\+\_\+\+S\+S\+D2119\+Pixel\+Draw} (void $\ast$pv\+Display\+Data, int32\+\_\+t lX, int32\+\_\+t lY, uint32\+\_\+t ul\+Value)
+\item 
+static void \textbf{ Kentec320x240x16\+\_\+\+S\+S\+D2119\+Pixel\+Draw\+Multiple} (void $\ast$pv\+Display\+Data, int32\+\_\+t lX, int32\+\_\+t lY, int32\+\_\+t l\+X0, int32\+\_\+t l\+Count, int32\+\_\+t l\+B\+PP, const uint8\+\_\+t $\ast$puc\+Data, const uint8\+\_\+t $\ast$puc\+Palette)
+\item 
+static void \textbf{ Kentec320x240x16\+\_\+\+S\+S\+D2119\+Line\+DrawH} (void $\ast$pv\+Display\+Data, int32\+\_\+t l\+X1, int32\+\_\+t l\+X2, int32\+\_\+t lY, uint32\+\_\+t ul\+Value)
+\item 
+static void \textbf{ Kentec320x240x16\+\_\+\+S\+S\+D2119\+Line\+DrawV} (void $\ast$pv\+Display\+Data, int32\+\_\+t lX, int32\+\_\+t l\+Y1, int32\+\_\+t l\+Y2, uint32\+\_\+t ul\+Value)
+\item 
+static void \textbf{ Kentec320x240x16\+\_\+\+S\+S\+D2119\+Rect\+Fill} (void $\ast$pv\+Display\+Data, const t\+Rectangle $\ast$p\+Rect, uint32\+\_\+t ul\+Value)
+\item 
+static uint32\+\_\+t \textbf{ Kentec320x240x16\+\_\+\+S\+S\+D2119\+Color\+Translate} (void $\ast$pv\+Display\+Data, uint32\+\_\+t ul\+Value)
+\item 
+static void \textbf{ Kentec320x240x16\+\_\+\+S\+S\+D2119\+Flush} (void $\ast$pv\+Display\+Data)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ pfn\+Write\+Data} \textbf{ Write\+Data} = \textbf{ Write\+Data\+G\+P\+IO}
+\item 
+\textbf{ pfn\+Write\+Command} \textbf{ Write\+Command} = \textbf{ Write\+Command\+G\+P\+IO}
+\item 
+const t\+Display \textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}
+\end{DoxyCompactItemize}
