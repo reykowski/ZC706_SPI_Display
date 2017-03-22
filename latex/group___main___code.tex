@@ -1076,38 +1076,7 @@ uint32\+\_\+t \textbf{ g\+\_\+ul\+Previous\+Panel}
 \subsubsection{timeout}
 {\footnotesize\ttfamily \#define timeout~4e5}
 
-\doxyref{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}{p.}{_z_c706___s_p_i___display_8c} -\/ Display data retrieved from Z\+C706 via S\+PI port.
 
-The data is displayed using TI E\+K-\/\+T\+M4\+C123\+G\+XL launchpad and Kentec 320x240 (E\+B-\/\+L\+M4\+F120-\/\+L35) display.
-
-Code uses the Stellaris Graphics Library and Tiva\+Ware™ Peripheral Driver Library
-
-This code configures the S\+S\+I1 as S\+PI Slave on an T\+M4\+C123G launchpad (E\+K-\/\+T\+M4\+C123\+G\+XL) evaluation board. RX timeout interrupt is configured for S\+S\+I1. Four 16bit words are sent from Z\+C706 F\+P\+GA. The S\+S\+I1 RX timeout interrupt is enabled. The code then waits for the interrupt to fire. Once the interrupt is fired, the data from slave RX F\+I\+FO is read, checked and assembled to a 32 bit word The 32bit words are stored in an array for further processing and disply U\+A\+R\+T0 is used to send information to host at 115200 baud and 8-\/n-\/1 mode.
-
-This example uses the following peripherals and I/O signals on E\+K-\/\+T\+M4\+C123\+G\+XL.
-
-
-\begin{DoxyItemize}
-\item S\+S\+I1 peripheral
-\item G\+P\+IO Port D peripheral (for S\+S\+I1 pins)
-\item S\+S\+I1\+C\+LK -\/ P\+D0 -\/ Clock
-\item S\+S\+I1\+Fss -\/ P\+D1 -\/ Enable
-\item S\+S\+I1\+Rx -\/ P\+D2 -\/ M\+O\+SI
-\item S\+S\+I1\+Tx -\/ P\+D3 -\/ M\+I\+SO (currently not used)
-\end{DoxyItemize}
-
-The following U\+A\+RT signals are configured only for displaying console messages for this example. These are not required for operation of S\+S\+I0.
-\begin{DoxyItemize}
-\item U\+A\+R\+T0 peripheral
-\item G\+P\+IO Port A peripheral (for U\+A\+R\+T0 pins)
-\item U\+A\+R\+T0\+RX -\/ P\+A0
-\item U\+A\+R\+T0\+TX -\/ P\+A1
-\end{DoxyItemize}
-
-This example uses the following interrupt handlers. To use this example in your own application you must add these interrupt handlers to your vector table.
-\begin{DoxyItemize}
-\item S\+S\+I1\+Int\+Handler. 
-\end{DoxyItemize}
 
 \subsection{Function Documentation}
 \mbox{\label{group___main___code_ga9f16cf799af396846e96534b1111bb51}} 
@@ -1272,7 +1241,7 @@ This example uses the following interrupt handlers. To use this example in your 
 \subsubsection{On\+Previous()}
 {\footnotesize\ttfamily void On\+Previous (\begin{DoxyParamCaption}\item[{t\+Widget $\ast$}]{p\+Widget }\end{DoxyParamCaption})}
 
-\mbox{\label{group___main___code_ga9ac8398ccddfa5d7735ac8444e13a0b6}} 
+Handles presses of the previous panel button. \mbox{\label{group___main___code_ga9ac8398ccddfa5d7735ac8444e13a0b6}} 
 \index{Main\+\_\+\+Code@{Main\+\_\+\+Code}!On\+Primitive\+Paint@{On\+Primitive\+Paint}}
 \index{On\+Primitive\+Paint@{On\+Primitive\+Paint}!Main\+\_\+\+Code@{Main\+\_\+\+Code}}
 \subsubsection{On\+Primitive\+Paint()}

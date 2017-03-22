@@ -62,21 +62,82 @@ $(function() {
 <div class="title">My Personal Index Page </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>ZC706 Diagnostic Tool Demonstration </p>
+<div class="textblock"><p>ZC706 Diagnostic Tool Demonstration <br />
+</p>
 <h1><a class="anchor" id="intro_sec"></a>
 Introduction</h1>
-<p>Display data retrieved from ZC706 via SPI port. </p><dl class="section author"><dt>Author</dt><dd>Arne Reykowski </dd></dl>
+<p><a class="el" href="_z_c706___s_p_i___display_8c.html">ZC706_SPI_Display.c</a> - Display data retrieved from ZC706 via SPI port. <br />
+ The data is displayed using TI EK-TM4C123GXL launch pad and <br />
+ Kentec 320x240 (EB-LM4F120-L35) display. <br />
+ Code uses the Stellaris Graphics Library and Tiva Ware (TM) Peripheral Driver Library</p>
+<dl class="section author"><dt>Author</dt><dd>Arne Reykowski </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2017 </dd></dl>
-<dl class="section pre"><dt>Precondition</dt><dd>First initialize the system. </dd></dl>
-<dl class="bug"><dt><b><a class="el" href="bug.html#_bug000001">Bug:</a></b></dt><dd></dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>Make sure that the SPI port is connected between ZC706 and TM4C123G. <br />
+ Otherwise only dummy data will be displayed. </dd></dl>
+<dl class="bug"><dt><b><a class="el" href="bug.html#_bug000001">Bug:</a></b></dt><dd>There is a thin black line across the screen after boot up. <br />
+ This line disappears when paging through the screens. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd></dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>This is the introduction.</dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd></dd></dl>
 <h1><a class="anchor" id="install_sec"></a>
 Installation</h1>
 <h2><a class="anchor" id="step1"></a>
 Step 1: Opening the box</h2>
 <p>etc... </p>
+<h1><a class="anchor" id="spi_sec"></a>
+SPI Interface</h1>
+<p><br />
+This code configures the SSI1 as SPI Slave on an <br />
+TM4C123G launchpad (EK-TM4C123GXL) evaluation board. <br />
+RX timeout interrupt is configured for SSI1. <br />
+Four 16bit words are sent from ZC706 FPGA. <br />
+The SSI1 RX timeout interrupt is enabled. <br />
+The code then waits for the interrupt to fire. <br />
+Once the interrupt is fired, the data from slave RX FIFO is read, <br />
+then checked and assembled to a 32 bit word <br />
+The 32bit words are stored in an array for further processing and display <br />
+UART0 is used to send information to host at 115200 baud and 8-n-1 <br />
+mode. <br />
+<br />
+This example uses the following peripherals and I/O signals on EK-TM4C123GXL.<br />
+<br />
+</p><ul>
+<li>SSI1 peripheral <br />
+</li>
+<li>GPIO Port D peripheral (for SSI1 pins) <br />
+</li>
+<li>SSI1CLK - PD0 - Clock <br />
+</li>
+<li>SSI1Fss - PD1 - Enable <br />
+</li>
+<li>SSI1Rx - PD2 - MOSI <br />
+</li>
+<li>SSI1Tx - PD3 - MISO (currently not used) <br />
+<br />
+The following UART signals are configured only for sending console <br />
+messages bck to host. They are not required for operation of the SSI1: <br />
+<br />
+</li>
+<li>UART0 peripheral <br />
+</li>
+<li>GPIO Port A peripheral (for UART0 pins) <br />
+</li>
+<li>UART0RX - PA0 <br />
+</li>
+<li>UART0TX - PA1 <br />
+<br />
+</li>
+</ul>
+<h1><a class="anchor" id="interrupt_sec"></a>
+Interrupts</h1>
+<p>This code uses the following interrupt handlers: <br />
+<br />
+</p><ul>
+<li>SSI1IntHandler. <br />
+<br />
+See also <a class="el" href="tm4c123gh6pm__startup__ccs_8c.html">tm4c123gh6pm_startup_ccs.c</a> which contains the vector interrupt table <br />
+</li>
+</ul>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

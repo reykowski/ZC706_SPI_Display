@@ -1,5 +1,11 @@
-Z\+C706 Diagnostic Tool Demonstration \section{Introduction}\label{index_intro_sec}
-Display data retrieved from Z\+C706 via S\+PI port. \begin{DoxyAuthor}{Author}
+Z\+C706 Diagnostic Tool Demonstration ~\newline
+\section{Introduction}\label{index_intro_sec}
+\doxyref{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}{p.}{_z_c706___s_p_i___display_8c} -\/ Display data retrieved from Z\+C706 via S\+PI port. ~\newline
+ The data is displayed using TI E\+K-\/\+T\+M4\+C123\+G\+XL launch pad and ~\newline
+ Kentec 320x240 (E\+B-\/\+L\+M4\+F120-\/\+L35) display. ~\newline
+ Code uses the Stellaris Graphics Library and Tiva Ware (TM) Peripheral Driver Library
+
+\begin{DoxyAuthor}{Author}
 Arne Reykowski 
 \end{DoxyAuthor}
 \begin{DoxyVersion}{Version}
@@ -9,16 +15,70 @@ Arne Reykowski
 2017 
 \end{DoxyDate}
 \begin{DoxyPrecond}{Precondition}
-First initialize the system. 
+Make sure that the S\+PI port is connected between Z\+C706 and T\+M4\+C123G. ~\newline
+ Otherwise only dummy data will be displayed. 
 \end{DoxyPrecond}
 \begin{DoxyRefDesc}{Bug}
-\item[\textbf{ Bug}]\end{DoxyRefDesc}
+\item[\textbf{ Bug}]There is a thin black line across the screen after boot up. ~\newline
+ This line disappears when paging through the screens. \end{DoxyRefDesc}
 \begin{DoxyWarning}{Warning}
 
 \end{DoxyWarning}
 \begin{DoxyCopyright}{Copyright}
-This is the introduction.
+
 \end{DoxyCopyright}
 \section{Installation}\label{index_install_sec}
 \subsection{Step 1\+: Opening the box}\label{index_step1}
-etc... 
+etc... \section{S\+P\+I Interface}\label{index_spi_sec}
+~\newline
+This code configures the S\+S\+I1 as S\+PI Slave on an ~\newline
+T\+M4\+C123G launchpad (E\+K-\/\+T\+M4\+C123\+G\+XL) evaluation board. ~\newline
+RX timeout interrupt is configured for S\+S\+I1. ~\newline
+Four 16bit words are sent from Z\+C706 F\+P\+GA. ~\newline
+The S\+S\+I1 RX timeout interrupt is enabled. ~\newline
+The code then waits for the interrupt to fire. ~\newline
+Once the interrupt is fired, the data from slave RX F\+I\+FO is read, ~\newline
+then checked and assembled to a 32 bit word ~\newline
+The 32bit words are stored in an array for further processing and display ~\newline
+U\+A\+R\+T0 is used to send information to host at 115200 baud and 8-\/n-\/1 ~\newline
+mode. ~\newline
+~\newline
+This example uses the following peripherals and I/O signals on E\+K-\/\+T\+M4\+C123\+G\+XL.~\newline
+~\newline
+
+\begin{DoxyItemize}
+\item S\+S\+I1 peripheral ~\newline
+
+\item G\+P\+IO Port D peripheral (for S\+S\+I1 pins) ~\newline
+
+\item S\+S\+I1\+C\+LK -\/ P\+D0 -\/ Clock ~\newline
+
+\item S\+S\+I1\+Fss -\/ P\+D1 -\/ Enable ~\newline
+
+\item S\+S\+I1\+Rx -\/ P\+D2 -\/ M\+O\+SI ~\newline
+
+\item S\+S\+I1\+Tx -\/ P\+D3 -\/ M\+I\+SO (currently not used) ~\newline
+~\newline
+The following U\+A\+RT signals are configured only for sending console ~\newline
+messages bck to host. They are not required for operation of the S\+S\+I1\+: ~\newline
+~\newline
+
+\item U\+A\+R\+T0 peripheral ~\newline
+
+\item G\+P\+IO Port A peripheral (for U\+A\+R\+T0 pins) ~\newline
+
+\item U\+A\+R\+T0\+RX -\/ P\+A0 ~\newline
+
+\item U\+A\+R\+T0\+TX -\/ P\+A1 ~\newline
+~\newline
+
+\end{DoxyItemize}\section{Interrupts}\label{index_interrupt_sec}
+This code uses the following interrupt handlers\+: ~\newline
+~\newline
+
+\begin{DoxyItemize}
+\item S\+S\+I1\+Int\+Handler. ~\newline
+~\newline
+See also \doxyref{tm4c123gh6pm\+\_\+startup\+\_\+ccs.\+c}{p.}{tm4c123gh6pm__startup__ccs_8c} which contains the vector interrupt table ~\newline
+
+\end{DoxyItemize}

@@ -3,23 +3,73 @@
  *
  * \section intro_sec Introduction
  *
- *  \brief     ZC706 Diagnostic Tool Demonstration
- *  \details   Display data retrieved from ZC706 via SPI port.
+ *  \brief     ZC706 Diagnostic Tool Demonstration \n
+ *  \details   ZC706_SPI_Display.c - Display data retrieved from ZC706 via SPI port.   \n
+ *  The data is displayed using TI EK-TM4C123GXL launch pad and                        \n
+ *  Kentec 320x240 (EB-LM4F120-L35) display.                                           \n
+ *
+ *  Code uses the Stellaris Graphics Library
+ *  and
+ *  Tiva Ware (TM) Peripheral Driver Library
+ *
  *  \author    Arne Reykowski
  *  \version   1.0
  *  \date      2017
- *  \pre       First initialize the system.
- *  \bug
+ *  \pre       Make sure that the SPI port is connected between ZC706 and TM4C123G. \n Otherwise only dummy data will be displayed.
+ *  \bug       There is a thin black line across the screen after boot up. \n This line disappears when paging through the screens.
  *  \warning
  *  \copyright
- * This is the introduction.
  *
  * \section install_sec Installation
  *
  * \subsection step1 Step 1: Opening the box
  *
  * etc...
+ * \section spi_sec SPI Interface
+ * \n
+ * This code configures the SSI1 as SPI Slave on an                             \n
+ * TM4C123G launchpad (EK-TM4C123GXL) evaluation board.                         \n
+ * RX timeout interrupt is configured for SSI1.                                 \n
+ * Four 16bit words are sent from ZC706 FPGA.                                   \n
+ * The SSI1 RX timeout interrupt is enabled.                                    \n
+ * The code then waits for the interrupt to fire.                               \n
+ * Once the interrupt is fired, the data from slave RX FIFO is read,            \n
+ * then checked and assembled to a 32 bit word                                  \n
+ * The 32bit words are stored in an array for further processing and display    \n
+ * UART0 is used to send information to host at 115200 baud and 8-n-1           \n
+ * mode.                                                                        \n
+ * \n
+ * This example uses the following peripherals and I/O signals on EK-TM4C123GXL.\n
+ * \n
+ * - SSI1 peripheral                                                            \n
+ * - GPIO Port D peripheral (for SSI1 pins)                                     \n
+ * - SSI1CLK - PD0  - Clock                                                     \n
+ * - SSI1Fss - PD1  - Enable                                                    \n
+ * - SSI1Rx  - PD2  - MOSI                                                      \n
+ * - SSI1Tx  - PD3  - MISO (currently not used)                                 \n
+ * \n
+ * The following UART signals are configured only for sending console           \n
+ * messages bck to host.  They are not required for operation of the SSI1:      \n
+ * \n
+ * - UART0 peripheral                                                           \n
+ * - GPIO Port A peripheral (for UART0 pins)                                    \n
+ * - UART0RX - PA0                                                              \n
+ * - UART0TX - PA1                                                              \n
+ * \n
+ * \section interrupt_sec Interrupts
+ * This code uses the following interrupt handlers:
+ * \n
+ * \n
+ * - SSI1IntHandler.                                                            \n
+ * \n
+ * See also tm4c123gh6pm_startup_ccs.c which contains the vector interrupt table    \n
  */
+
+
+
+//
+//*****************************************************************************
+
 
 //*****************************************************************************
 //
@@ -27,55 +77,6 @@
 //! @{
 //
 //*****************************************************************************
-//*****************************************************************************
-//!
-//! ZC706_SPI_Display.c - Display data retrieved from ZC706 via SPI port.
-//!
-//! The data is displayed using TI EK-TM4C123GXL launchpad and
-//! Kentec 320x240 (EB-LM4F120-L35) display.
-//!
-//! Code uses the Stellaris Graphics Library
-//! and
-//! TivaWare™ Peripheral Driver Library
-//!
-//!
-//!
-//! This code configures the SSI1 as SPI Slave on an
-//! TM4C123G launchpad (EK-TM4C123GXL) evaluation board.
-//! RX timeout interrupt is configured for SSI1.
-//! Four 16bit words are sent from ZC706 FPGA.
-//! The SSI1 RX timeout interrupt is enabled.
-//! The code then waits for the interrupt to fire.
-//! Once the interrupt is fired, the data from slave RX FIFO is read, checked and assembled to a 32 bit word
-//! The 32bit words are stored in an array for further processing and disply
-//! UART0 is used to send information to host at 115200 baud and 8-n-1
-//! mode.
-//!
-//! This example uses the following peripherals and I/O signals on EK-TM4C123GXL.
-//!
-//! - SSI1 peripheral
-//! - GPIO Port D peripheral (for SSI1 pins)
-//! - SSI1CLK - PD0  - Clock
-//! - SSI1Fss - PD1	 - Enable
-//! - SSI1Rx  - PD2  - MOSI
-//! - SSI1Tx  - PD3  - MISO (currently not used)
-//!
-//! The following UART signals are configured only for displaying console
-//! messages for this example.  These are not required for operation of SSI0.
-//! - UART0 peripheral
-//! - GPIO Port A peripheral (for UART0 pins)
-//! - UART0RX - PA0
-//! - UART0TX - PA1
-//!
-//! This example uses the following interrupt handlers.  To use this example
-//! in your own application you must add these interrupt handlers to your
-//! vector table.
-//! - SSI1IntHandler.
-//!
-//
-//*****************************************************************************
-
-
 
 #include "stdint.h"
 #include "stdbool.h"
@@ -738,7 +739,7 @@ GrStringDraw(pContext, pcString, i32Length, i32X-w, i32Y, bOpaque);
 }
 //*****************************************************************************
 //
-// Handles presses of the previous panel button.
+/*! Handles presses of the previous panel button. */
 //
 //*****************************************************************************
 void
