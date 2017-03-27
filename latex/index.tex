@@ -31,16 +31,18 @@ Make sure that the S\+PI port is connected between Z\+C706 and T\+M4\+C123G. ~\n
 \subsection{Step 1\+: Opening the box}\label{index_step1}
 etc... \section{S\+P\+I Interface}\label{index_spi_sec}
 ~\newline
-This code configures the S\+S\+I1 as S\+PI Slave on an ~\newline
+This code configures the serial port S\+S\+I1 as S\+PI Slave on an ~\newline
 T\+M4\+C123G launchpad (E\+K-\/\+T\+M4\+C123\+G\+XL) evaluation board. ~\newline
-RX timeout interrupt is configured for S\+S\+I1. ~\newline
-Four 16bit words are sent from Z\+C706 F\+P\+GA. ~\newline
+An RX timeout interrupt is configured for S\+S\+I1. ~\newline
+Data are sent from Z\+C706 in groups of gour 16bit words. ~\newline
 The S\+S\+I1 RX timeout interrupt is enabled. ~\newline
 The code then waits for the interrupt to fire. ~\newline
+\char`\"{}void S\+S\+I1\+Int\+Handler(void)\char`\"{} contains the interrupt routine ~\newline
 Once the interrupt is fired, the data from slave RX F\+I\+FO is read, ~\newline
 then checked and assembled to a 32 bit word ~\newline
-The 32bit words are stored in an array for further processing and display ~\newline
-U\+A\+R\+T0 is used to send information to host at 115200 baud and 8-\/n-\/1 ~\newline
+The 32bit words are stored in an array ( int32\+\_\+t g\+\_\+ul\+Data\+Rx2[N\+U\+M\+\_\+\+S\+S\+I\+\_\+\+D\+A\+TA]) ~\newline
+for further processing and display. ~\newline
+The U\+A\+R\+T0 is used to send information to host at 115200 baud and 8-\/n-\/1 ~\newline
 mode. ~\newline
 ~\newline
 This example uses the following peripherals and I/O signals on E\+K-\/\+T\+M4\+C123\+G\+XL.~\newline
@@ -60,7 +62,7 @@ This example uses the following peripherals and I/O signals on E\+K-\/\+T\+M4\+C
 \item S\+S\+I1\+Tx -\/ P\+D3 -\/ M\+I\+SO (currently not used) ~\newline
 ~\newline
 The following U\+A\+RT signals are configured only for sending console ~\newline
-messages bck to host. They are not required for operation of the S\+S\+I1\+: ~\newline
+messages back to host. They are not required for operation of the S\+S\+I1\+: ~\newline
 ~\newline
 
 \item U\+A\+R\+T0 peripheral ~\newline

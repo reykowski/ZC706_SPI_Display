@@ -27,16 +27,18 @@
  * etc...
  * \section spi_sec SPI Interface
  * \n
- * This code configures the SSI1 as SPI Slave on an                             \n
+ * This code configures the serial port SSI1 as SPI Slave on an                 \n
  * TM4C123G launchpad (EK-TM4C123GXL) evaluation board.                         \n
- * RX timeout interrupt is configured for SSI1.                                 \n
- * Four 16bit words are sent from ZC706 FPGA.                                   \n
+ * An RX timeout interrupt is configured for SSI1.                              \n
+ * Data are sent from ZC706 in groups of gour 16bit words.                      \n
  * The SSI1 RX timeout interrupt is enabled.                                    \n
  * The code then waits for the interrupt to fire.                               \n
+ * "void SSI1IntHandler(void)" contains the interrupt routine                   \n
  * Once the interrupt is fired, the data from slave RX FIFO is read,            \n
  * then checked and assembled to a 32 bit word                                  \n
- * The 32bit words are stored in an array for further processing and display    \n
- * UART0 is used to send information to host at 115200 baud and 8-n-1           \n
+ * The 32bit words are stored in an array ( int32_t g_ulDataRx2[NUM_SSI_DATA])  \n
+ * for further processing and display.    \n
+ * The UART0 is used to send information to host at 115200 baud and 8-n-1       \n
  * mode.                                                                        \n
  * \n
  * This example uses the following peripherals and I/O signals on EK-TM4C123GXL.\n
@@ -49,7 +51,7 @@
  * - SSI1Tx  - PD3  - MISO (currently not used)                                 \n
  * \n
  * The following UART signals are configured only for sending console           \n
- * messages bck to host.  They are not required for operation of the SSI1:      \n
+ * messages back to host.  They are not required for operation of the SSI1:      \n
  * \n
  * - UART0 peripheral                                                           \n
  * - GPIO Port A peripheral (for UART0 pins)                                    \n
@@ -486,11 +488,34 @@ uint8_t SysTickIntHandler()
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //*****************************************************************************
 //
-// The first panel, which draws a picture of a tube amp.
+// The first panel, which draws a picture and a push button.
 //
 //*****************************************************************************
-Canvas(g_sDrawImage, g_psPanels, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
-       320, 216, CANVAS_STYLE_APP_DRAWN, 0, 0, 0, 0, 0, 0, DrawFirstImage);
+
+// Button across first panel
+
+//RectangularButton(g_sFirst, 0, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
+//                  320, 216, PB_STYLE_OUTLINE | PB_STYLE_TEXT_OPAQUE, ClrBlack, ClrBlack, 0, ClrSilver,
+//                  &g_sFontCm20, "", g_pucBlue50x50, g_pucBlue50x50Press, 0, 0,
+//                  OnFirst);
+tPushButtonWidget g_psFirst[] =
+{
+RectangularButtonStruct(g_psPanels, 0, 0,
+                        &g_sKentec320x240x16_SSD2119, 0, 24, 320, 216,
+                        PB_STYLE_OUTLINE |PB_STYLE_TEXT_OPAQUE | PB_STYLE_RELEASE_NOTIFY ,
+                        ClrBlack, ClrBlack,  ClrGray, ClrSilver,
+                        &g_sFontCm20, "", 0, 0, 0, 0, OnFirst),
+};
+// Picture for first panel
+//Canvas(g_sDrawImage, g_psPanels, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
+//       320, 216, CANVAS_STYLE_APP_DRAWN, 0, 0, 0, 0, 0, 0, DrawFirstImage);
+tCanvasWidget g_psFirstCanvas[] =
+{
+CanvasStruct(g_psPanels, g_psFirst, 0,
+                       &g_sKentec320x240x16_SSD2119, 0, 24, 320, 240,
+                       CANVAS_STYLE_APP_DRAWN, 0, 0, 0, 0, 0, 0, DrawFirstImage),
+};
+
 //*****************************************************************************
 //
 // The second panel, which contains the Block Diagram with Push Buttons
@@ -629,7 +654,7 @@ Canvas(g_sPrimitives, g_psPanels + 8, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
 //*****************************************************************************
 tCanvasWidget g_psPanels[] =
 {
-    CanvasStruct(0, 0, &g_sDrawImage, &g_sKentec320x240x16_SSD2119, 0, 24,
+    CanvasStruct(0, 0, &g_psFirstCanvas , &g_sKentec320x240x16_SSD2119, 0, 24,
                  320, 216, CANVAS_STYLE_FILL, ClrBlack, 0, 0, 0, 0, 0, 0),
 	CanvasStruct(0, 0, &g_psButtonCanvas, &g_sKentec320x240x16_SSD2119, 0, 24,
 	             320, 166, CANVAS_STYLE_FILL, ClrBlack, 0, 0, 0, 0, 0, 0),
@@ -694,7 +719,7 @@ char *g_pcPanelNames[] =
 //
 //*****************************************************************************
 RectangularButton(g_sPrevious, 0, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 190,
-                  50, 50, PB_STYLE_FILL, ClrBlack, ClrBlack, 0, ClrSilver,
+                  50, 50, PB_STYLE_FILL | PB_STYLE_RELEASE_NOTIFY , ClrBlack, ClrBlack, 0, ClrSilver,
                   &g_sFontCm20, "-", g_pucBlue50x50, g_pucBlue50x50Press, 0, 0,
                   OnPrevious);
 
@@ -703,19 +728,11 @@ Canvas(g_sTitle, 0, ClrBlack, 0, &g_sKentec320x240x16_SSD2119, 50, 190, 220, 50,
        &g_sFontCm20, 0, 0, 0);
 
 RectangularButton(g_sNext, 0, 0, 0, &g_sKentec320x240x16_SSD2119, 270, 190,
-                  50, 50, PB_STYLE_IMG | PB_STYLE_TEXT, ClrBlack, ClrBlack, 0,
+                  50, 50, PB_STYLE_IMG | PB_STYLE_TEXT | PB_STYLE_RELEASE_NOTIFY , ClrBlack, ClrBlack, 0,
                   ClrSilver, &g_sFontCm20, "+", g_pucBlue50x50,
                   g_pucBlue50x50Press, 0, 0, OnNext);
 
-//*****************************************************************************
-//
-// The buttons across first panel
-//
-//*****************************************************************************
-RectangularButton(g_sFirst, 0, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
-                  320, 166, PB_STYLE_OUTLINE | PB_STYLE_TEXT_OPAQUE, ClrBlack, ClrBlack, 0, ClrSilver,
-                  &g_sFontCm20, "", g_pucBlue50x50, g_pucBlue50x50Press, 0, 0,
-                  OnFirst);
+
 //*****************************************************************************
 //
 // The panel that is currently being displayed.
@@ -745,15 +762,17 @@ GrStringDraw(pContext, pcString, i32Length, i32X-w, i32Y, bOpaque);
 void
 OnPrevious(tWidget *pWidget)
 {
+ //   SysCtlDelay(1000000);
+
 	g_ulPreviousPanel = g_ulPanel;
     //
     // There is nothing to be done if the first panel is already being
     // displayed.
     //
-    if(g_ulPanel == 0)
+    if(g_ulPanel == First_Panel)
     {
-        return;
-   }
+//        return;
+    }
 
     //
     // Remove the current panel.
@@ -765,7 +784,7 @@ OnPrevious(tWidget *pWidget)
     {
     	g_ulPanel = 0;	// Go back to first panel
     }
-    else
+    else if (g_ulPanel > First_Panel)
     {
     	//
     	// Decrement the panel index.
@@ -791,35 +810,33 @@ OnPrevious(tWidget *pWidget)
     //
     // See if the previous panel was the last panel.
     //
-    //if(g_ulPanel == (NUM_PANELS - 2))
-      if(g_ulPreviousPanel >= ( Data_Panel ))
+
+    if(g_ulPreviousPanel >= ( Data_Panel ))
     {
         //
         // Display the next button.
         //
         PushButtonImageOn(&g_sNext);
         PushButtonTextOn(&g_sNext);
-        PushButtonFillOff(&g_sNext);
+        PushButtonFillOn(&g_sNext);
         WidgetPaint((tWidget *)&g_sNext);
     }
 
 
-      //
-      // Add and draw the new panel.
-      //
-      WidgetAdd(WIDGET_ROOT, (tWidget *)(g_psPanels + g_ulPanel));
-      WidgetPaint((tWidget *)(g_psPanels + g_ulPanel));
+    //
+    // Add and draw the new panel.
+    //
+    WidgetAdd(WIDGET_ROOT, (tWidget *)(g_psPanels + g_ulPanel));
+    WidgetPaint((tWidget *)(g_psPanels + g_ulPanel));
 
-    if(g_ulPanel == 0)
+    //
+    // Set the title for this panel.
+    //
+    if(g_ulPanel > First_Panel)
     {
-        return;
-    }
-
-//
-// Set the title of this panel.
-//
       CanvasTextSet(&g_sTitle, g_pcPanelNames[g_ulPanel]);
       WidgetPaint((tWidget *)&g_sTitle);
+    }
 
 }
 
@@ -831,6 +848,7 @@ OnPrevious(tWidget *pWidget)
 void
 OnNext(tWidget *pWidget)
 {
+//    SysCtlDelay(1000000);
     //
     // There is nothing to be done if the last panel is already being
     // displayed.
@@ -838,7 +856,12 @@ OnNext(tWidget *pWidget)
 
     if(g_ulPanel >= Data_Panel)
     {
-        return;
+//        return;
+    }
+
+    if (g_ulPanel == First_Panel)
+    {
+//        WidgetRemove((tWidget *)(&g_psFirst));               // Remove button
     }
 
     //
@@ -846,10 +869,14 @@ OnNext(tWidget *pWidget)
     //
     WidgetRemove((tWidget *)(g_psPanels + g_ulPanel));
 
+
     //
     // Increment the panel index.
     //
-    g_ulPanel++;
+    if(g_ulPanel < Data_Panel)
+    {
+        g_ulPanel++;
+    }
 
     //
     // Add and draw the new panel.
@@ -866,21 +893,21 @@ OnNext(tWidget *pWidget)
     //
     // See if the previous panel was the first panel.
     //
-    if(g_ulPanel == 1)
+    if(g_ulPanel > First_Panel)
     {
         //
         // Display the previous button.
         //
         PushButtonImageOn(&g_sPrevious);
         PushButtonTextOn(&g_sPrevious);
-        PushButtonFillOff(&g_sPrevious);
+        PushButtonFillOn(&g_sPrevious);
         WidgetPaint((tWidget *)&g_sPrevious);
     }
 
     //
     // See if this is the last panel.
     //
-    if(g_ulPanel == Data_Panel)
+    if(g_ulPanel >= Data_Panel)
     {
         //
         // Clear the next button from the display since the last panel is being
@@ -901,6 +928,7 @@ OnNext(tWidget *pWidget)
 void
 OnFirst(tWidget *pWidget)
 {
+//    SysCtlDelay(1000000);
     //
     // There is nothing to be done if the last panel is already being
     // displayed.
@@ -915,7 +943,7 @@ OnFirst(tWidget *pWidget)
     // Remove the current panel.
     //
     WidgetRemove((tWidget *)(g_psPanels + g_ulPanel));
-    WidgetRemove((tWidget *)(&g_sFirst));               // Remove button
+    //WidgetRemove((tWidget *)(&g_psFirst));               // Remove button
     //
     // Increment the panel index.
     //
@@ -943,24 +971,18 @@ OnFirst(tWidget *pWidget)
         //
         PushButtonImageOn(&g_sPrevious);
         PushButtonTextOn(&g_sPrevious);
-        PushButtonFillOff(&g_sPrevious);
+        PushButtonFillOn(&g_sPrevious);
         WidgetPaint((tWidget *)&g_sPrevious);
     }
 
     //
-    // See if this is the last panel.
+    // Show the next button
     //
-//    if(g_ulPanel == Data_Panel)
-//    {
-        //
-        // Clear the next button from the display since the last panel is being
-        // displayed.
-        //
-        PushButtonImageOn(&g_sNext);
-        PushButtonTextOn(&g_sNext);
-        PushButtonFillOn(&g_sNext);
-        WidgetPaint((tWidget *)&g_sNext);
-//   }
+    PushButtonImageOn(&g_sNext);
+    PushButtonTextOn(&g_sNext);
+    PushButtonFillOn(&g_sNext);
+    WidgetPaint((tWidget *)&g_sNext);
+
 }
 //*****************************************************************************
 //
@@ -971,7 +993,7 @@ void
 DrawFirstImage(tWidget *pWidget, tContext *pContext)
 {
 
-    WidgetAdd(WIDGET_ROOT, (tWidget *)&g_sFirst);       // Add button
+ //   WidgetAdd(WIDGET_ROOT, (tWidget *)&g_psFirst);       // Add button
 
     if   (iHealth == 0)
     {
@@ -2018,6 +2040,7 @@ main(void)
 
     WidgetMessageQueueProcess();
 
+//    DrawFirstImage((tWidget *) g_ulPanel, &sContext);
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -2110,8 +2133,8 @@ main(void)
 
        // Enable the system ticks at 100 hz. - 100 measurements per second
        //
-       uint32_t a = ROM_SysCtlClockGet();		// Current Clock Rate (40MHz)
-       ROM_SysTickPeriodSet(a/3);			//Argument has to be <= 16777216
+       uint32_t a = ROM_SysCtlClockGet();		// Current Clock Rate (80MHz)
+       ROM_SysTickPeriodSet(a/4);			    //Argument has to be <= 16777216
        ROM_SysTickIntEnable();
        ROM_SysTickEnable();
 
@@ -2272,6 +2295,13 @@ main(void)
                    }
                    iHealth_old = iHealth;
                    // Health status check
+                   if (iHealth !=0)
+                   {
+                       GrContextFontSet(&sContext, &g_sFontCm20);
+                       GrContextForegroundSet(&sContext, ClrRed);
+                       GrContextBackgroundSet(&sContext, ClrSeashell);
+                       GrStringDraw(&sContext, "Touch Screen to Take Action", -1, 20, 95, 1);
+                   }
                    break;
                case Block_Diagram  :
                     GrContextFontSet(&sContext, &g_sFontCm20);
@@ -2407,6 +2437,7 @@ main(void)
                    break;
 
                case Data_Panel  :
+                   GrContextFontSet(&sContext, &g_sFontCm20);
                    GrContextForegroundSet(&sContext, ClrBlack);
                    GrContextBackgroundSet(&sContext, ClrLime);
                    GrStringDraw(&sContext, val_AGC_Str, 10, S11_x, S11_y, 1);	// AGC
@@ -2557,13 +2588,6 @@ main(void)
     }//while end
 
 
-    while(1)
-    {
-    //
-    // Process any messages in the widget message queue.
-    //
-    WidgetMessageQueueProcess();
-    }
 
 
 }

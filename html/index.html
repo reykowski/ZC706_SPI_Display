@@ -87,16 +87,18 @@ Step 1: Opening the box</h2>
 <h1><a class="anchor" id="spi_sec"></a>
 SPI Interface</h1>
 <p><br />
-This code configures the SSI1 as SPI Slave on an <br />
+This code configures the serial port SSI1 as SPI Slave on an <br />
 TM4C123G launchpad (EK-TM4C123GXL) evaluation board. <br />
-RX timeout interrupt is configured for SSI1. <br />
-Four 16bit words are sent from ZC706 FPGA. <br />
+An RX timeout interrupt is configured for SSI1. <br />
+Data are sent from ZC706 in groups of gour 16bit words. <br />
 The SSI1 RX timeout interrupt is enabled. <br />
 The code then waits for the interrupt to fire. <br />
+"void SSI1IntHandler(void)" contains the interrupt routine <br />
 Once the interrupt is fired, the data from slave RX FIFO is read, <br />
 then checked and assembled to a 32 bit word <br />
-The 32bit words are stored in an array for further processing and display <br />
-UART0 is used to send information to host at 115200 baud and 8-n-1 <br />
+The 32bit words are stored in an array ( int32_t g_ulDataRx2[NUM_SSI_DATA]) <br />
+for further processing and display. <br />
+The UART0 is used to send information to host at 115200 baud and 8-n-1 <br />
 mode. <br />
 <br />
 This example uses the following peripherals and I/O signals on EK-TM4C123GXL.<br />
@@ -115,7 +117,7 @@ This example uses the following peripherals and I/O signals on EK-TM4C123GXL.<br
 <li>SSI1Tx - PD3 - MISO (currently not used) <br />
 <br />
 The following UART signals are configured only for sending console <br />
-messages bck to host. They are not required for operation of the SSI1: <br />
+messages back to host. They are not required for operation of the SSI1: <br />
 <br />
 </li>
 <li>UART0 peripheral <br />
