@@ -8,6 +8,8 @@ var searchData=
   ['g_5fpfnvectors',['g_pfnVectors',['../tm4c123gh6pm__startup__ccs_8c.html#a28c770c8f2522f11e2a95f7486620c5b',1,'tm4c123gh6pm_startup_ccs.c']]],
   ['g_5fplparmset',['g_plParmSet',['../group__touch__api.html#ga15218c1cfd423a464026786301f25539',1,'touch.c']]],
   ['g_5fpsbuttoncanvas',['g_psButtonCanvas',['../group___main___code.html#ga319634c9f0d3d67ce4e630cb4b8be14e',1,'ZC706_SPI_Display.c']]],
+  ['g_5fpsfirst',['g_psFirst',['../group___main___code.html#ga818dcfd1d080d9fb6a6c360b9a512889',1,'ZC706_SPI_Display.c']]],
+  ['g_5fpsfirstcanvas',['g_psFirstCanvas',['../group___main___code.html#ga517100d699081cb8f60be673a77fd6f8',1,'ZC706_SPI_Display.c']]],
   ['g_5fpspanels',['g_psPanels',['../group___main___code.html#gae989b75249d946105b62a2ea415642cc',1,'ZC706_SPI_Display.c']]],
   ['g_5fpspushbuttons2',['g_psPushButtons2',['../group___main___code.html#ga46bab50a6c7fe8ea4e637d1a71d4791b',1,'ZC706_SPI_Display.c']]],
   ['g_5fpssamples',['g_psSamples',['../group__touch__api.html#ga54d750144fb44b7853c478fcbe9af570',1,'touch.c']]],

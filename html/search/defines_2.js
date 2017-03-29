@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['tick_5fhalf',['tick_half',['../_z_c706___s_p_i___display_8c.html#ae8d793a88618f26e33092e6eeb07ea85',1,'ZC706_SPI_Display.c']]],
-  ['touch_5fmin',['TOUCH_MIN',['../touch_8h.html#a911e446aebb9acee7b96834da91db002',1,'touch.h']]]
+  ['first_5fpanel',['First_Panel',['../defines_8h.html#a97e2934ec3716650dd79dc4c367e881c',1,'defines.h']]]
 ];

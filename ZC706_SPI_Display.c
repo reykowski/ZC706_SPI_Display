@@ -87,6 +87,7 @@
 #include "time.h"
 #include "touch.h"
 #include "images.h"
+#include "defines.h"
 
 #include "inc/hw_memmap.h"
 #include "inc/hw_nvic.h"
@@ -128,94 +129,6 @@
 
 #include "drivers/rgb.h"
 
-#define	timeout 4e5
-
-#define Display_Width	320
-#define Display_Height  240
-#define P11_x (Display_Width / 10)+45
-#define P21_x (Display_Width / 10)+45
-#define P31_x (Display_Width / 10)+45
-#define P41_x (Display_Width / 10)+45
-#define P51_x (Display_Width / 10)+45
-#define P61_x (Display_Width / 10)+45
-
-#define P12_x (Display_Width / 2)+80
-#define P22_x (Display_Width / 2)+80
-#define P32_x (Display_Width / 2)+80
-#define P42_x (Display_Width / 2)+80
-#define P52_x (Display_Width / 2)+80
-#define P62_x (Display_Width / 2)+80
-
-#define P11_y 30
-#define P21_y 60
-#define P31_y 90
-#define P41_y 120
-#define P51_y 150
-#define P61_y 180
-
-#define P12_y 30
-#define P22_y 60
-#define P32_y 90
-#define P42_y 120
-#define P52_y 150
-#define P62_y 180
-
-#define S11_x (Display_Width/ 10)+45
-#define S21_x (Display_Width/ 10)+45
-#define S31_x (Display_Width/ 10)+45
-#define S41_x (Display_Width/ 10)+45
-#define S51_x (Display_Width/ 10)+45
-#define S61_x (Display_Width/ 10)+45
-
-#define S12_x (Display_Width/ 2)+80
-#define S22_x (Display_Width/ 2)+80
-#define S32_x (Display_Width/ 2)+80
-#define S42_x (Display_Width/ 2)+80
-#define S52_x (Display_Width/ 2)+80
-#define S62_x (Display_Width/ 2)+80
-
-#define S11_y 30
-#define S21_y 60
-#define S31_y 90
-#define S41_y 120
-#define S51_y 150
-#define S61_y 180
-
-#define S12_y 30
-#define S22_y 60
-#define S32_y 90
-#define S42_y 120
-#define S52_y 150
-#define S62_y 180
-
-// Define String names for data display:
-#define str_AGC		"AGC: "
-#define str_Lock	"Lock: "
-#define str_HOLD	"HOLD: "
-#define str_EVM		"EVM: "
-#define str_FRAME	"FRAME: "
-#define str_CRC		"CRC: "
-#define str_BER		"BER: "
-#define str_NA		"---: "
-
-
-// Define names for LED display:
-#define str_LED1	"AGC"
-#define str_LED2	"Lock"
-#define str_LED3	"HOLD"
-#define str_LED4	"EVM"
-#define str_LED5	"FRAME"
-#define str_LED6	"CRC"
-#define str_LED7	"BER"
-#define str_LED8	"---"
-#define str_LED9	"---"
-#define str_LED10	"---"
-
-
-// Define LED colors
-#define light_is_red        2
-#define light_is_yellow     1
-#define light_is_green       0
 //*****************************************************************************
 //
 // Number of bytes to send and receive.
@@ -524,14 +437,16 @@ CanvasStruct(g_psPanels, g_psFirst, 0,
 //
 // Start placing some Blocks for Block Diagram
 //
-#define rect_x 	45
-#define rect_y	45
+/*
+#define rect_x  45
+#define rect_y  45
 #define rect_x1 20
 #define rect_x2 95
 #define rect_x3 170
 #define rect_x4 245
 #define rect_y1 45
 #define rect_y2 120
+*/
 uint32_t g_ulButtonState;
 uint32_t g_ulButtonState2;
 tPushButtonWidget g_psPushButtons2[] =
@@ -705,14 +620,7 @@ char *g_pcPanelNames[] =
     "     Sliders        ",
     "     S/W Update     "
 };
-#define First_Panel    0
-#define Block_Diagram  1
-#define LED_Panel      2
-#define Data_Panel 	   3
-#define RX_Panel       4
-#define PLL_Panel      5
-#define SYNC_Panel     6
-#define RXMSG_Panel    7
+
 //*****************************************************************************
 //
 // The buttons and text across the bottom of the screen.
@@ -1019,14 +927,7 @@ void
 OnBlockDiagramPaint(tWidget *pWidget, tContext *pContext)
 {
 
-#define rect_x 		45
-#define rect_y		45
-#define rect_x1 	20
-#define rect_x2		95
-#define rect_x3 	170
-#define rect_x4		245
-#define rect_y1 	45
-#define rect_y2		120
+
 
     GrContextForegroundSet(pContext, ClrBrown);
     GrLineDraw(pContext, rect_x1+rect_x, rect_y1+rect_y/2, rect_x2, rect_y1+rect_y/2);
@@ -1262,8 +1163,7 @@ void
 OnButtonPress2(tWidget *pWidget)
 {
     uint32_t ulIdx;
-#define rect_x 	45
-#define rect_y	45
+
 
 
     //
@@ -1312,11 +1212,7 @@ OnLEDStatusPaint(tWidget *pWidget, tContext *pContext)
     // Start placing some LEDs
     //
 
-    #define LED_x0 40
-	#define LED_y0 80
-	#define LED_xd 56
-	#define LED_yd 90
-    #define LED_size 10
+
 
     GrContextForegroundSet(pContext, ClrLime);
     GrCircleFill(pContext, (LED_x0 + 0*LED_xd), (LED_y0 + 0*LED_yd), LED_size);
@@ -1497,8 +1393,6 @@ OnPrimitivePaint(tWidget *pWidget, tContext *pContext)
 
     tRectangle sRect;
 
-#define rect_x 	45
-#define rect_y	45
 
     //
     // Draw a filled rectangle with an overlapping rectangle.
@@ -1800,15 +1694,7 @@ void delay_cycles(long cycles)
 //*****************************************************************************
 void UpdateScope(tContext *pContext, uint8_t *i_Curve, float fnew_Value, float fmin, float fmax , uint8_t yp_min, uint8_t yp_max, char *scope_string)
 {
-#define tick_half 3
 
-#define x_tick1 40
-#define x_tick2 80
-#define x_tick3 120
-#define x_tick4 160
-#define x_tick5 200
-#define x_tick6 240
-#define x_tick7 280
 
     uint8_t yp_center, yp_off;
     yp_center = (yp_max+yp_min)/2;
@@ -1891,15 +1777,7 @@ main(void)
 
 //***************************************************************************************
 
-#define pos_Lock_Avg1     20
-#define pos_Lock_Avg2     21
-#define	pos_AGC	     	  12
-#define	pos_Lock	      10
-#define	pos_Hold	      22
-#define	pos_EVM		       3
-#define	pos_Frame	      24
-#define	pos_CRC		      14
-#define	pos_BER		       6
+
 
     g_ulDataRx2[0] = 0b1111000011110000;
     g_ulDataRx2[1] = 0b1100110011110000;

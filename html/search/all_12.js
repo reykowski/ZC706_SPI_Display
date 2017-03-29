@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['tick_5fhalf',['tick_half',['../_z_c706___s_p_i___display_8c.html#ae8d793a88618f26e33092e6eeb07ea85',1,'ZC706_SPI_Display.c']]],
-  ['timeout',['timeout',['../group___main___code.html#gae6c5811c029a6ee1565195f9e17ddec2',1,'ZC706_SPI_Display.c']]],
+  ['tick_5fhalf',['tick_half',['../defines_8h.html#ae8d793a88618f26e33092e6eeb07ea85',1,'defines.h']]],
+  ['timeout',['timeout',['../defines_8h.html#ae6c5811c029a6ee1565195f9e17ddec2',1,'defines.h']]],
   ['tm4c123gh6pm_5fstartup_5fccs_2ec',['tm4c123gh6pm_startup_ccs.c',['../tm4c123gh6pm__startup__ccs_8c.html',1,'']]],
   ['touch_2ec',['touch.c',['../touch_8c.html',1,'']]],
   ['touch_2eh',['touch.h',['../touch_8h.html',1,'']]],

@@ -1,10 +1,20 @@
 var searchData=
 [
-  ['x_5ftick1',['x_tick1',['../_z_c706___s_p_i___display_8c.html#ae340b901beacf63f7fe5983d233c3b45',1,'ZC706_SPI_Display.c']]],
-  ['x_5ftick2',['x_tick2',['../_z_c706___s_p_i___display_8c.html#a499852226edf11ff9149c1f177d472ed',1,'ZC706_SPI_Display.c']]],
-  ['x_5ftick3',['x_tick3',['../_z_c706___s_p_i___display_8c.html#a0e32ae93bdfb0cf69cb1906af5d7a6e2',1,'ZC706_SPI_Display.c']]],
-  ['x_5ftick4',['x_tick4',['../_z_c706___s_p_i___display_8c.html#a572f813268e5824d4d5f51e3ef91a75b',1,'ZC706_SPI_Display.c']]],
-  ['x_5ftick5',['x_tick5',['../_z_c706___s_p_i___display_8c.html#a82048783e46aa6b536a3f92216641333',1,'ZC706_SPI_Display.c']]],
-  ['x_5ftick6',['x_tick6',['../_z_c706___s_p_i___display_8c.html#a0e9e94db9f0c0dfec9005d02dfeb5f41',1,'ZC706_SPI_Display.c']]],
-  ['x_5ftick7',['x_tick7',['../_z_c706___s_p_i___display_8c.html#aa85a2d4779ff6bfac28ed5cb4fa03cd9',1,'ZC706_SPI_Display.c']]]
+  ['lcd_5fcommand_5fport',['LCD_COMMAND_PORT',['../_kentec320x240x16__ssd2119__8bit_8h.html#a92ea1e50c99dd67706e29bf0f18079a2',1,'Kentec320x240x16_ssd2119_8bit.h']]],
+  ['lcd_5fcontrol_5fclr_5freg',['LCD_CONTROL_CLR_REG',['../_kentec320x240x16__ssd2119__8bit_8h.html#a8c5be5af52bbd374dc43eac8c05d1cb4',1,'Kentec320x240x16_ssd2119_8bit.h']]],
+  ['lcd_5fcontrol_5fnreset',['LCD_CONTROL_NRESET',['../_kentec320x240x16__ssd2119__8bit_8h.html#ad92b8dfc8afa4d3ea698b5e92c57c612',1,'Kentec320x240x16_ssd2119_8bit.h']]],
+  ['lcd_5fcontrol_5fset_5freg',['LCD_CONTROL_SET_REG',['../_kentec320x240x16__ssd2119__8bit_8h.html#ae3c996a791a7702b06604bb7e81a4b88',1,'Kentec320x240x16_ssd2119_8bit.h']]],
+  ['lcd_5fcontrol_5fxn',['LCD_CONTROL_XN',['../_kentec320x240x16__ssd2119__8bit_8h.html#ab159d1f0781f685fbee01523bf40a23d',1,'Kentec320x240x16_ssd2119_8bit.h']]],
+  ['lcd_5fcontrol_5fyn',['LCD_CONTROL_YN',['../_kentec320x240x16__ssd2119__8bit_8h.html#ac913fed20514ce25a5286e930d83434c',1,'Kentec320x240x16_ssd2119_8bit.h']]],
+  ['lcd_5fdata_5fport',['LCD_DATA_PORT',['../_kentec320x240x16__ssd2119__8bit_8h.html#a077def6ebb43bf9aee4e7cad468ed726',1,'Kentec320x240x16_ssd2119_8bit.h']]],
+  ['lcd_5fread_5fstart',['LCD_READ_START',['../_kentec320x240x16__ssd2119__8bit_8h.html#a656654803dd6791abf9446e07ea8d99f',1,'Kentec320x240x16_ssd2119_8bit.h']]],
+  ['led_5fpanel',['LED_Panel',['../defines_8h.html#ac7bc6aa47d211536c509c7c5e868bb69',1,'defines.h']]],
+  ['led_5fsize',['LED_size',['../defines_8h.html#a3a6d49d792b47ac707544c9412e01e4b',1,'defines.h']]],
+  ['led_5fx0',['LED_x0',['../defines_8h.html#a40647070788823614bc375735f44d50b',1,'defines.h']]],
+  ['led_5fxd',['LED_xd',['../defines_8h.html#a9698fac4aa5473aa934c0b1272471a38',1,'defines.h']]],
+  ['led_5fy0',['LED_y0',['../defines_8h.html#a8dd722116a578b8791f0fcfc3d495bb7',1,'defines.h']]],
+  ['led_5fyd',['LED_yd',['../defines_8h.html#a1aa1b0637a5f545f03a0c41e4b3ba445',1,'defines.h']]],
+  ['light_5fis_5fgreen',['light_is_green',['../defines_8h.html#a343a2695a67c9654485cee8dc8de2886',1,'defines.h']]],
+  ['light_5fis_5fred',['light_is_red',['../defines_8h.html#a834ff761c18ea52e1910d7e36cbf8f24',1,'defines.h']]],
+  ['light_5fis_5fyellow',['light_is_yellow',['../defines_8h.html#af6e15ef8ddcba6aae30751628dab80dd',1,'defines.h']]]
 ];

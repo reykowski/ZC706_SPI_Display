@@ -7,6 +7,7 @@
 {\ttfamily \#include \char`\"{}time.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}touch.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}images.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}defines.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}inc/hw\+\_\+memmap.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}inc/hw\+\_\+nvic.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}inc/hw\+\_\+ssi.\+h\char`\"{}}\newline
@@ -44,257 +45,13 @@
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \textbf{ timeout}~4e5
-\item 
-\#define \textbf{ Display\+\_\+\+Width}~320
-\item 
-\#define \textbf{ Display\+\_\+\+Height}~240
-\item 
-\#define \textbf{ P11\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 10)+45
-\item 
-\#define \textbf{ P21\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 10)+45
-\item 
-\#define \textbf{ P31\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 10)+45
-\item 
-\#define \textbf{ P41\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 10)+45
-\item 
-\#define \textbf{ P51\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 10)+45
-\item 
-\#define \textbf{ P61\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 10)+45
-\item 
-\#define \textbf{ P12\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 2)+80
-\item 
-\#define \textbf{ P22\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 2)+80
-\item 
-\#define \textbf{ P32\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 2)+80
-\item 
-\#define \textbf{ P42\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 2)+80
-\item 
-\#define \textbf{ P52\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 2)+80
-\item 
-\#define \textbf{ P62\+\_\+x}~(\textbf{ Display\+\_\+\+Width} / 2)+80
-\item 
-\#define \textbf{ P11\+\_\+y}~30
-\item 
-\#define \textbf{ P21\+\_\+y}~60
-\item 
-\#define \textbf{ P31\+\_\+y}~90
-\item 
-\#define \textbf{ P41\+\_\+y}~120
-\item 
-\#define \textbf{ P51\+\_\+y}~150
-\item 
-\#define \textbf{ P61\+\_\+y}~180
-\item 
-\#define \textbf{ P12\+\_\+y}~30
-\item 
-\#define \textbf{ P22\+\_\+y}~60
-\item 
-\#define \textbf{ P32\+\_\+y}~90
-\item 
-\#define \textbf{ P42\+\_\+y}~120
-\item 
-\#define \textbf{ P52\+\_\+y}~150
-\item 
-\#define \textbf{ P62\+\_\+y}~180
-\item 
-\#define \textbf{ S11\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 10)+45
-\item 
-\#define \textbf{ S21\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 10)+45
-\item 
-\#define \textbf{ S31\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 10)+45
-\item 
-\#define \textbf{ S41\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 10)+45
-\item 
-\#define \textbf{ S51\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 10)+45
-\item 
-\#define \textbf{ S61\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 10)+45
-\item 
-\#define \textbf{ S12\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 2)+80
-\item 
-\#define \textbf{ S22\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 2)+80
-\item 
-\#define \textbf{ S32\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 2)+80
-\item 
-\#define \textbf{ S42\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 2)+80
-\item 
-\#define \textbf{ S52\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 2)+80
-\item 
-\#define \textbf{ S62\+\_\+x}~(\textbf{ Display\+\_\+\+Width}/ 2)+80
-\item 
-\#define \textbf{ S11\+\_\+y}~30
-\item 
-\#define \textbf{ S21\+\_\+y}~60
-\item 
-\#define \textbf{ S31\+\_\+y}~90
-\item 
-\#define \textbf{ S41\+\_\+y}~120
-\item 
-\#define \textbf{ S51\+\_\+y}~150
-\item 
-\#define \textbf{ S61\+\_\+y}~180
-\item 
-\#define \textbf{ S12\+\_\+y}~30
-\item 
-\#define \textbf{ S22\+\_\+y}~60
-\item 
-\#define \textbf{ S32\+\_\+y}~90
-\item 
-\#define \textbf{ S42\+\_\+y}~120
-\item 
-\#define \textbf{ S52\+\_\+y}~150
-\item 
-\#define \textbf{ S62\+\_\+y}~180
-\item 
-\#define \textbf{ str\+\_\+\+A\+GC}~\char`\"{}A\+G\+C\+: \char`\"{}
-\item 
-\#define \textbf{ str\+\_\+\+Lock}~\char`\"{}Lock\+: \char`\"{}
-\item 
-\#define \textbf{ str\+\_\+\+H\+O\+LD}~\char`\"{}H\+O\+L\+D\+: \char`\"{}
-\item 
-\#define \textbf{ str\+\_\+\+E\+VM}~\char`\"{}E\+V\+M\+: \char`\"{}
-\item 
-\#define \textbf{ str\+\_\+\+F\+R\+A\+ME}~\char`\"{}F\+R\+A\+M\+E\+: \char`\"{}
-\item 
-\#define \textbf{ str\+\_\+\+C\+RC}~\char`\"{}C\+R\+C\+: \char`\"{}
-\item 
-\#define \textbf{ str\+\_\+\+B\+ER}~\char`\"{}B\+E\+R\+: \char`\"{}
-\item 
-\#define \textbf{ str\+\_\+\+NA}~\char`\"{}-\/-\/-\/\+: \char`\"{}
-\item 
-\#define \textbf{ str\+\_\+\+L\+E\+D1}~\char`\"{}A\+GC\char`\"{}
-\item 
-\#define \textbf{ str\+\_\+\+L\+E\+D2}~\char`\"{}Lock\char`\"{}
-\item 
-\#define \textbf{ str\+\_\+\+L\+E\+D3}~\char`\"{}H\+O\+LD\char`\"{}
-\item 
-\#define \textbf{ str\+\_\+\+L\+E\+D4}~\char`\"{}E\+VM\char`\"{}
-\item 
-\#define \textbf{ str\+\_\+\+L\+E\+D5}~\char`\"{}F\+R\+A\+ME\char`\"{}
-\item 
-\#define \textbf{ str\+\_\+\+L\+E\+D6}~\char`\"{}C\+RC\char`\"{}
-\item 
-\#define \textbf{ str\+\_\+\+L\+E\+D7}~\char`\"{}B\+ER\char`\"{}
-\item 
-\#define \textbf{ str\+\_\+\+L\+E\+D8}~\char`\"{}-\/-\/-\/\char`\"{}
-\item 
-\#define \textbf{ str\+\_\+\+L\+E\+D9}~\char`\"{}-\/-\/-\/\char`\"{}
-\item 
-\#define \textbf{ str\+\_\+\+L\+E\+D10}~\char`\"{}-\/-\/-\/\char`\"{}
-\item 
-\#define \textbf{ light\+\_\+is\+\_\+red}~2
-\item 
-\#define \textbf{ light\+\_\+is\+\_\+yellow}~1
-\item 
-\#define \textbf{ light\+\_\+is\+\_\+green}~0
-\item 
 \#define \textbf{ N\+U\+M\+\_\+\+S\+S\+I\+\_\+\+D\+A\+TA}~128
 \item 
 \#define \textbf{ N\+U\+M\+\_\+\+S\+S\+I\+\_\+\+D\+A\+TA}~128
-\item 
-\#define \textbf{ rect\+\_\+x}~45
-\item 
-\#define \textbf{ rect\+\_\+y}~45
-\item 
-\#define \textbf{ rect\+\_\+x1}~20
-\item 
-\#define \textbf{ rect\+\_\+x2}~95
-\item 
-\#define \textbf{ rect\+\_\+x3}~170
-\item 
-\#define \textbf{ rect\+\_\+x4}~245
-\item 
-\#define \textbf{ rect\+\_\+y1}~45
-\item 
-\#define \textbf{ rect\+\_\+y2}~120
 \item 
 \#define \textbf{ N\+U\+M\+\_\+\+P\+U\+S\+H\+\_\+\+B\+U\+T\+T\+O\+N\+S2}
 \item 
 \#define \textbf{ N\+U\+M\+\_\+\+P\+A\+N\+E\+LS}~(sizeof(\textbf{ g\+\_\+ps\+Panels}) / sizeof(\textbf{ g\+\_\+ps\+Panels}[0]))
-\item 
-\#define \textbf{ First\+\_\+\+Panel}~0
-\item 
-\#define \textbf{ Block\+\_\+\+Diagram}~1
-\item 
-\#define \textbf{ L\+E\+D\+\_\+\+Panel}~2
-\item 
-\#define \textbf{ Data\+\_\+\+Panel}~3
-\item 
-\#define \textbf{ R\+X\+\_\+\+Panel}~4
-\item 
-\#define \textbf{ P\+L\+L\+\_\+\+Panel}~5
-\item 
-\#define \textbf{ S\+Y\+N\+C\+\_\+\+Panel}~6
-\item 
-\#define \textbf{ R\+X\+M\+S\+G\+\_\+\+Panel}~7
-\item 
-\#define \textbf{ rect\+\_\+x}~45
-\item 
-\#define \textbf{ rect\+\_\+y}~45
-\item 
-\#define \textbf{ rect\+\_\+x1}~20
-\item 
-\#define \textbf{ rect\+\_\+x2}~95
-\item 
-\#define \textbf{ rect\+\_\+x3}~170
-\item 
-\#define \textbf{ rect\+\_\+x4}~245
-\item 
-\#define \textbf{ rect\+\_\+y1}~45
-\item 
-\#define \textbf{ rect\+\_\+y2}~120
-\item 
-\#define \textbf{ rect\+\_\+x}~45
-\item 
-\#define \textbf{ rect\+\_\+y}~45
-\item 
-\#define \textbf{ L\+E\+D\+\_\+x0}~40
-\item 
-\#define \textbf{ L\+E\+D\+\_\+y0}~80
-\item 
-\#define \textbf{ L\+E\+D\+\_\+xd}~56
-\item 
-\#define \textbf{ L\+E\+D\+\_\+yd}~90
-\item 
-\#define \textbf{ L\+E\+D\+\_\+size}~10
-\item 
-\#define \textbf{ rect\+\_\+x}~45
-\item 
-\#define \textbf{ rect\+\_\+y}~45
-\item 
-\#define \textbf{ tick\+\_\+half}~3
-\item 
-\#define \textbf{ x\+\_\+tick1}~40
-\item 
-\#define \textbf{ x\+\_\+tick2}~80
-\item 
-\#define \textbf{ x\+\_\+tick3}~120
-\item 
-\#define \textbf{ x\+\_\+tick4}~160
-\item 
-\#define \textbf{ x\+\_\+tick5}~200
-\item 
-\#define \textbf{ x\+\_\+tick6}~240
-\item 
-\#define \textbf{ x\+\_\+tick7}~280
-\item 
-\#define \textbf{ pos\+\_\+\+Lock\+\_\+\+Avg1}~20
-\item 
-\#define \textbf{ pos\+\_\+\+Lock\+\_\+\+Avg2}~21
-\item 
-\#define \textbf{ pos\+\_\+\+A\+GC}~12
-\item 
-\#define \textbf{ pos\+\_\+\+Lock}~10
-\item 
-\#define \textbf{ pos\+\_\+\+Hold}~22
-\item 
-\#define \textbf{ pos\+\_\+\+E\+VM}~3
-\item 
-\#define \textbf{ pos\+\_\+\+Frame}~24
-\item 
-\#define \textbf{ pos\+\_\+\+C\+RC}~14
-\item 
-\#define \textbf{ pos\+\_\+\+B\+ER}~6
 \end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -341,8 +98,6 @@ void \textbf{ S\+S\+I1\+Int\+Handler} (void)
 \item 
 uint8\+\_\+t \textbf{ Sys\+Tick\+Int\+Handler} ()
 \item 
-\textbf{ Canvas} (g\+\_\+s\+Draw\+Image, \textbf{ g\+\_\+ps\+Panels}, 0, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 0, 24, 320, 216, C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+A\+P\+P\+\_\+\+D\+R\+A\+WN, 0, 0, 0, 0, 0, 0, \textbf{ Draw\+First\+Image})
-\item 
 \textbf{ Canvas} (g\+\_\+s\+L\+E\+D\+\_\+\+Display, \textbf{ g\+\_\+ps\+Panels}+2, 0, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 0, 24, 320, 166, C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+A\+P\+P\+\_\+\+D\+R\+A\+WN, 0, 0, 0, 0, 0, 0, \textbf{ On\+L\+E\+D\+Status\+Paint})
 \item 
 \textbf{ Canvas} (g\+\_\+s\+Status\+Data, \textbf{ g\+\_\+ps\+Panels}+3, 0, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 0, 24, 320, 166, C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+A\+P\+P\+\_\+\+D\+R\+A\+WN, 0, 0, 0, 0, 0, 0, \textbf{ On\+Data\+Paint})
@@ -357,13 +112,11 @@ uint8\+\_\+t \textbf{ Sys\+Tick\+Int\+Handler} ()
 \item 
 \textbf{ Canvas} (g\+\_\+s\+Primitives, \textbf{ g\+\_\+ps\+Panels}+8, 0, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 0, 24, 320, 166, C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+A\+P\+P\+\_\+\+D\+R\+A\+WN, 0, 0, 0, 0, 0, 0, \textbf{ On\+Primitive\+Paint})
 \item 
-\textbf{ Rectangular\+Button} (g\+\_\+s\+Previous, 0, 0, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 0, 190, 50, 50, P\+B\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+F\+I\+LL, Clr\+Black, Clr\+Black, 0, Clr\+Silver, \&g\+\_\+s\+Font\+Cm20, \char`\"{}-\/\char`\"{}, \textbf{ g\+\_\+puc\+Blue50x50}, \textbf{ g\+\_\+puc\+Blue50x50\+Press}, 0, 0, \textbf{ On\+Previous})
+\textbf{ Rectangular\+Button} (g\+\_\+s\+Previous, 0, 0, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 0, 190, 50, 50, P\+B\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+F\+I\+LL$\vert$P\+B\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+N\+O\+T\+I\+FY, Clr\+Black, Clr\+Black, 0, Clr\+Silver, \&g\+\_\+s\+Font\+Cm20, \char`\"{}-\/\char`\"{}, \textbf{ g\+\_\+puc\+Blue50x50}, \textbf{ g\+\_\+puc\+Blue50x50\+Press}, 0, 0, \textbf{ On\+Previous})
 \item 
 \textbf{ Canvas} (g\+\_\+s\+Title, 0, Clr\+Black, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 50, 190, 220, 50, C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+T\+E\+XT$\vert$C\+A\+N\+V\+A\+S\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+F\+I\+LL, 0, 0, Clr\+Silver, \&g\+\_\+s\+Font\+Cm20, 0, 0, 0)
 \item 
-\textbf{ Rectangular\+Button} (g\+\_\+s\+Next, 0, 0, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 270, 190, 50, 50, P\+B\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+I\+MG$\vert$P\+B\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+T\+E\+XT, Clr\+Black, Clr\+Black, 0, Clr\+Silver, \&g\+\_\+s\+Font\+Cm20, \char`\"{}+\char`\"{}, \textbf{ g\+\_\+puc\+Blue50x50}, \textbf{ g\+\_\+puc\+Blue50x50\+Press}, 0, 0, \textbf{ On\+Next})
-\item 
-\textbf{ Rectangular\+Button} (g\+\_\+s\+First, 0, 0, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 0, 24, 320, 166, P\+B\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+O\+U\+T\+L\+I\+NE$\vert$P\+B\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+T\+E\+X\+T\+\_\+\+O\+P\+A\+Q\+UE, Clr\+Black, Clr\+Black, 0, Clr\+Silver, \&g\+\_\+s\+Font\+Cm20, \char`\"{}\char`\"{}, \textbf{ g\+\_\+puc\+Blue50x50}, \textbf{ g\+\_\+puc\+Blue50x50\+Press}, 0, 0, \textbf{ On\+First})
+\textbf{ Rectangular\+Button} (g\+\_\+s\+Next, 0, 0, 0, \&\textbf{ g\+\_\+s\+Kentec320x240x16\+\_\+\+S\+S\+D2119}, 270, 190, 50, 50, P\+B\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+I\+MG$\vert$P\+B\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+T\+E\+XT$\vert$P\+B\+\_\+\+S\+T\+Y\+L\+E\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+N\+O\+T\+I\+FY, Clr\+Black, Clr\+Black, 0, Clr\+Silver, \&g\+\_\+s\+Font\+Cm20, \char`\"{}+\char`\"{}, \textbf{ g\+\_\+puc\+Blue50x50}, \textbf{ g\+\_\+puc\+Blue50x50\+Press}, 0, 0, \textbf{ On\+Next})
 \item 
 void \textbf{ Gr\+String\+Draw\+Right} (const t\+Context $\ast$p\+Context, const char $\ast$pc\+String, int32\+\_\+t i32\+Length, int32\+\_\+t i32X, int32\+\_\+t i32Y, uint32\+\_\+t b\+Opaque)
 \item 
@@ -512,6 +265,10 @@ t\+Context $\ast$ \textbf{ p1\+Context}
 \item 
 uint32\+\_\+t \textbf{ g\+\_\+pui32\+Colors} [3]
 \item 
+t\+Push\+Button\+Widget \textbf{ g\+\_\+ps\+First} [$\,$]
+\item 
+t\+Canvas\+Widget \textbf{ g\+\_\+ps\+First\+Canvas} [$\,$]
+\item 
 uint32\+\_\+t \textbf{ g\+\_\+ul\+Button\+State}
 \item 
 uint32\+\_\+t \textbf{ g\+\_\+ul\+Button\+State2}
@@ -526,138 +283,3 @@ uint32\+\_\+t \textbf{ g\+\_\+ul\+Panel}
 \item 
 uint32\+\_\+t \textbf{ g\+\_\+ul\+Previous\+Panel}
 \end{DoxyCompactItemize}
-
-
-\subsection{Macro Definition Documentation}
-\mbox{\label{_z_c706___s_p_i___display_8c_a3a6d49d792b47ac707544c9412e01e4b}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!L\+E\+D\+\_\+size@{L\+E\+D\+\_\+size}}
-\index{L\+E\+D\+\_\+size@{L\+E\+D\+\_\+size}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{L\+E\+D\+\_\+size}
-{\footnotesize\ttfamily \#define L\+E\+D\+\_\+size~10}
-
-\mbox{\label{_z_c706___s_p_i___display_8c_a40647070788823614bc375735f44d50b}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!L\+E\+D\+\_\+x0@{L\+E\+D\+\_\+x0}}
-\index{L\+E\+D\+\_\+x0@{L\+E\+D\+\_\+x0}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{L\+E\+D\+\_\+x0}
-{\footnotesize\ttfamily \#define L\+E\+D\+\_\+x0~40}
-
-\mbox{\label{_z_c706___s_p_i___display_8c_a9698fac4aa5473aa934c0b1272471a38}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!L\+E\+D\+\_\+xd@{L\+E\+D\+\_\+xd}}
-\index{L\+E\+D\+\_\+xd@{L\+E\+D\+\_\+xd}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{L\+E\+D\+\_\+xd}
-{\footnotesize\ttfamily \#define L\+E\+D\+\_\+xd~56}
-
-\mbox{\label{_z_c706___s_p_i___display_8c_a8dd722116a578b8791f0fcfc3d495bb7}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!L\+E\+D\+\_\+y0@{L\+E\+D\+\_\+y0}}
-\index{L\+E\+D\+\_\+y0@{L\+E\+D\+\_\+y0}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{L\+E\+D\+\_\+y0}
-{\footnotesize\ttfamily \#define L\+E\+D\+\_\+y0~80}
-
-\mbox{\label{_z_c706___s_p_i___display_8c_a1aa1b0637a5f545f03a0c41e4b3ba445}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!L\+E\+D\+\_\+yd@{L\+E\+D\+\_\+yd}}
-\index{L\+E\+D\+\_\+yd@{L\+E\+D\+\_\+yd}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{L\+E\+D\+\_\+yd}
-{\footnotesize\ttfamily \#define L\+E\+D\+\_\+yd~90}
-
-\mbox{\label{_z_c706___s_p_i___display_8c_a833d038aace23bcc6ea607920ba5ddd8}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!pos\+\_\+\+A\+GC@{pos\+\_\+\+A\+GC}}
-\index{pos\+\_\+\+A\+GC@{pos\+\_\+\+A\+GC}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{pos\+\_\+\+A\+GC}
-{\footnotesize\ttfamily \#define pos\+\_\+\+A\+GC~12}
-
-\mbox{\label{_z_c706___s_p_i___display_8c_a3e15102f8685408efe256d1f8baa4da1}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!pos\+\_\+\+B\+ER@{pos\+\_\+\+B\+ER}}
-\index{pos\+\_\+\+B\+ER@{pos\+\_\+\+B\+ER}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{pos\+\_\+\+B\+ER}
-{\footnotesize\ttfamily \#define pos\+\_\+\+B\+ER~6}
-
-\mbox{\label{_z_c706___s_p_i___display_8c_a8d17e7e0bfaa381b0a79bf1f428e74f3}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!pos\+\_\+\+C\+RC@{pos\+\_\+\+C\+RC}}
-\index{pos\+\_\+\+C\+RC@{pos\+\_\+\+C\+RC}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{pos\+\_\+\+C\+RC}
-{\footnotesize\ttfamily \#define pos\+\_\+\+C\+RC~14}
-
-\mbox{\label{_z_c706___s_p_i___display_8c_abd9e864c0335ba82dfe2fa4c84c1766d}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!pos\+\_\+\+E\+VM@{pos\+\_\+\+E\+VM}}
-\index{pos\+\_\+\+E\+VM@{pos\+\_\+\+E\+VM}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{pos\+\_\+\+E\+VM}
-{\footnotesize\ttfamily \#define pos\+\_\+\+E\+VM~3}
-
-\mbox{\label{_z_c706___s_p_i___display_8c_a06505baf5280b53a5711eb94b63529bd}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!pos\+\_\+\+Frame@{pos\+\_\+\+Frame}}
-\index{pos\+\_\+\+Frame@{pos\+\_\+\+Frame}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{pos\+\_\+\+Frame}
-{\footnotesize\ttfamily \#define pos\+\_\+\+Frame~24}
-
-\mbox{\label{_z_c706___s_p_i___display_8c_a1357034d9cc57489ed06067622ebe858}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!pos\+\_\+\+Hold@{pos\+\_\+\+Hold}}
-\index{pos\+\_\+\+Hold@{pos\+\_\+\+Hold}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{pos\+\_\+\+Hold}
-{\footnotesize\ttfamily \#define pos\+\_\+\+Hold~22}
-
-\mbox{\label{_z_c706___s_p_i___display_8c_accaacde0efa2d43d87b8a311a3fc029f}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!pos\+\_\+\+Lock@{pos\+\_\+\+Lock}}
-\index{pos\+\_\+\+Lock@{pos\+\_\+\+Lock}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{pos\+\_\+\+Lock}
-{\footnotesize\ttfamily \#define pos\+\_\+\+Lock~10}
-
-\mbox{\label{_z_c706___s_p_i___display_8c_ae9f06bf35a8e89201e2667948320ee95}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!pos\+\_\+\+Lock\+\_\+\+Avg1@{pos\+\_\+\+Lock\+\_\+\+Avg1}}
-\index{pos\+\_\+\+Lock\+\_\+\+Avg1@{pos\+\_\+\+Lock\+\_\+\+Avg1}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{pos\+\_\+\+Lock\+\_\+\+Avg1}
-{\footnotesize\ttfamily \#define pos\+\_\+\+Lock\+\_\+\+Avg1~20}
-
-\mbox{\label{_z_c706___s_p_i___display_8c_af920acce600c341d82c67b4ee4aca67e}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!pos\+\_\+\+Lock\+\_\+\+Avg2@{pos\+\_\+\+Lock\+\_\+\+Avg2}}
-\index{pos\+\_\+\+Lock\+\_\+\+Avg2@{pos\+\_\+\+Lock\+\_\+\+Avg2}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{pos\+\_\+\+Lock\+\_\+\+Avg2}
-{\footnotesize\ttfamily \#define pos\+\_\+\+Lock\+\_\+\+Avg2~21}
-
-\mbox{\label{_z_c706___s_p_i___display_8c_ae8d793a88618f26e33092e6eeb07ea85}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!tick\+\_\+half@{tick\+\_\+half}}
-\index{tick\+\_\+half@{tick\+\_\+half}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{tick\+\_\+half}
-{\footnotesize\ttfamily \#define tick\+\_\+half~3}
-
-\mbox{\label{_z_c706___s_p_i___display_8c_ae340b901beacf63f7fe5983d233c3b45}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!x\+\_\+tick1@{x\+\_\+tick1}}
-\index{x\+\_\+tick1@{x\+\_\+tick1}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{x\+\_\+tick1}
-{\footnotesize\ttfamily \#define x\+\_\+tick1~40}
-
-\mbox{\label{_z_c706___s_p_i___display_8c_a499852226edf11ff9149c1f177d472ed}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!x\+\_\+tick2@{x\+\_\+tick2}}
-\index{x\+\_\+tick2@{x\+\_\+tick2}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{x\+\_\+tick2}
-{\footnotesize\ttfamily \#define x\+\_\+tick2~80}
-
-\mbox{\label{_z_c706___s_p_i___display_8c_a0e32ae93bdfb0cf69cb1906af5d7a6e2}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!x\+\_\+tick3@{x\+\_\+tick3}}
-\index{x\+\_\+tick3@{x\+\_\+tick3}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{x\+\_\+tick3}
-{\footnotesize\ttfamily \#define x\+\_\+tick3~120}
-
-\mbox{\label{_z_c706___s_p_i___display_8c_a572f813268e5824d4d5f51e3ef91a75b}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!x\+\_\+tick4@{x\+\_\+tick4}}
-\index{x\+\_\+tick4@{x\+\_\+tick4}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{x\+\_\+tick4}
-{\footnotesize\ttfamily \#define x\+\_\+tick4~160}
-
-\mbox{\label{_z_c706___s_p_i___display_8c_a82048783e46aa6b536a3f92216641333}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!x\+\_\+tick5@{x\+\_\+tick5}}
-\index{x\+\_\+tick5@{x\+\_\+tick5}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{x\+\_\+tick5}
-{\footnotesize\ttfamily \#define x\+\_\+tick5~200}
-
-\mbox{\label{_z_c706___s_p_i___display_8c_a0e9e94db9f0c0dfec9005d02dfeb5f41}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!x\+\_\+tick6@{x\+\_\+tick6}}
-\index{x\+\_\+tick6@{x\+\_\+tick6}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{x\+\_\+tick6}
-{\footnotesize\ttfamily \#define x\+\_\+tick6~240}
-
-\mbox{\label{_z_c706___s_p_i___display_8c_aa85a2d4779ff6bfac28ed5cb4fa03cd9}} 
-\index{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}!x\+\_\+tick7@{x\+\_\+tick7}}
-\index{x\+\_\+tick7@{x\+\_\+tick7}!Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c@{Z\+C706\+\_\+\+S\+P\+I\+\_\+\+Display.\+c}}
-\subsubsection{x\+\_\+tick7}
-{\footnotesize\ttfamily \#define x\+\_\+tick7~280}
-
