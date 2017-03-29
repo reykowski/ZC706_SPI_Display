@@ -2363,6 +2363,7 @@ main(void)
 
                case PLL_Panel  :
                    GrContextForegroundSet(&sContext, ClrBlack);
+
                    GrContextBackgroundSet(&sContext, ClrLime);
                    GrContextFontSet(&sContext, &g_sFontCm20);
                    GrStringDrawRight(&sContext, val_Lock_Str, 9, S11_x+80, S11_y, 1);	// Lock
