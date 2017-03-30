@@ -225,8 +225,6 @@
 
     tContext *p1Context;
 
-
-
 //*****************************************************************************
 //
 // The DMA control structure table.
@@ -244,21 +242,12 @@
     #endif
 
 
-
 //*****************************************************************************
 //
 // Global array for holding the color values for the RGB.
 //
 //*****************************************************************************
 uint32_t g_pui32Colors[3];
-
-
-//*****************************************************************************
-//
-// Number of bytes to send and receive.
-//
-//*****************************************************************************
-#define NUM_SSI_DATA 128
 
 
 
@@ -352,15 +341,6 @@ SSI1IntHandler(void)
 		}
 	}
 
-	if(ulStatus & SSI_RXFF)
-	{
-		//
-		// Interrupt is because of RX time out.
-		// Don't do nothing
-		// Just clear interrupt
-		//
-	}
-
 	//
 	// Clear interrupts.
 	//
@@ -383,11 +363,6 @@ uint8_t SysTickIntHandler()
 	}
 	ROM_IntMasterDisable();
 
-	if (status)
-	{
-		//return status;
-	}
-
     ROM_IntMasterEnable();
     SysTick_Semafore = 1;		// Indicate to Main Routine that Sys Tick occured
 
@@ -407,10 +382,6 @@ uint8_t SysTickIntHandler()
 
 // Button across first panel
 
-//RectangularButton(g_sFirst, 0, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
-//                  320, 216, PB_STYLE_OUTLINE | PB_STYLE_TEXT_OPAQUE, ClrBlack, ClrBlack, 0, ClrSilver,
-//                  &g_sFontCm20, "", g_pucBlue50x50, g_pucBlue50x50Press, 0, 0,
-//                  OnFirst);
 tPushButtonWidget g_psFirst[] =
 {
 RectangularButtonStruct(g_psPanels, 0, 0,
@@ -420,8 +391,7 @@ RectangularButtonStruct(g_psPanels, 0, 0,
                         &g_sFontCm20, "", 0, 0, 0, 0, OnFirst),
 };
 // Picture for first panel
-//Canvas(g_sDrawImage, g_psPanels, 0, 0, &g_sKentec320x240x16_SSD2119, 0, 24,
-//       320, 216, CANVAS_STYLE_APP_DRAWN, 0, 0, 0, 0, 0, 0, DrawFirstImage);
+
 tCanvasWidget g_psFirstCanvas[] =
 {
 CanvasStruct(g_psPanels, g_psFirst, 0,
@@ -437,16 +407,7 @@ CanvasStruct(g_psPanels, g_psFirst, 0,
 //
 // Start placing some Blocks for Block Diagram
 //
-/*
-#define rect_x  45
-#define rect_y  45
-#define rect_x1 20
-#define rect_x2 95
-#define rect_x3 170
-#define rect_x4 245
-#define rect_y1 45
-#define rect_y2 120
-*/
+
 uint32_t g_ulButtonState;
 uint32_t g_ulButtonState2;
 tPushButtonWidget g_psPushButtons2[] =
@@ -587,13 +548,7 @@ tCanvasWidget g_psPanels[] =
 			     320, 166, CANVAS_STYLE_FILL, ClrLime, 0, 0, 0, 0, 0, 0),
 
 };
-/*
-    CanvasStruct(0, 0, &g_sDrawImage, &g_sKentec320x240x16_SSD2119, 0,
-                 24, 320, 186, CANVAS_STYLE_FILL, ClrBlack, 0, 0, 0, 0, g_pui9Image, 0),
-	             	CanvasStruct(0, 0, &g_sPrimitives  , &g_sKentec320x240x16_SSD2119, 0, 24,
-			     320, 166, CANVAS_STYLE_FILL, ClrSeashell, 0, 0, 0, 0, 0, 0),
-};
-*/
+
 //*****************************************************************************
 //
 // The number of panels.
@@ -670,17 +625,8 @@ GrStringDraw(pContext, pcString, i32Length, i32X-w, i32Y, bOpaque);
 void
 OnPrevious(tWidget *pWidget)
 {
- //   SysCtlDelay(1000000);
 
 	g_ulPreviousPanel = g_ulPanel;
-    //
-    // There is nothing to be done if the first panel is already being
-    // displayed.
-    //
-    if(g_ulPanel == First_Panel)
-    {
-//        return;
-    }
 
     //
     // Remove the current panel.
@@ -756,21 +702,7 @@ OnPrevious(tWidget *pWidget)
 void
 OnNext(tWidget *pWidget)
 {
-//    SysCtlDelay(1000000);
-    //
-    // There is nothing to be done if the last panel is already being
-    // displayed.
-    //
 
-    if(g_ulPanel >= Data_Panel)
-    {
-//        return;
-    }
-
-    if (g_ulPanel == First_Panel)
-    {
-//        WidgetRemove((tWidget *)(&g_psFirst));               // Remove button
-    }
 
     //
     // Remove the current panel.
@@ -836,7 +768,6 @@ OnNext(tWidget *pWidget)
 void
 OnFirst(tWidget *pWidget)
 {
-//    SysCtlDelay(1000000);
     //
     // There is nothing to be done if the last panel is already being
     // displayed.
@@ -901,12 +832,9 @@ void
 DrawFirstImage(tWidget *pWidget, tContext *pContext)
 {
 
- //   WidgetAdd(WIDGET_ROOT, (tWidget *)&g_psFirst);       // Add button
-
     if   (iHealth == 0)
     {
         GrImageDraw(pContext, g_pui_Flower_Image, 0, 24);
-        //    GrImageDraw(pContext, g_pui_Harmony_Image, 0, 24);
     }
     else
     {
@@ -974,8 +902,6 @@ OnBlockDiagramPaint(tWidget *pWidget, tContext *pContext)
 void
 OnRxButtonPress(tWidget *pWidget)
 {
-	//return;
-
     //
     // Remove the current panel.
     //
@@ -1206,8 +1132,6 @@ void
 OnLEDStatusPaint(tWidget *pWidget, tContext *pContext)
 {
 
-
-
     //
     // Start placing some LEDs
     //
@@ -1392,8 +1316,6 @@ OnPrimitivePaint(tWidget *pWidget, tContext *pContext)
 {
 
     tRectangle sRect;
-
-
     //
     // Draw a filled rectangle with an overlapping rectangle.
     //
@@ -1830,11 +1752,6 @@ main(void)
 
 
     //
-    // Set the clocking to run directly from the external crystal/oscillator.
-    //
-    //  SysCtlClockSet(SYSCTL_SYSDIV_1 | SYSCTL_USE_OSC | SYSCTL_XTAL_16MHZ | SYSCTL_OSC_MAIN );
-
-    //
     // Set the clock to 40Mhz derived from the PLL and the external oscillator
     //
     ROM_SysCtlClockSet(SYSCTL_SYSDIV_2_5 | SYSCTL_USE_PLL | SYSCTL_XTAL_16MHZ | SYSCTL_OSC_MAIN );
@@ -1870,7 +1787,7 @@ main(void)
     // Put the application name in the middle of the banner.
     //
     GrContextFontSet(&sContext, &g_sFontCm20);
-    GrStringDrawCentered(&sContext, "ZC706 SDR Test v0.1", -1,
+    GrStringDrawCentered(&sContext, "ZC706 SDR Test v0.101", -1,
                              Display_Width/ 2, 10, 0);
 
 
@@ -1918,8 +1835,6 @@ main(void)
 
     WidgetMessageQueueProcess();
 
-//    DrawFirstImage((tWidget *) g_ulPanel, &sContext);
-
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
@@ -1937,13 +1852,6 @@ main(void)
     UARTprintf("  First 8 bits are identifier, second 8 bit are data MSB/LSB \n");
 
 
-
-    //
-    // After all the init and config we start blink the LED
-    //
-    //RGBBlinkRateSet(0.5f);
-
-
     //
     // Init SPI1 as slave.
     //
@@ -1954,18 +1862,6 @@ main(void)
     //
     SSIIntEnable(SSI1_BASE, SSI_RXTO);
 	//
-	// Read any residual data from the SSI port.  This makes sure the receive
-	// FIFOs are empty, so we don't read any unwanted junk.  This is done here
-	// because the SPI SSI mode is full-duplex, which allows you to send and
-	// receive at the same time.  The SSIDataGetNonBlocking function returns
-	// "true" when data was returned, and "false" when no data was returned.
-	// The "non-bLocking" function checks if there is any data in the receive
-	// FIFO and does not "hang" if there isn't.
-	//
-    //      while(SSIDataGetNonBlocking(SSI1_BASE, &g_ulDataRx2[0]))
-    //      {
-    //      }
-
        //
        // Clear any pending interrupt
        //
@@ -1983,18 +1879,9 @@ main(void)
        //
        // Set the color to a white approximation.
        //
-       g_pui32Colors[RED] = 0x8000;
-       g_pui32Colors[BLUE] = 0x8000;
-       g_pui32Colors[GREEN] = 0x8000;
-
-       //
-       // Initialize RGB driver. Use a default intensity and blink rate.
-       //
-/*       RGBInit(0);
-       RGBColorSet(g_pui32Colors);
-       RGBIntensitySet(0.5f);
-       RGBEnable();
-*/
+//       g_pui32Colors[RED] = 0x8000;
+ //      g_pui32Colors[BLUE] = 0x8000;
+  //     g_pui32Colors[GREEN] = 0x8000;
 
 
        //
@@ -2058,11 +1945,6 @@ main(void)
             {
                 val_AGC_Str[2] = '-';
             }
-            // Lock Status
-/*    		fLock = (g_ulDataRx2[pos_Lock]/32768.0);
-    		float_to_int_and_fract(fLock, &i32IntegerPart, &i32FractionPart);
-            usprintf(val_Lock_Str, " %2d.%02ddB  ", i32IntegerPart, i32FractionPart);
-*/
             fLock = log10(abs(g_ulDataRx2[pos_Lock_Avg2]/32768.0)+0.00001);
             float_to_int_and_fract(fLock, &i32IntegerPart, &i32FractionPart);
             usprintf(val_Lock_Str, " %2d.%01ddB  ", i32IntegerPart, i32FractionPart);

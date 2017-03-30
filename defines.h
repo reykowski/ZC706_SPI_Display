@@ -1,6 +1,15 @@
 
 #define timeout 4e5
 
+
+//*****************************************************************************
+//
+// Number of bytes to send and receive.
+//
+//*****************************************************************************
+#define NUM_SSI_DATA 128
+
+
 #define Display_Width   320                         //!< Display Width
 #define Display_Height  240                         //!< Display Height
 
@@ -133,14 +142,17 @@
 #define x_tick6 240
 #define x_tick7 280
 
+
+#define pos_EVM            3
+#define pos_BER            6
+#define pos_Lock          10
+#define pos_AGC           12
+#define pos_CRC           14
 #define pos_Lock_Avg1     20
 #define pos_Lock_Avg2     21
-#define pos_AGC           12
-#define pos_Lock          10
 #define pos_Hold          22
-#define pos_EVM            3
 #define pos_Frame         24
-#define pos_CRC           14
-#define pos_BER            6
+
+
 
 
