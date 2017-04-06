@@ -1,7 +1,7 @@
 
 #define timeout 4e5
 
-
+#define SW_Version      "v0.102"
 //*****************************************************************************
 //
 // Number of bytes to send and receive.
@@ -83,6 +83,8 @@
 #define str_FRAME   "FRAME: "
 #define str_CRC     "CRC: "
 #define str_BER     "BER: "
+#define str_ERR     "ERR: "
+#define str_BIT     "BIT: "
 #define str_NA      "---: "
 
 
@@ -126,11 +128,11 @@
 #define SYNC_Panel     6
 #define RXMSG_Panel    7
 
-    #define LED_x0 40
-    #define LED_y0 80
-    #define LED_xd 56
-    #define LED_yd 90
-    #define LED_size 10
+#define LED_x0 40
+#define LED_y0 80
+#define LED_xd 56
+#define LED_yd 90
+#define LED_size 10
 
 #define tick_half 3
 
@@ -143,15 +145,17 @@
 #define x_tick7 280
 
 
-#define pos_EVM            3
-#define pos_BER            6
-#define pos_Lock          10
-#define pos_AGC           12
-#define pos_CRC           14
-#define pos_Lock_Avg1     20
-#define pos_Lock_Avg2     21
-#define pos_Hold          22
-#define pos_Frame         24
+#define pos_EVM            4-1
+#define pos_BER            7-1
+#define pos_Bit_Count      7-1
+#define pos_Error_Count    8-1
+#define pos_Lock          11-1
+#define pos_AGC           13-1
+#define pos_CRC           15-1
+#define pos_Lock_Avg1     21-1
+#define pos_Lock_Avg2     22-1
+#define pos_Hold          23-1
+#define pos_Frame         25-1
 
 
 

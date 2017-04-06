@@ -149,7 +149,8 @@
     float fRsense = 0.010;
     float fVref0 = 2.5, fVref1 = 2.5, fVref2 = 2.5, fVref3 = 2.5;
 
-
+    int32_t i32IntegerPart;
+    int32_t i32FractionPart;
     uint16_t i_counter=0;
     uint8_t iAGC_Curve[320]={ [ 0 ... 319 ] = (186-25)};
     uint8_t iLock_Curve[320]={ [ 0 ... 319 ] = 132};
@@ -173,6 +174,11 @@
     static char val10_string[20];
     static char val11_string[20];
     static char val12_string[20];
+
+    static char ver[6] = SW_Version;
+    static char title_str_sub[25] = "ZC706 SDR Test ";
+    //static char title_str_full[25];
+
 
     //*****************************************************************************
     //
@@ -1193,8 +1199,8 @@ OnDataPaint(tWidget *pWidget, tContext *pContext)
     GrStringDrawRight(pContext, str_FRAME,  9, P31_x+10, P31_y, 0);
     GrStringDrawRight(pContext, str_CRC,  9, P32_x+10, P32_y, 0);
     GrStringDrawRight(pContext, str_BER,  9, P41_x+10, P41_y, 0);
-    GrStringDrawRight(pContext, str_NA,  9, P42_x+10, P42_y, 0);
-    GrStringDrawRight(pContext, str_NA,  9, P51_x+10, P51_y, 0);
+    GrStringDrawRight(pContext, str_ERR,  9, P42_x+10, P42_y, 0);
+    GrStringDrawRight(pContext, str_BIT,  9, P51_x+10, P51_y, 0);
     GrStringDrawRight(pContext, str_NA, 9, P52_x+10, P52_y, 0);
 
 }
@@ -1584,15 +1590,23 @@ void	Median_Filter_for_3(float *data_in)
 
 
 //*****************************************************************************
-void float_to_int_and_fract(float float_value, int32_t *i32IntegerPart, int32_t *i32FractionPart)
+void float_to_int_and_fract(float float_value, int32_t *i32IntegerPart, int32_t *i32FractionPart, uint8_t i8FracDigits)
 //
 // Convert the floats to an integer part and fraction part for easy
 // print.
 //
 {
-*i32IntegerPart = (int32_t) float_value;
-*i32FractionPart =(int32_t) (float_value * 1000.0f);
-*i32FractionPart = *i32FractionPart - (*i32IntegerPart * 1000);
+    int32_t i32_help;
+    int16_t i16_help;
+    float float_help;
+
+    i32_help = (int32_t) float_value;
+    float_help = (float) float_value - (float) i32_help;
+*i32IntegerPart = i32_help;
+i16_help = 3-i8FracDigits;
+i16_help = pow(10, i16_help);
+*i32FractionPart =(int32_t) (float_help * 1000.0f)/i16_help;
+//*i32FractionPart = *i32FractionPart - (*i32IntegerPart * 1000);
 if(*i32FractionPart < 0)
 	{
     *i32FractionPart *= -1;
@@ -1681,13 +1695,13 @@ void UpdateScope(tContext *pContext, uint8_t *i_Curve, float fnew_Value, float f
 int
 main(void)
 
+
 {
 
-    int32_t i32IntegerPart;
-    int32_t i32FractionPart;
+    char *title_str_full = malloc(25);
     uint8_t i8Count=0;
 
-    uint32_t ulindex, ulindex_max = 0;
+    //uint32_t ulindex_max = 0;
     int16_t val;
     uint16_t LSB_val, MSB_val;
 
@@ -1786,8 +1800,9 @@ main(void)
     //
     // Put the application name in the middle of the banner.
     //
+    title_str_full = strcat(title_str_sub , ver);
     GrContextFontSet(&sContext, &g_sFontCm20);
-    GrStringDrawCentered(&sContext, "ZC706 SDR Test v0.101", -1,
+    GrStringDrawCentered(&sContext, title_str_full , -1,
                              Display_Width/ 2, 10, 0);
 
 
@@ -1925,7 +1940,7 @@ main(void)
         	//
         	// Display the data that were read from RX FIFO.
         	//
-        	ulindex_max = g_ulSSI1RXFF;
+        	//ulindex_max = g_ulSSI1RXFF;
         	g_ulSSI1RXFF = 0;
 
         	//
@@ -1939,14 +1954,14 @@ main(void)
 
             // AGC Value
     		fAGC =  log10((abs(g_ulDataRx2[pos_AGC]/32768.0)/1000.0)+0.00001);
-    		float_to_int_and_fract(fAGC, &i32IntegerPart, &i32FractionPart);
+    		float_to_int_and_fract(fAGC, &i32IntegerPart, &i32FractionPart, 3);
             usprintf(val_AGC_Str, " %3d.%03ddB  ", i32IntegerPart, i32FractionPart);
             if ((fAGC<0)&(i32IntegerPart==0))
             {
                 val_AGC_Str[2] = '-';
             }
             fLock = log10(abs(g_ulDataRx2[pos_Lock_Avg2]/32768.0)+0.00001);
-            float_to_int_and_fract(fLock, &i32IntegerPart, &i32FractionPart);
+            float_to_int_and_fract(fLock, &i32IntegerPart, &i32FractionPart, 1);
             usprintf(val_Lock_Str, " %2d.%01ddB  ", i32IntegerPart, i32FractionPart);
             if ((fLock<0)&(i32IntegerPart==0))
             {
@@ -1955,37 +1970,61 @@ main(void)
 
             // Hold Over
     		fHold = (g_ulDataRx2[pos_Hold]/32768.0);
-    		float_to_int_and_fract(fHold, &i32IntegerPart, &i32FractionPart);
+    		float_to_int_and_fract(fHold, &i32IntegerPart, &i32FractionPart, 2);
             usprintf(val_HOLD_Str, " %2d.%02d    ", i32IntegerPart, i32FractionPart);
 
             // EVM
     		fEVM = (g_ulDataRx2[pos_EVM]/(16384.0))+my_noise/10;
-    		float_to_int_and_fract(fEVM, &i32IntegerPart, &i32FractionPart);
+    		float_to_int_and_fract(fEVM, &i32IntegerPart, &i32FractionPart, 2);
             usprintf(val_EVM_Str, " %2d.%02d    ", i32IntegerPart, i32FractionPart);
 
             // Frame
             fFrame = 1.0 - (g_ulDataRx2[pos_Frame]/32768.0);
-    		float_to_int_and_fract(fFrame, &i32IntegerPart, &i32FractionPart);
+    		float_to_int_and_fract(fFrame, &i32IntegerPart, &i32FractionPart, 1);
             usprintf(val_Frame_Str, " %2d.%01d    ", i32IntegerPart, i32FractionPart);
 
             // Message (CRC Error)
             fCRC = (g_ulDataRx2[pos_CRC]/32768.0);
-    		float_to_int_and_fract(fCRC, &i32IntegerPart, &i32FractionPart);
+    		float_to_int_and_fract(fCRC, &i32IntegerPart, &i32FractionPart, 1);
             usprintf(val_CRC_Str, " %2d.%01d    ", i32IntegerPart, i32FractionPart);
 
             // BER
-            fBER = (g_ulDataRx2[pos_BER]/(16384.0))+my_noise;
-    		float_to_int_and_fract(fBER, &i32IntegerPart, &i32FractionPart);
-            usprintf(val_BER_Str, " %3d.%01d    ", i32IntegerPart, i32FractionPart);
+            fBER = 100.0*(1.0+g_ulDataRx2[pos_Error_Count])/(1.0+g_ulDataRx2[pos_Bit_Count]);
+    		float_to_int_and_fract(fBER, &i32IntegerPart, &i32FractionPart, 3);
+            usprintf(val_BER_Str, " %3d.%03d", i32IntegerPart, i32FractionPart);
 
+            uint32_t * i32_myunsignedint = 0;
+            int64_t i64_mysignedint = 0;
+            int32_t ihelp = 0;
+            uint32_t ihelpu = 0;
 
-            fTemp2 = (g_ulDataRx2[7]/(16384.0))+my_noise;
-    		float_to_int_and_fract(fTemp2, &i32IntegerPart, &i32FractionPart);
-            usprintf(val8_string, " %2d.%02d    ", i32IntegerPart, i32FractionPart);
+//            ihelp = g_ulDataRx2[pos_Error_Count];
+            ihelpu = (uint32_t) g_ulDataRx2[pos_Error_Count];
+//          i64_mysignedint = (int64_t) i32_myunsignedint;
+//            fTemp2 = (float) i64_mysignedint;
+            fTemp2 = (float) ihelpu;
+//            if (fTemp2<0)
+//            {
+//                fTemp2 = fTemp2 + (4294967296.0);
+//            }
+            fTemp2 = fTemp2/1e6;
+    		float_to_int_and_fract(fTemp2, &i32IntegerPart, &i32FractionPart, 3);
+            usprintf(val8_string, "%2d.%03de6 ", i32IntegerPart, i32FractionPart);
 
-            fTempInt = (g_ulDataRx2[8]/(16384.0))+my_noise;
-    		float_to_int_and_fract(fTempInt, &i32IntegerPart, &i32FractionPart);
-            usprintf(val9_string, " %2d.%02d    ", i32IntegerPart, i32FractionPart);
+//            ihelp = g_ulDataRx2[pos_Bit_Count];
+            ihelpu = (uint32_t) g_ulDataRx2[pos_Bit_Count];
+//            * i32_myunsignedint = &ihelp;
+//            i64_mysignedint = (int64_t) i32_myunsignedint;
+//            fTempInt = (float) i64_mysignedint;
+            fTempInt = (float) ihelpu;
+//            if (fTempInt<0)
+//            {
+//                fTempInt = fTempInt + (4294967296.0);//2.1575e9;
+//            }
+            fTempInt = fTempInt/1e6;
+    		float_to_int_and_fract(fTempInt, &i32IntegerPart, &i32FractionPart, 1);
+//    		i32FractionPart = i32FractionPart/1000;
+            usprintf(val9_string, "%4d.%01de6 ", i32IntegerPart, i32FractionPart);
 
             //
             // Check light status
@@ -2200,7 +2239,7 @@ main(void)
                    GrContextFontSet(&sContext, &g_sFontCm20);
                    GrContextForegroundSet(&sContext, ClrBlack);
                    GrContextBackgroundSet(&sContext, ClrLime);
-                   GrStringDraw(&sContext, val_AGC_Str, 10, S11_x, S11_y, 1);	// AGC
+                   GrStringDraw(&sContext, val_AGC_Str, -1, S11_x, S11_y, 1);	// AGC
                    GrStringDraw(&sContext, val_Lock_Str, 10, S12_x, S12_y, 1);	// Lock
 
                    GrStringDrawRight(&sContext, val_HOLD_Str, 8, S21_x+70, S21_y, 1);	// Holder Over
@@ -2210,9 +2249,9 @@ main(void)
                    GrStringDrawRight(&sContext, val_CRC_Str, 8, S32_x+70, S32_y, 1);	// Message Status (CRC Error)
 
                    GrStringDrawRight(&sContext, val_BER_Str, 8, S41_x+70, S41_y, 1);	// BER
-                   GrStringDrawRight(&sContext, val8_string, 8, S42_x+70, S42_y, 1);
+                   GrStringDrawRight(&sContext, val8_string, -1, S42_x+80, S42_y, 1);
 
-                   GrStringDrawRight(&sContext, val9_string, 8, S51_x+70, S51_y, 1);
+                   GrStringDrawRight(&sContext, val9_string, -1, S51_x+100, S51_y, 1);
                    GrStringDrawRight(&sContext, val10_string, 8, S52_x+70, S52_y, 1);
 
                   break;
