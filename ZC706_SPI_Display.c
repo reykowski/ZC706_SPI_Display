@@ -223,12 +223,12 @@
 
 
     extern tCanvasWidget g_psPanels[10];
-    extern const uint8_t g_pui_Soothing_Image[];    //Soothing Image
-    extern const uint8_t g_pui_Stormy_Image[];      //Stormy Image
+    //extern const uint8_t g_pui_Soothing_Image[];    //Soothing Image
+   //extern const uint8_t g_pui_Stormy_Image[];      //Stormy Image
     extern const uint8_t g_pui_Lightning_Image[];      //Lightning Image
     extern const uint8_t g_pui_Harmony_Image[];      //Harmony Image
     extern const uint8_t g_pui_Flower_Image[];      // Flower Image
-
+    extern const uint8_t g_pui_Blue_Moon_Image[];    // Blue Moon Image
     tContext *p1Context;
 
 //*****************************************************************************
@@ -840,14 +840,14 @@ DrawFirstImage(tWidget *pWidget, tContext *pContext)
 
     if   (iHealth == 0)
     {
+//        GrImageDraw(pContext, g_pui_Blue_Moon_Image, 0, 24);
         GrImageDraw(pContext, g_pui_Flower_Image, 0, 24);
     }
     else
     {
+//        GrImageDraw(pContext, g_pui_Blue_Moon_Image, 0, 24);
         GrImageDraw(pContext, g_pui_Lightning_Image, 0, 24);
     }
-
-
 
     GrFlush(pContext);
 

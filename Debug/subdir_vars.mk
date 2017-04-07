@@ -12,6 +12,7 @@ C_SRCS += \
 ../Kentec320x240x16_ssd2119_8bit.c \
 ../TubeImage.c \
 ../ZC706_SPI_Display.c \
+../blue_moon_320x240.c \
 ../flower320x240.c \
 ../harmony320x240.c \
 ../images.c \
@@ -26,6 +27,7 @@ C_DEPS += \
 ./Kentec320x240x16_ssd2119_8bit.d \
 ./TubeImage.d \
 ./ZC706_SPI_Display.d \
+./blue_moon_320x240.d \
 ./flower320x240.d \
 ./harmony320x240.d \
 ./images.d \
@@ -40,6 +42,7 @@ OBJS += \
 ./Kentec320x240x16_ssd2119_8bit.obj \
 ./TubeImage.obj \
 ./ZC706_SPI_Display.obj \
+./blue_moon_320x240.obj \
 ./flower320x240.obj \
 ./harmony320x240.obj \
 ./images.obj \
@@ -54,6 +57,7 @@ OBJS__QUOTED += \
 "Kentec320x240x16_ssd2119_8bit.obj" \
 "TubeImage.obj" \
 "ZC706_SPI_Display.obj" \
+"blue_moon_320x240.obj" \
 "flower320x240.obj" \
 "harmony320x240.obj" \
 "images.obj" \
@@ -68,6 +72,7 @@ C_DEPS__QUOTED += \
 "Kentec320x240x16_ssd2119_8bit.d" \
 "TubeImage.d" \
 "ZC706_SPI_Display.d" \
+"blue_moon_320x240.d" \
 "flower320x240.d" \
 "harmony320x240.d" \
 "images.d" \
@@ -82,6 +87,7 @@ C_SRCS__QUOTED += \
 "../Kentec320x240x16_ssd2119_8bit.c" \
 "../TubeImage.c" \
 "../ZC706_SPI_Display.c" \
+"../blue_moon_320x240.c" \
 "../flower320x240.c" \
 "../harmony320x240.c" \
 "../images.c" \

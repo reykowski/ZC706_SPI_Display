@@ -13,6 +13,7 @@ ORDERED_OBJS += \
 "./Kentec320x240x16_ssd2119_8bit.obj" \
 "./TubeImage.obj" \
 "./ZC706_SPI_Display.obj" \
+"./blue_moon_320x240.obj" \
 "./flower320x240.obj" \
 "./harmony320x240.obj" \
 "./images.obj" \
@@ -172,8 +173,8 @@ Display_Parameters.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "Kentec320x240x16_ssd2119_8bit.obj" "TubeImage.obj" "ZC706_SPI_Display.obj" "flower320x240.obj" "harmony320x240.obj" "images.obj" "lightning320x240.obj" "soothe320x240.obj" "stormy320x240.obj" "tm4c123gh6pm_startup_ccs.obj" "touch.obj" "ustdlib.obj" "drivers\rgb.obj" "utils\uartstdio.obj" 
-	-$(RM) "Kentec320x240x16_ssd2119_8bit.d" "TubeImage.d" "ZC706_SPI_Display.d" "flower320x240.d" "harmony320x240.d" "images.d" "lightning320x240.d" "soothe320x240.d" "stormy320x240.d" "tm4c123gh6pm_startup_ccs.d" "touch.d" "ustdlib.d" "drivers\rgb.d" "utils\uartstdio.d" 
+	-$(RM) "Kentec320x240x16_ssd2119_8bit.obj" "TubeImage.obj" "ZC706_SPI_Display.obj" "blue_moon_320x240.obj" "flower320x240.obj" "harmony320x240.obj" "images.obj" "lightning320x240.obj" "soothe320x240.obj" "stormy320x240.obj" "tm4c123gh6pm_startup_ccs.obj" "touch.obj" "ustdlib.obj" "drivers\rgb.obj" "utils\uartstdio.obj" 
+	-$(RM) "Kentec320x240x16_ssd2119_8bit.d" "TubeImage.d" "ZC706_SPI_Display.d" "blue_moon_320x240.d" "flower320x240.d" "harmony320x240.d" "images.d" "lightning320x240.d" "soothe320x240.d" "stormy320x240.d" "tm4c123gh6pm_startup_ccs.d" "touch.d" "ustdlib.d" "drivers\rgb.d" "utils\uartstdio.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
